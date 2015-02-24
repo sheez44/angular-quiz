@@ -1,9 +1,10 @@
 var myQuiz = angular.module('myQuiz', []);
 myQuiz.controller('MainController', function($scope, $http) {
 	
-		$scope.number = 1;
+		 $scope.number = 0;
 
-		$scope.loadData = function(number) {
+
+		$scope.loadQuizData = function() {
 		      $http({
 		        url: 'quizdb.json',
 		        dataType: 'json',
@@ -14,6 +15,7 @@ myQuiz.controller('MainController', function($scope, $http) {
 		        }
 		      }).success(function(response) {
 		        $scope.question = response.allQuestions[$scope.number].question;
+		        $scope.choices = response.allQuestions[$scope.number].choices;
 		      }).error(function(error) {
 		        $scope.names = [{
 		          "Name": "Errrrrrr"
@@ -21,26 +23,33 @@ myQuiz.controller('MainController', function($scope, $http) {
 		      });
 		    };
 
-		$scope.addQuestion = function() {
-			$scope.number += 1;
+		function addQuestion() {
+			if ($scope.number < 9) {
+				console.log($scope.number);
+				$scope.number += 1;
+			} else {
+				$scope.number = 0;
+			}
+
 		}
+		$scope.addQuestion = addQuestion;
 
 		$scope.$watch('number', function() {
-			$scope.loadData();
+			$scope.loadQuizData();
 		});
 });
-myQuiz.factory('loadQuestions', function($http) {
+// myQuiz.factory('loadQuestions', function($http) {
 
-	var questions = { content: null};
+// 	var questions = { content: null};
 
-	$http.get('quizdb.json').
-		success(function(data) {
-			questions = data;
-		}).
-		error(function(data, status) {
-			console.log(data + status);
-		});
+// 	$http.get('quizdb.json').
+// 		success(function(data) {
+// 			questions = data;
+// 		}).
+// 		error(function(data, status) {
+// 			console.log(data + status);
+// 		});
 
-	return questions;
+// 	return questions;
 
-});
+// });
