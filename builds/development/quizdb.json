@@ -1,0 +1,54 @@
+{
+    "allQuestions": [
+        {
+            "question": "Who is Prime Minister of the United Kingdom? (FIRST)",
+            "choices": ["David Cameron", "Gordon Brown", "Winston Churchill", "Tony Blair"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "Name the king who failed to keep an eye on things at the battle of Hastings ?",
+            "choices": ["David Cameron", "Harold", "Winston Churchill", "Tony Blair"],
+            "correctAnswer": 1
+        },
+        {
+            "question": "In which sport would you use a chucker ?",
+            "choices": ["Ice hockey", "Billiards", "Polo", "Curling"],
+            "correctAnswer": 2
+        },
+        {
+            "question": "If a snail climbed up a 12 ft wall at a steady rate of 3 feet a day, but slipped down 2ft every night, how many days would it take him to reach the top ?",
+            "choices": ["10 days", "9 days", "8 days", "12 days"],
+            "correctAnswer": 0
+        },
+        {
+            "question": "Traditionally, what type of wood do Rolls Royce use on the dashboards of their cars?",
+            "choices": ["Shit", "Gordon Brown", "Winston Churchill", "Walnut"],
+            "correctAnswer": 3
+        },
+        {
+            "question": "What is the national emblem of Canada ?",
+            "choices": ["David Cameron", "Gordon Brown", "Winston Churchill", "Maple leaf"],
+            "correctAnswer": 3
+        },
+        {
+            "question": "Free Willey was a film about what ?",
+            "choices": ["David Cameron", "Whale", "Winston Churchill", "Tony Blair"],
+            "correctAnswer": 1
+        },
+        {
+            "question": "What World War II operation was code named `Dynamo` ?",
+            "choices": ["David Cameron", "Gordon Brown", "Evacuation of Dunkirk", "Tony Blair"],
+            "correctAnswer": 2
+        },
+        {
+            "question": "How many old pennies were there in a Groat?",
+            "choices": ["One", "Two", "Three", "Four"],
+            "correctAnswer": 3
+        },
+        {
+            "question": "In cricket, where would you find the chain ? (LAST) ",
+            "choices": ["Between the wickets", "Gordon Brown", "Winston Churchill", "Tony Blair"],
+            "correctAnswer": 0
+        }
+    ]
+}

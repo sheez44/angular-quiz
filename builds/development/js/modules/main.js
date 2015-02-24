@@ -1,0 +1,1 @@
+var myQuiz = angular.module('myQuiz', []);
