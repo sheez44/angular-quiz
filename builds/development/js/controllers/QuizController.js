@@ -1,36 +1,3 @@
-var myQuiz = angular.module('myQuiz', ['ngRoute', 'ngAnimate']);
-
-myQuiz.config(['$routeProvider',
-	function($routeProvider) {
-		$routeProvider.
-			when('/quiz', {
-				templateUrl: 'partials/quiz.html',
-				controller: 'QuizController'
-			}).
-			when('/home', {
-				templateUrl: 'partials/home.html',
-				controller: 'HomeController'
-			}).
-			otherwise({
-				redirectTo: '/home'
-			});
-	}]);
-myQuiz.controller('HomeController', function($scope, $location) {
-
-	$scope.test = "Click the button to start the quiz";
-
-	function startQuiz () {
-		return $location.path('/quiz');
-	}
-
-	$scope.startQuiz = startQuiz;
-
-});
-myQuiz.controller('MainController', function($scope) {
-	
-	$scope.title = "My first Quiz!";
-		 
-});
 myQuiz.controller('QuizController', function($scope, $http) {
 
 
@@ -79,18 +46,3 @@ myQuiz.controller('QuizController', function($scope, $http) {
 		});
 
 	});	
-// myQuiz.factory('loadQuestions', function($http) {
-
-// 	var questions = { content: null};
-
-// 	$http.get('quizdb.json').
-// 		success(function(data) {
-// 			questions = data;
-// 		}).
-// 		error(function(data, status) {
-// 			console.log(data + status);
-// 		});
-
-// 	return questions;
-
-// });

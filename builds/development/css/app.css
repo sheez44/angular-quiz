@@ -22,3 +22,33 @@ header {
   padding: 15px;
   border-radius: 15px;
   box-shadow: 5px 5px 0 gray; }
+
+.choiceSelection {
+  background: green; }
+
+.choices.ng-enter, .choices.ng-move {
+  transition: 1.5s linear all;
+  opacity: 0; }
+
+.choices.ng-enter.ng-enter-active, .choices.ng-move.ng-move-active {
+  opacity: 1; }
+
+.choices.ng-leave {
+  animation: 1.5s animation; }
+
+@keyframes animation {
+  from {
+    opacity: 1; }
+
+  to {
+    opacity: 0; } }
+
+.navigation {
+  list-style-type: none;
+  text-align: center;
+  background: green;
+  height: auto; }
+  .navigation li {
+    display: inline;
+    padding: 15px;
+    background: yellow; }
