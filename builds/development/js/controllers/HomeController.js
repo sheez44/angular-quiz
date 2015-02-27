@@ -1,11 +1,15 @@
-myQuiz.controller('HomeController', function($scope, $location) {
+angular
+	.module('myQuiz')
+	.controller('HomeController', HomeController);
 
-	$scope.test = "Click the button to start the quiz";
+function HomeController($scope, $location) {
+
+	vm.test = "Click the button to start the quiz";
 
 	function startQuiz () {
 		return $location.path('/quiz');
 	}
 
-	$scope.startQuiz = startQuiz;
+	vm.startQuiz = startQuiz;
 
-});
+};

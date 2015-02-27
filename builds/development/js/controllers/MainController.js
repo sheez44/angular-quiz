@@ -1,5 +1,9 @@
-myQuiz.controller('MainController', function($scope) {
+angular
+	.module('myQuiz')
+	.controller('MainController', MainController);
+
+function MainController($scope) {	
 	
 	$scope.title = "My first Quiz!";
 		 
-});
+};

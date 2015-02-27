@@ -2,7 +2,7 @@
 
 <h2>{{question}}</h2>
 <ul>
-	<li ng-repeat="choice in choices" class="choices" ng-class="{choiceSelection: isSelected(question)}">{{choice}}</li>
+	<li ng-repeat="choice in choices" class="choices" ng-click="setSelection(choice)" ng-class="{choiceSelection: isSelected(choice)}">{{choice}}</li>
 </ul>
 
 <button ng-click="addQuestion()">add</button>

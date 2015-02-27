@@ -9,11 +9,15 @@ var gulp = require('gulp'),
 
 var jsSources = ['./builds/development/js/modules/*.js',
 				 './builds/development/js/controllers/*.js',
-				 './builds/development/js/services/*.js'];
+				 './builds/development/js/services/*.js',
+				 './builds/development/js/routes/*.js'];
 
 gulp.task('sass', function() {
 	gulp.src('./builds/components/sass/app.scss')
-		.pipe(sass())
+		.pipe(sass({
+        errLogToConsole: true,
+        sourceComments : 'normal'
+    	}))
 		.pipe(gulp.dest('./builds/development/css/'))
 		.pipe(livereload.reload())
 });
