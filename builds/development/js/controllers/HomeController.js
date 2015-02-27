@@ -4,12 +4,12 @@ angular
 
 function HomeController($scope, $location) {
 
-	vm.test = "Click the button to start the quiz";
+	$scope.test = "Enter your name first to start the quiz";
 
 	function startQuiz () {
 		return $location.path('/quiz');
 	}
 
-	vm.startQuiz = startQuiz;
+	$scope.startQuiz = startQuiz;
 
 };

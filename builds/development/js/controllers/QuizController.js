@@ -18,6 +18,7 @@ function QuizController ($scope, $http) {
 	      }).success(function(response) {
 	        $scope.question = response.allQuestions[$scope.number].question;
 	        $scope.choices = response.allQuestions[$scope.number].choices;
+	        $scope.correctAnswer = response.allQuestions[$scope.number].correctAnswer;
 	      }).error(function(error) {
 	        $scope.names = [{
 	          "Name": "Errrrrrr"
@@ -25,12 +26,26 @@ function QuizController ($scope, $http) {
 	      });
 	    };
 
+	$scope.correctAnswers = 0;
+	var incorrectAnswers = 0;
+	var correctAnswersList = [];
+	var incorrectAnswersList = [];    
+
 	function addQuestion() {
 		if ($scope.number < 9) {
-			console.log($scope.number);
+			var answer = choiceSelection.userAnswers.pop();
+			if (answer === $scope.correctAnswer) {
+				$scope.correctAnswers += 1;
+				correctAnswersList.push(answer);
+				choiceSelection.userAnswer = [];
+			} else {
+				incorrectAnswers += 1;
+				incorrectAnswersList.push(answer);
+				choiceSelection.userAnswer = [];
+			}
 			$scope.number += 1;
 		} else {
-			$scope.number = 0;
+			alert("You answered: " + $scope.correctAnswers + "correctly");
 		}
 	} // private;
 
@@ -38,14 +53,17 @@ function QuizController ($scope, $http) {
 		isSelected: false,
 		userAnswers: [],
 		setSelection: function(choice) {
-			this.userAnwers.push(choice);
+			choiceSelection.userAnswers.push(choice);
+			console.log(choiceSelection.userAnswers);
 		},
 		isSelection: function() {
-			if(this.isSelected === true) {
-				return true;
+			if(that.isSelected) {
+				return;
 			}
 		}
-	}
+	};
+
+	console.log(choiceSelection);
 
 	$scope.setSelection = choiceSelection.setSelection;
 
@@ -56,5 +74,8 @@ function QuizController ($scope, $http) {
 	$scope.$watch('number', function() {
 		$scope.loadQuizData();
 	});	
+
+
+
 
 };	

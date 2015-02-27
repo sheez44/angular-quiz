@@ -2,6 +2,8 @@
 <div class="main">
 <h2>{{test}}</h2>
 
-<button ng-click="startQuiz()">Start</button>
+<input ng-model="user.name" type="text">
+
+<button ng-show="user.name" ng-click="startQuiz()">Start</button>
 
 </div>
