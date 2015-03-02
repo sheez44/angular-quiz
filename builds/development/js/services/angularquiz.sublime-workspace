@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"has",
+				"hasMadeAChoice"
+			],
+			[
 				"inc",
 				"incorrectAnswersList"
 			],
@@ -84,10 +88,18 @@
 			}
 		},
 		{
+			"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/index.html",
+			"settings":
+			{
+				"buffer_size": 767,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/partials/quiz.html",
 			"settings":
 			{
-				"buffer_size": 307,
+				"buffer_size": 360,
 				"line_ending": "Windows"
 			}
 		},
@@ -103,7 +115,7 @@
 			"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/js/app.js",
 			"settings":
 			{
-				"buffer_size": 3088,
+				"buffer_size": 3387,
 				"line_ending": "Windows"
 			}
 		},
@@ -116,10 +128,13 @@
 			}
 		},
 		{
+			"contents": "angular\n	.module('myQuiz')\n	.controller('QuizController', QuizController);\n\nfunction QuizController ($scope, $http) {\n\n	$scope.number = 0;\n\n	$scope.loadQuizData = function() {\n	      $http({\n	        url: 'quizdb.json',\n	        dataType: 'json',\n	        method: 'GET',\n	        data: '',\n	        headers: {\n	          \"Content-Type\": \"application/json\"\n	        }\n	      }).success(function(response) {\n	        $scope.question = response.allQuestions[$scope.number].question;\n	        $scope.choices = response.allQuestions[$scope.number].choices;\n	        $scope.correctAnswer = response.allQuestions[$scope.number].correctAnswer;\n	      }).error(function(error) {\n	        $scope.names = [{\n	          \"Name\": \"Errrrrrr\"\n	        }];\n	      });\n	    };\n\n	$scope.correctAnswers = 0;\n	var incorrectAnswers = 0;\n	var correctAnswersList = [];\n	var incorrectAnswersList = [];    \n\n	function addQuestion() {\n		if ($scope.number < 9) {\n			var answer = choiceSelection.userAnswers.pop();\n			if (answer === $scope.correctAnswer) {\n				$scope.correctAnswers += 1;\n				correctAnswersList.push(answer);\n				choiceSelection.userAnswer = [];\n			} else {\n				incorrectAnswers += 1;\n				incorrectAnswersList.push(answer);\n				choiceSelection.userAnswer = [];\n			}\n			$scope.number += 1;\n		} else {\n			alert(\"You answered: \" + $scope.correctAnswers + \"correctly\");\n		}\n	} // private;\n\n	$scope.isSelected = false;\n\n	var choiceSelection = {\n		userAnswers: [],\n		setSelection: function(choice) {\n			choiceSelection.userAnswers.push(choice);\n		},\n		isSelected: function() {\n			if(that.isSelected) {\n				return true;\n			}\n		},\n		hasAnsweredOnce: function() {\n			if($scope.number !== 0) {\n				return true;\n			}\n		},\n		hasMadeAChoice: function() {\n			if (choiceSelection.userAnswers.length === 0) {\n				return true;\n			}\n		}\n	};\n\n	console.log(choiceSelection);\n\n	$scope.addQuestion = addQuestion; // make the addQuestion public to the view\n\n	$scope.hasMadeAChoice = choiceSelection.hasMadeAChoice;\n\n	$scope.hasAnswers = choiceSelection.hasAnsweredOnce;\n\n	$scope.setSelection = choiceSelection.setSelected;\n\n	$scope.isSelected = choiceSelection.isSelected;\n\n	\n\n	$scope.$watch('number', function() {\n		$scope.loadQuizData();\n	});	\n\n\n\n\n};	",
 			"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/js/controllers/QuizController.js",
+			"file_size": 2337,
+			"file_write_time": 130698142576630016,
 			"settings":
 			{
-				"buffer_size": 1941,
+				"buffer_size": 2218,
 				"line_ending": "Windows"
 			}
 		}
@@ -258,7 +273,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -287,7 +302,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -320,19 +335,48 @@
 				},
 				{
 					"buffer": 2,
-					"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/partials/quiz.html",
+					"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 307,
+						"buffer_size": 767,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								257,
-								257
+								252,
+								261
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/partials/quiz.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 360,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								170,
+								170
 							]
 						],
 						"settings":
@@ -343,11 +387,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/partials/home.html",
 					"semi_transient": false,
 					"settings":
@@ -371,16 +415,16 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/js/app.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3088,
+						"buffer_size": 3387,
 						"regions":
 						{
 						},
@@ -400,11 +444,11 @@
 						"translation.y": 1083.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/js/controllers/HomeController.js",
 					"semi_transient": false,
 					"settings":
@@ -428,7 +472,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -438,20 +482,20 @@
 			"sheets":
 			[
 				{
-					"buffer": 6,
+					"buffer": 7,
 					"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/js/controllers/QuizController.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1941,
+						"buffer_size": 2218,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1323,
-								1323
+								1526,
+								1526
 							]
 						],
 						"settings":
@@ -460,10 +504,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 342.0,
+						"translation.y": 741.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -545,7 +589,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},

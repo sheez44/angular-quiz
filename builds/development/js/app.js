@@ -7,6 +7,25 @@ angular
 
 angular
 	.module('myQuiz')
+	.config(config);
+
+function config($routeProvider) {
+	$routeProvider.
+		when('/quiz', {
+			templateUrl: 'partials/quiz.html',
+			controller: 'QuizController'
+		}).
+		when('/home', {
+			templateUrl: 'partials/home.html',
+			controller: 'HomeController',
+			controllerAs: 'vm'
+		}).
+		otherwise({
+			redirectTo: '/home'
+		});
+}
+angular
+	.module('myQuiz')
 	.controller('HomeController', HomeController);
 
 function HomeController($scope, $location) {
@@ -80,27 +99,44 @@ function QuizController ($scope, $http) {
 		}
 	} // private;
 
+	$scope.isSelected = false;
+
 	var choiceSelection = {
-		isSelected: false,
 		userAnswers: [],
 		setSelection: function(choice) {
 			choiceSelection.userAnswers.push(choice);
-			console.log(choiceSelection.userAnswers);
+			choiceSelection.is
 		},
-		isSelection: function() {
+		isSelected: function() {
 			if(that.isSelected) {
-				return;
+				return true;
+			}
+		},
+		hasAnsweredOnce: function() {
+			if($scope.number !== 0) {
+				return true;
+			}
+		},
+		hasMadeAChoice: function() {
+			if (choiceSelection.userAnswers.length === 0) {
+				return true;
 			}
 		}
 	};
 
 	console.log(choiceSelection);
 
-	$scope.setSelection = choiceSelection.setSelection;
-
-	$scope.isSelection = choiceSelection.isSelection;
-
 	$scope.addQuestion = addQuestion; // make the addQuestion public to the view
+
+	$scope.hasMadeAChoice = choiceSelection.hasMadeAChoice;
+
+	$scope.hasAnswers = choiceSelection.hasAnsweredOnce;
+
+	$scope.setSelection = choiceSelection.setSelected;
+
+	$scope.isSelected = choiceSelection.isSelected;
+
+	
 
 	$scope.$watch('number', function() {
 		$scope.loadQuizData();
@@ -125,22 +161,3 @@ function QuizController ($scope, $http) {
 // 	return questions;
 
 // });
-angular
-	.module('myQuiz')
-	.config(config);
-
-function config($routeProvider) {
-	$routeProvider.
-		when('/quiz', {
-			templateUrl: 'partials/quiz.html',
-			controller: 'QuizController'
-		}).
-		when('/home', {
-			templateUrl: 'partials/home.html',
-			controller: 'HomeController',
-			controllerAs: 'vm'
-		}).
-		otherwise({
-			redirectTo: '/home'
-		});
-}
