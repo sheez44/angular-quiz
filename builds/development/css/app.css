@@ -6,20 +6,27 @@ body {
 
 /* line 7, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
 ul, ol {
-  list-style-type: none; }
+  list-style-type: none;
+  padding: 0;
+  margin: 0; }
 
-/* line 11, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 13, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+a {
+  text-decoration: none;
+  color: tomato; }
+
+/* line 18, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
 header {
   height: 100px;
   text-align: center;
   background: #336699;
   line-height: 100px;
   color: #999; }
-  /* line 17, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+  /* line 24, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
   header h1 {
     margin-top: 0; }
 
-/* line 22, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 29, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
 .main {
   width: 600px;
   margin: 4em auto 0;
@@ -28,47 +35,88 @@ header {
   border-radius: 15px;
   box-shadow: 5px 5px 0 gray; }
 
-/* line 31, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
-.choiceSelection {
-  background: green; }
+/* line 38, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+.active {
+  background: green;
+  color: #eee;
+  border-radius: 5px; }
 
-/* line 1, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/animations.scss */
+/* line 44, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+.choices {
+  padding: 15px 0 15px 15px; }
+
+/* line 1, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_animations.scss */
 .choices.ng-enter, .choices.ng-move {
   transition: 1.5s linear all;
   opacity: 0; }
 
-/* line 8, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/animations.scss */
+/* line 8, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_animations.scss */
 .choices.ng-enter-stagger, .choices.ng-leave-stagger, .choices.ng-move-stagger {
   -webkit-transition-delay: 0.2s;
   transition-delay: 0.2s;
   -webkit-transition-duration: 0;
   transition-duration: 0; }
 
-/* line 16, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/animations.scss */
+/* line 16, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_animations.scss */
 .choices.ng-enter.ng-enter-active, .choices.ng-move.ng-move-active {
   opacity: 1; }
 
-/* line 20, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/animations.scss */
+/* line 20, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_animations.scss */
 .choices.ng-leave {
   animation: 1.5s animation; }
 
 @keyframes animation {
-  /* line 25, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/animations.scss */
+  /* line 25, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_animations.scss */
   from {
     opacity: 1; }
 
-  /* line 28, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/animations.scss */
+  /* line 28, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_animations.scss */
   to {
     opacity: 0; } }
 
-/* line 1, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/navbar.scss */
+/* line 34, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_animations.scss */
+.animate-enter, .animate-leave {
+  -webkit-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+  -moz-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+  -ms-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+  -o-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+  transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
+  position: relative;
+  display: block; }
+
+/* line 46, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_animations.scss */
+.animate-enter.animate-enter-active, .animate-leave {
+  opacity: 1;
+  top: 0;
+  height: 30px; }
+
+/* line 53, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_animations.scss */
+.animate-leave.animate-leave-active, .animate-enter {
+  opacity: 0;
+  top: -50px;
+  height: 0px; }
+
+/* line 1, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_navbar.scss */
 .navigation {
   list-style-type: none;
   text-align: center;
   background: green;
   height: auto; }
-  /* line 6, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/navbar.scss */
+  /* line 6, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_navbar.scss */
   .navigation li {
     display: inline;
     padding: 15px;
     background: yellow; }
+
+/* line 1, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_buttons.scss */
+.button__next {
+  margin-top: 1em;
+  background: blue;
+  padding: 15px;
+  width: 75px;
+  color: white; }
+
+/* line 9, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_buttons.scss */
+button[disabled] {
+  background: gray;
+  color: black; }

@@ -1,0 +1,12 @@
+.button__next {
+	margin-top: 1em;
+	background: blue;
+	padding: 15px;
+	width: 75px;
+	color: white;
+}
+
+button[disabled] {
+	background: gray;
+	color: black;
+}

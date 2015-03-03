@@ -13,6 +13,11 @@ function config($routeProvider) {
 			controller: 'HomeController',
 			controllerAs: 'vm'
 		}).
+		when('/', {
+			templateUrl: 'partials/home.html',
+			controller: 'HomeController',
+			controllerAs: 'vm'
+		}).
 		otherwise({
 			redirectTo: '/home'
 		});

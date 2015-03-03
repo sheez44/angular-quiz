@@ -1,0 +1,57 @@
+.choices.ng-enter, .choices.ng-move {
+  transition: 1.5s linear all;
+  opacity: 0;
+}
+
+.choices.ng-enter-stagger,
+.choices.ng-leave-stagger,
+.choices.ng-move-stagger {
+  -webkit-transition-delay: 0.2s;
+  transition-delay: 0.2s;
+  -webkit-transition-duration:0;
+  transition-duration:0;
+}
+
+.choices.ng-enter.ng-enter-active,
+.choices.ng-move.ng-move-active {
+  opacity:1;
+}
+
+.choices.ng-leave {
+  animation: 1.5s animation;
+}
+
+@keyframes animation {
+  from {
+     opacity: 1; 
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.animate-enter, 
+.animate-leave
+{ 
+  -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  position: relative;
+  display: block;
+} 
+ 
+.animate-enter.animate-enter-active, 
+.animate-leave {
+  opacity: 1;
+  top: 0;
+  height: 30px;
+}
+ 
+.animate-leave.animate-leave-active,
+.animate-enter {
+  opacity: 0;
+  top: -50px;
+  height: 0px;
+}

@@ -2,7 +2,7 @@ angular
 	.module('myQuiz')
 	.controller('QuizController', QuizController);
 
-function QuizController ($scope, $http) {
+function QuizController ($scope, $http, $animate) {
 
 	$scope.number = 0;
 
@@ -34,6 +34,7 @@ function QuizController ($scope, $http) {
 	function addQuestion() {
 		if ($scope.number < 9) {
 			var answer = choiceSelection.userAnswers.pop();
+			$scope.selected = undefined;
 			if (answer === $scope.correctAnswer) {
 				$scope.correctAnswers += 1;
 				correctAnswersList.push(answer);
@@ -49,18 +50,16 @@ function QuizController ($scope, $http) {
 		}
 	} // private;
 
-	$scope.isSelected = false;
+
 
 	var choiceSelection = {
 		userAnswers: [],
 		setSelection: function(choice) {
 			choiceSelection.userAnswers.push(choice);
-			choiceSelection.is
+			$scope.selected = choice;
 		},
-		isSelected: function() {
-			if(that.isSelected) {
-				return true;
-			}
+		isActive: function(choice) {
+			return $scope.selected === choice;
 		},
 		hasAnsweredOnce: function() {
 			if($scope.number !== 0) {
@@ -74,17 +73,15 @@ function QuizController ($scope, $http) {
 		}
 	};
 
-	console.log(choiceSelection);
-
 	$scope.addQuestion = addQuestion; // make the addQuestion public to the view
 
 	$scope.hasMadeAChoice = choiceSelection.hasMadeAChoice;
 
 	$scope.hasAnswers = choiceSelection.hasAnsweredOnce;
 
-	$scope.setSelection = choiceSelection.setSelected;
+	$scope.setSelection = choiceSelection.setSelection;
 
-	$scope.isSelected = choiceSelection.isSelected;
+	$scope.isActive = choiceSelection.isActive;
 
 	
 

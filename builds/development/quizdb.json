@@ -7,7 +7,7 @@
         },
         {
             "question": "Name the king who failed to keep an eye on things at the battle of Hastings ?",
-            "choices": ["David Cameron", "Harold", "Winston Churchill", "Tony Blair"],
+            "choices": ["David Cameron", "Harold", "King Arthur", "Tony Blair"],
             "correctAnswer": "Harold"
         },
         {
@@ -22,22 +22,22 @@
         },
         {
             "question": "Traditionally, what type of wood do Rolls Royce use on the dashboards of their cars?",
-            "choices": ["Shit", "Gordon Brown", "Winston Churchill", "Walnut"],
+            "choices": ["Oak", "Cedar", "Pine", "Walnut"],
             "correctAnswer": "Walnut"
         },
         {
             "question": "What is the national emblem of Canada ?",
-            "choices": ["David Cameron", "Gordon Brown", "Winston Churchill", "Maple leaf"],
+            "choices": ["Silver glass", "Racoon", "Bear", "Maple leaf"],
             "correctAnswer": "Maple leaf"
         },
         {
             "question": "Free Willey was a film about what ?",
-            "choices": ["David Cameron", "Whale", "Winston Churchill", "Tony Blair"],
+            "choices": ["Shark", "Whale", "Dog", "Mouse"],
             "correctAnswer": "Whale"
         },
         {
             "question": "What World War II operation was code named `Dynamo` ?",
-            "choices": ["David Cameron", "Gordon Brown", "Evacuation of Dunkirk", "Tony Blair"],
+            "choices": ["Battle of Brittain", "Operation Market Garden", "Evacuation of Dunkirk", "Waterloo"],
             "correctAnswer": "Evacuation of Dunkirk"
         },
         {
@@ -47,7 +47,7 @@
         },
         {
             "question": "In cricket, where would you find the chain ? (LAST) ",
-            "choices": ["Between the wickets", "Gordon Brown", "Winston Churchill", "Tony Blair"],
+            "choices": ["Between the wickets", "In the caps", "Locker room", "Clever"],
             "correctAnswer": "Between the wickets"
         }
     ]
