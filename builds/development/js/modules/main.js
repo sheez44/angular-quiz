@@ -1,6 +1,10 @@
-angular
-	.module('myQuiz', [
-		'ngRoute', 
-		'ngAnimate'
-	]);
-	
+(function () {
+
+	angular
+		.module('myQuiz', [
+			'ngRoute', 
+			'ngAnimate',
+			'ngCookies'
+		]);
+
+})(); 

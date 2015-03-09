@@ -1,15 +1,28 @@
-angular
-	.module('myQuiz')
-	.controller('HomeController', HomeController);
+(function () {
 
-function HomeController($scope, $location) {
+	angular
+		.module('myQuiz')
+		.controller('HomeController', ['$scope', '$location', '$cookieStore', '$cookies', HomeController]);
 
-	$scope.test = "Enter your name to start the quiz";
+	function HomeController($scope, $location, $cookieStore, $cookies) {
 
-	function startQuiz () {
-		return $location.path('/quiz');
-	}
+		$scope.test = "Enter your name to start the quiz";
+		$scope.user = {
+			name: ''
+		};
 
-	$scope.startQuiz = startQuiz;
 
-};
+		function startQuiz (name) {
+			setUserName(name);
+			return $location.path('/quiz');
+		}
+
+		function setUserName(name) {
+			$cookies.userName = name;
+		}
+
+		$scope.startQuiz = startQuiz;
+
+	};
+
+})(); 

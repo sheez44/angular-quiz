@@ -1,10 +1,10 @@
 angular
 	.module('myQuiz')
-	.controller('QuizController', QuizController);
+	.controller('QuizController', ['$scope','$http', '$animate', 'Data', '$location', QuizController]);
 
-function QuizController ($scope, $http, $animate) {
+function QuizController ($scope, $http, $animate, Data, $location) {
 
-	$scope.number = 0;
+	$scope.number = Data.number;
 
 	$scope.loadQuizData = function() {
 	      $http({
@@ -26,10 +26,10 @@ function QuizController ($scope, $http, $animate) {
 	      });
 	    };
 
-	$scope.correctAnswers = 0;
-	var incorrectAnswers = 0;
-	var correctAnswersList = [];
-	var incorrectAnswersList = [];    
+	$scope.correctAnswers = Data.correctAnswers;
+	var incorrectAnswers = Data.incorrectAnswers;
+	var correctAnswersList = Data.correctAnswersList;
+	var incorrectAnswersList = Data.incorrectAnswersList;    
 
 	function addQuestion() {
 		if ($scope.number < 9) {
@@ -46,14 +46,12 @@ function QuizController ($scope, $http, $animate) {
 			}
 			$scope.number += 1;
 		} else {
-			alert("You answered: " + $scope.correctAnswers + "correctly");
+			$location.path('/endofquiz');
 		}
 	} // private;
 
-
-
 	var choiceSelection = {
-		userAnswers: [],
+
 		setSelection: function(choice) {
 			choiceSelection.userAnswers.push(choice);
 			$scope.selected = choice;
@@ -65,31 +63,24 @@ function QuizController ($scope, $http, $animate) {
 			if($scope.number !== 0) {
 				return true;
 			}
-		},
-		hasMadeAChoice: function() {
-			if (choiceSelection.userAnswers.length === 0) {
-				return true;
-			}
 		}
-	};
+
+	}
+
+
 
 	$scope.addQuestion = addQuestion; // make the addQuestion public to the view
 
-	$scope.hasMadeAChoice = choiceSelection.hasMadeAChoice;
-
-	$scope.hasAnswers = choiceSelection.hasAnsweredOnce;
+	$scope.hasMadeAChoice = Data.hasMadeAChoice;
 
 	$scope.setSelection = choiceSelection.setSelection;
 
 	$scope.isActive = choiceSelection.isActive;
 
-	
+	$scope.hasAnsweredOnce = choiceSelection.hasAnsweredOnce;
 
 	$scope.$watch('number', function() {
 		$scope.loadQuizData();
 	});	
-
-
-
 
 };	
