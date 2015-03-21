@@ -2,16 +2,15 @@
 
 	angular
 		.module('myQuiz')
-		.controller('MainController', ["CONSTANTS", "$cookies", "$cookieStore", MainController]);
+		.controller('MainController', ["CONSTANTS", 'User', MainController]);
 
-	function MainController(CONSTANTS, $cookies, $cookieStore) {	
+	function MainController(CONSTANTS, User) {	
 		
 		vm = this;
 
 		vm.title = CONSTANTS.TITLE;
 
-		vm.user = $cookies.userName;
-			 
+		vm.user = User;	 
 	};
 
 })();

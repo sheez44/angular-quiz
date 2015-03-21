@@ -1,192 +1,9 @@
-(function () {
-
 	angular
 		.module('myQuiz', [
 			'ngRoute', 
 			'ngAnimate',
-			'ngCookies'
 		]);
 
-})(); 
-(function () {
-	
-	angular
-		.module('myQuiz')
-		.config(config);
-
-	function config($routeProvider) {
-		$routeProvider.
-			when('/quiz', {
-				templateUrl: 'partials/quiz.html',
-				controller: 'QuizController'
-			}).
-			when('/endofquiz', {
-				templateUrl: 'partials/endofquiz.html',
-				controller: 'EoquizController'
-			}).
-			when('/home', {
-				templateUrl: 'partials/home.html',
-				controller: 'HomeController',
-				controllerAs: 'vm'
-			}).
-			when('/', {
-				templateUrl: 'partials/home.html',
-				controller: 'HomeController',
-				controllerAs: 'vm'
-			}).
-			otherwise({
-				redirectTo: '/home'
-			});
-	}
-
-})(); 
-(function () {
-	
-	angular
-		.module('myQuiz')
-		.controller('EoquizController', ['$scope', 'Data', EoquizController]);
-
-	function EoquizController($scope, Data) {
-
-		$scope.scores = Data.scores;
-
-	}
-
-})(); 
-(function () {
-
-	angular
-		.module('myQuiz')
-		.controller('HomeController', ['$scope', '$location', '$cookieStore', '$cookies', HomeController]);
-
-	function HomeController($scope, $location, $cookieStore, $cookies) {
-
-		$scope.test = "Enter your name to start the quiz";
-		$scope.user = {
-			name: ''
-		};
-
-
-		function startQuiz (name) {
-			setUserName(name);
-			return $location.path('/quiz');
-		}
-
-		function setUserName(name) {
-			$cookies.userName = name;
-		}
-
-		$scope.startQuiz = startQuiz;
-
-	};
-
-})(); 
-
-(function() {
-
-	angular
-		.module('myQuiz')
-		.controller('MainController', ["CONSTANTS", "$cookies", "$cookieStore", MainController]);
-
-	function MainController(CONSTANTS, $cookies, $cookieStore) {	
-		
-		vm = this;
-
-		vm.title = CONSTANTS.TITLE;
-
-		vm.user = $cookies.userName;
-			 
-	};
-
-})();
-
-
-angular
-	.module('myQuiz')
-	.controller('QuizController', ['$scope','$http', '$animate', 'Data', '$location', QuizController]);
-
-function QuizController ($scope, $http, $animate, Data, $location) {
-
-	$scope.number = Data.number;
-
-	$scope.loadQuizData = function() {
-	      $http({
-	        url: 'quizdb.json',
-	        dataType: 'json',
-	        method: 'GET',
-	        data: '',
-	        headers: {
-	          "Content-Type": "application/json"
-	        }
-	      }).success(function(response) {
-	        $scope.question = response.allQuestions[$scope.number].question;
-	        $scope.choices = response.allQuestions[$scope.number].choices;
-	        $scope.correctAnswer = response.allQuestions[$scope.number].correctAnswer;
-	      }).error(function(error) {
-	        $scope.names = [{
-	          "Name": "Errrrrrr"
-	        }];
-	      });
-	    };
-
-	$scope.correctAnswers = Data.correctAnswers;
-	var incorrectAnswers = Data.incorrectAnswers;
-	var correctAnswersList = Data.correctAnswersList;
-	var incorrectAnswersList = Data.incorrectAnswersList;    
-
-	function addQuestion() {
-		if ($scope.number < 9) {
-			var answer = choiceSelection.userAnswers.pop();
-			$scope.selected = undefined;
-			if (answer === $scope.correctAnswer) {
-				$scope.correctAnswers += 1;
-				correctAnswersList.push(answer);
-				choiceSelection.userAnswer = [];
-			} else {
-				incorrectAnswers += 1;
-				incorrectAnswersList.push(answer);
-				choiceSelection.userAnswer = [];
-			}
-			$scope.number += 1;
-		} else {
-			$location.path('/endofquiz');
-		}
-	} // private;
-
-	var choiceSelection = {
-
-		setSelection: function(choice) {
-			choiceSelection.userAnswers.push(choice);
-			$scope.selected = choice;
-		},
-		isActive: function(choice) {
-			return $scope.selected === choice;
-		},
-		hasAnsweredOnce: function() {
-			if($scope.number !== 0) {
-				return true;
-			}
-		}
-
-	}
-
-
-
-	$scope.addQuestion = addQuestion; // make the addQuestion public to the view
-
-	$scope.hasMadeAChoice = Data.hasMadeAChoice;
-
-	$scope.setSelection = choiceSelection.setSelection;
-
-	$scope.isActive = choiceSelection.isActive;
-
-	$scope.hasAnsweredOnce = choiceSelection.hasAnsweredOnce;
-
-	$scope.$watch('number', function() {
-		$scope.loadQuizData();
-	});	
-
-};	
 (function () {
 	
 	angular
@@ -221,18 +38,174 @@ angular.module('myQuiz')
 	});
 
 })();	
-// myQuiz.factory('loadQuestions', function($http) {
+(function () {
+	
+	angular
+		.module('myQuiz')
+		.factory('QuestionService', ['$http', '$q', function($http, $q) {
 
-// 	var questions = { content: null};
+			var currentNumber = 0;
 
-// 	$http.get('quizdb.json').
-// 		success(function(data) {
-// 			questions = data;
-// 		}).
-// 		error(function(data, status) {
-// 			console.log(data + status);
-// 		});
+			return {
 
-// 	return questions;
+				getQuestion: function() {	
 
-// });
+				var def = $q.defer();
+
+				$http.get("quizdb.json")
+					.success(function(data) {
+						def.resolve(data.allQuestions[currentNumber]);
+					})
+					.error(function() {
+						def.reject("failed to retrieve questions");
+					});
+				return def.promise;	
+				},
+				getCurrentNumber: function() {
+					return currentNumber;
+				},
+				nextQuestion: function() {
+					currentNumber += 1;
+				}
+			};
+	}]);
+
+})(); 
+(function () {
+	
+	angular
+		.module('myQuiz')
+		// Ask for username which will displayed during quiz
+		.value("User", {
+			name: ""
+		})
+})(); 
+(function () {
+	
+	angular
+		.module('myQuiz')
+		.config(config);
+
+	function config($routeProvider) {
+		$routeProvider.
+			when('/quiz', {
+				templateUrl: 'partials/quiz.html',
+				controller: 'QuizController',
+				controllerAs: 'quiz'
+			}).
+			when('/endofquiz', {
+				templateUrl: 'partials/endofquiz.html',
+				controller: 'EoquizController'
+			}).
+			when('/home', {
+				templateUrl: 'partials/home.html',
+				controller: 'HomeController',
+				controllerAs: 'vm',
+				resolve: function (User) {
+					$scope.user = User.name;
+				}
+			}).
+			when('/', {
+				templateUrl: 'partials/home.html',
+				controller: 'HomeController',
+				controllerAs: 'vm'
+			}).
+			otherwise({
+				redirectTo: '/home'
+			});
+	}
+
+})(); 
+(function () {
+	
+	angular
+		.module('myQuiz')
+		.controller('EoquizController', ['$scope', 'Data', EoquizController]);
+
+	function EoquizController($scope, Data) {
+
+		$scope.scores = Data.scores;
+
+	}
+
+})(); 
+(function () {
+
+	angular
+		.module('myQuiz')
+		.controller('HomeController', ['$scope', '$location', 'User', HomeController]);
+
+	function HomeController($scope, $location, User) {
+
+		$scope.test = "Enter your name to start the quiz";
+
+		$scope.user;
+
+		function startQuiz (name) {
+			setUserName(name);
+			return $location.path('/quiz');
+		}
+
+		function setUserName(name) {
+			User.name = name;
+		}
+
+		$scope.startQuiz = startQuiz;
+
+
+
+	};
+
+})(); 
+
+(function() {
+
+	angular
+		.module('myQuiz')
+		.controller('MainController', ["CONSTANTS", 'User', MainController]);
+
+	function MainController(CONSTANTS, User) {	
+		
+		vm = this;
+
+		vm.title = CONSTANTS.TITLE;
+
+		vm.user = User;	 
+	};
+
+})();
+
+
+(function () {
+	angular
+		.module('myQuiz')
+		.controller('QuizController', ['$scope', '$http', '$animate', 'Data', '$location', 'QuestionService', QuizController]);
+
+	function QuizController ($scope, $http, $animate, Data, $location, QuestionService) {
+
+		var vm = this;
+		
+		QuestionService.getQuestion().then(function(data) {
+			// bad code, needs to get resolved in service
+			vm.question = data.question;
+			vm.choices = data.choices;
+			vm.correctAnswer = data.correctAnswer;
+		});
+
+		function addQuestion() {
+			QuestionService.nextQuestion();
+			// bad code, needs to get resolved in service
+			QuestionService.getQuestion().then(function(data) {
+				vm.question = data.question;
+				vm.choices = data.choices;
+				vm.correctAnswer = data.correctAnswer;
+			});
+		}
+
+		vm.addQuestion = addQuestion;
+
+	};
+
+
+	
+})(); 

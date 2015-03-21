@@ -2,15 +2,13 @@
 
 	angular
 		.module('myQuiz')
-		.controller('HomeController', ['$scope', '$location', '$cookieStore', '$cookies', HomeController]);
+		.controller('HomeController', ['$scope', '$location', 'User', HomeController]);
 
-	function HomeController($scope, $location, $cookieStore, $cookies) {
+	function HomeController($scope, $location, User) {
 
 		$scope.test = "Enter your name to start the quiz";
-		$scope.user = {
-			name: ''
-		};
 
+		$scope.user;
 
 		function startQuiz (name) {
 			setUserName(name);
@@ -18,10 +16,12 @@
 		}
 
 		function setUserName(name) {
-			$cookies.userName = name;
+			User.name = name;
 		}
 
 		$scope.startQuiz = startQuiz;
+
+
 
 	};
 
