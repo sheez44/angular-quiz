@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"ret",
+				"retrieveCurrentQuestion"
+			],
+			[
+				"que",
+				"QuestionService"
+			],
+			[
+				"has",
+				"hasAnsweredOnce"
+			],
+			[
 				"Q",
 				"QuestionNumber"
 			],
@@ -14,10 +26,6 @@
 			[
 				"correct",
 				"correctAnswersList"
-			],
-			[
-				"has",
-				"hasAnsweredOnce"
 			],
 			[
 				"choc",
@@ -108,13 +116,10 @@
 			}
 		},
 		{
-			"contents": "(function () {\n	\n	angular\n		.module('myQuiz')\n		.factory('QuestionService', ['$http', '$q', function($http, $q) {\n\n			var currentNumber = 0;\n\n			return {\n\n				getQuestion: function() {	\n\n				var def = $q.defer();\n\n				$http.get(\"quizdb.json\")\n					.success(function(data) {\n						// resolve the data by returning the question, choices and correctanswer in an object\n						def.resolve(data.allQuestions[currentNumber]);\n					})\n					.error(function() {\n						def.reject(\"failed to retrieve questions\");\n					});\n				return def.promise;	\n				},\n				getCurrentNumber: function() {\n					return currentNumber;\n				},\n				nextQuestion: function() {\n					currentNumber += 1;\n				}\n			};\n	}]);\n\n})(); ",
 			"file": "questionservice.js",
-			"file_size": 633,
-			"file_write_time": 130714522233406994,
 			"settings":
 			{
-				"buffer_size": 693,
+				"buffer_size": 1054,
 				"line_ending": "Windows"
 			}
 		},
@@ -122,7 +127,7 @@
 			"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/partials/quiz.html",
 			"settings":
 			{
-				"buffer_size": 392,
+				"buffer_size": 418,
 				"line_ending": "Windows"
 			}
 		},
@@ -162,7 +167,7 @@
 			"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/js/controllers/QuizController.js",
 			"settings":
 			{
-				"buffer_size": 821,
+				"buffer_size": 1599,
 				"line_ending": "Windows"
 			}
 		},
@@ -309,6 +314,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"currentNumber",
+			"CurrentNumber",
+			"currentNumber",
 			"number",
 			"loadQuestions",
 			"choiceSelection",
@@ -334,7 +342,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -363,7 +371,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
@@ -392,7 +400,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -421,7 +429,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -430,15 +438,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 693,
+						"buffer_size": 1054,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								365,
-								365
+								513,
+								513
 							]
 						],
 						"settings":
@@ -450,7 +458,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -459,15 +467,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 392,
+						"buffer_size": 418,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								275,
-								275
+								418,
+								418
 							]
 						],
 						"settings":
@@ -478,7 +486,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -536,7 +544,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
@@ -599,7 +607,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
@@ -608,15 +616,19 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 821,
+						"buffer_size": 1599,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								377,
-								377
+								293,
+								293
+							],
+							[
+								1585,
+								1585
 							]
 						],
 						"settings":
@@ -657,7 +669,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -686,7 +698,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 7,
 					"type": "text"
 				}
 			]
@@ -720,7 +732,7 @@
 		"cols":
 		[
 			0.0,
-			0.455378973105,
+			0.426039119804,
 			1.0
 		],
 		"rows":

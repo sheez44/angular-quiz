@@ -44,7 +44,7 @@ angular.module('myQuiz')
 		.module('myQuiz')
 		.factory('QuestionService', ['$http', '$q', function($http, $q) {
 
-			var currentNumber = 0;
+			var currentQuestion = 0;
 
 			return {
 
@@ -54,18 +54,27 @@ angular.module('myQuiz')
 
 				$http.get("quizdb.json")
 					.success(function(data) {
-						def.resolve(data.allQuestions[currentNumber]);
+						// resolve the data by returning the question, choices and correctanswer in an object
+						def.resolve({
+							totalQuestions: data.allQuestions.length,
+							question: data.allQuestions[currentQuestion].question,
+							choices: data.allQuestions[currentQuestion].choices,
+							correctAnswer: data.allQuestions[currentQuestion].correctAnswer
+							});
 					})
 					.error(function() {
 						def.reject("failed to retrieve questions");
 					});
 				return def.promise;	
 				},
-				getCurrentNumber: function() {
-					return currentNumber;
+				getCurrentQuestion: function() {
+					return currentQuestion;
 				},
 				nextQuestion: function() {
-					currentNumber += 1;
+					(currentQuestion >= 0) ? currentQuestion += 1 : false; 
+				}, 
+				prevQuestion: function() {
+					(currentQuestion < 0) ? false : currentQuestion -= 1; 
 				}
 			};
 	}]);
@@ -184,17 +193,23 @@ angular.module('myQuiz')
 	function QuizController ($scope, $http, $animate, Data, $location, QuestionService) {
 
 		var vm = this;
+		var totalQuestions;
+		var currentQuestion;
+
+		var dirty = false;
 		
 		QuestionService.getQuestion().then(function(data) {
-			// bad code, needs to get resolved in service
+			totalQuestions = data.totalQuestions;
+			currentQuestion = data.currentQuestion;
 			vm.question = data.question;
 			vm.choices = data.choices;
 			vm.correctAnswer = data.correctAnswer;
 		});
 
 		function addQuestion() {
+			vm.selected = false; // prevents highlight same question
 			QuestionService.nextQuestion();
-			// bad code, needs to get resolved in service
+			getQuestions();
 			QuestionService.getQuestion().then(function(data) {
 				vm.question = data.question;
 				vm.choices = data.choices;
@@ -202,10 +217,32 @@ angular.module('myQuiz')
 			});
 		}
 
+		var choiceSelection = {
+			userAnswers: [],
+			setSelection: function(choice) {
+				choiceSelection.userAnswers.push(choice);
+				vm.selected = choice;
+			},
+			hasMadeAChoice: function() {
+				if(choiceSelection.userAnswers.length === 0) {
+					return true;
+				}
+			},
+			isActive: function (choice) {
+				return vm.selected === choice;
+			},
+			hasAnsweredOnce: function() {
+				if(currentQuestion !== 0) {
+					return true;
+				}
+			}
+		};
 		vm.addQuestion = addQuestion;
+		vm.setSelection = choiceSelection.setSelection;
+		vm.hasMadeAChoice = choiceSelection.hasMadeAChoice;
+		vm.isActive = choiceSelection.isActive;
+		vm.hasAnsweredOnce = choiceSelection.hasAnsweredOnce;
 
 	};
-
-
 	
 })(); 

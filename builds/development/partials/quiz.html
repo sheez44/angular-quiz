@@ -2,11 +2,11 @@
 
 <h2>{{quiz.question}}</h2>
 <ul>
-	<li ng-repeat="choice in quiz.choices" class="choices" ng-click="setSelection(choice)" ng-class="{active: isActive(choice)}">{{choice}}</li>
+	<li ng-repeat="choice in quiz.choices" class="choices" ng-click="quiz.setSelection(choice)" ng-class="{active: quiz.isActive(choice)}">{{choice}}</li>
 </ul>
 
-<button class="button__next" ng-disabled="hasMadeAChoice()" ng-click="quiz.addQuestion()">add</button>
+<button class="button__next" ng-disabled="quiz.hasMadeAChoice()" ng-click="quiz.addQuestion()">add</button>
 
-<h2 ng-show="hasAnsweredOnce()">You answered {{correctAnswers}} correctly!</h2>
+<h2 ng-show="quiz.hasAnsweredOnce()">You answered {{quiz.currentQuestion}} correctly!</h2>
 
 </div>
