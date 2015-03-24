@@ -2,7 +2,8 @@
 <div class="main">
 <h2>{{test}}</h2>
 
-<input ng-model="name" type="text">
+<input ng-model="name" ng-minlength="3" type="text" ng-keydown="onKeyDown($event, name)">
+<p ng-hide="name">You need to enter at least 3 characters</p>
 
 <button ng-show="name" ng-click="startQuiz(name)">Start</button>
 

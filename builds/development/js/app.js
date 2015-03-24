@@ -44,37 +44,26 @@ angular.module('myQuiz')
 		.module('myQuiz')
 		.factory('QuestionService', ['$http', '$q', function($http, $q) {
 
-			var currentQuestion = 0;
-
 			return {
 
-				getQuestion: function() {	
+				getQuestion: function(number) {	
 
-				var def = $q.defer();
+					var def = $q.defer();
 
-				$http.get("quizdb.json")
-					.success(function(data) {
-						// resolve the data by returning the question, choices and correctanswer in an object
-						def.resolve({
-							totalQuestions: data.allQuestions.length,
-							question: data.allQuestions[currentQuestion].question,
-							choices: data.allQuestions[currentQuestion].choices,
-							correctAnswer: data.allQuestions[currentQuestion].correctAnswer
-							});
-					})
-					.error(function() {
-						def.reject("failed to retrieve questions");
-					});
-				return def.promise;	
-				},
-				getCurrentQuestion: function() {
-					return currentQuestion;
-				},
-				nextQuestion: function() {
-					(currentQuestion >= 0) ? currentQuestion += 1 : false; 
-				}, 
-				prevQuestion: function() {
-					(currentQuestion < 0) ? false : currentQuestion -= 1; 
+					$http.get("quizdb.json")
+						.success(function(data) {
+							// resolve the data by returning the question, choices and correctanswer in an object
+							def.resolve({
+								totalQuestions: data.allQuestions.length,
+								question: data.allQuestions[number].question,
+								choices: data.allQuestions[number].choices,
+								correctAnswer: data.allQuestions[number].correctAnswer
+								});
+						})
+						.error(function() {
+							def.reject("failed to retrieve questions");
+						});
+					return def.promise;	
 				}
 			};
 	}]);
@@ -87,6 +76,9 @@ angular.module('myQuiz')
 		// Ask for username which will displayed during quiz
 		.value("User", {
 			name: ""
+		})
+		.value("CurrentQuestion", {
+			question: 0
 		})
 })(); 
 (function () {
@@ -149,6 +141,7 @@ angular.module('myQuiz')
 		$scope.test = "Enter your name to start the quiz";
 
 		$scope.user;
+		$scope.name;
 
 		function startQuiz (name) {
 			setUserName(name);
@@ -159,10 +152,17 @@ angular.module('myQuiz')
 			User.name = name;
 		}
 
+		
+		function onKeyDown(event, name) {
+			console.log(event);
+			if (event.keyCode === 13 && $scope.name.length > 2) {
+				startQuiz(name);
+			} 
+		}
+
+
 		$scope.startQuiz = startQuiz;
-
-
-
+		$scope.onKeyDown = onKeyDown;
 	};
 
 })(); 
@@ -188,33 +188,69 @@ angular.module('myQuiz')
 (function () {
 	angular
 		.module('myQuiz')
-		.controller('QuizController', ['$scope', '$http', '$animate', 'Data', '$location', 'QuestionService', QuizController]);
+		.controller('QuizController', 
+			['$scope', '$http', '$animate', 'Data', '$location', 'QuestionService', QuizController]);
 
 	function QuizController ($scope, $http, $animate, Data, $location, QuestionService) {
 
 		var vm = this;
 		var totalQuestions;
-		var currentQuestion;
+		var currentQuestion = 0;
+		var totalCorrectAnswers = 0;
+		var totalWrongAnswers = 0;
+		vm.correctAnswersArr = [];
+		var wrongAnswersArr = [];
 
-		var dirty = false;
-		
-		QuestionService.getQuestion().then(function(data) {
-			totalQuestions = data.totalQuestions;
-			currentQuestion = data.currentQuestion;
-			vm.question = data.question;
-			vm.choices = data.choices;
-			vm.correctAnswer = data.correctAnswer;
-		});
-
-		function addQuestion() {
-			vm.selected = false; // prevents highlight same question
-			QuestionService.nextQuestion();
-			getQuestions();
-			QuestionService.getQuestion().then(function(data) {
+		// This function is used to call the questionService everytime the user clicks on the 'add' button
+		function getTheCurrentQuestion() {
+			QuestionService.getQuestion(currentQuestion).then(function(data) {
 				vm.question = data.question;
 				vm.choices = data.choices;
 				vm.correctAnswer = data.correctAnswer;
 			});
+		}
+
+		// Initial call of the data => first question
+		QuestionService.getQuestion(currentQuestion).then(function(data) {
+			totalQuestions = data.totalQuestions;
+			getTheCurrentQuestion();
+		});
+
+		// Every time a user clicks on the "add" button this function is called
+		// Will update the question and choices
+		function addQuestion() {
+			if(currentQuestion + 1 <= totalQuestions ) {
+				vm.selected = false; // prevents highlight same question
+				getUserAnswer();
+				vm.test = choiceSelection.nextQuestion();
+				getTheCurrentQuestion();	
+			} else {
+				$location.path('/');
+			}		
+		}
+
+		// This function passes the last given answer by the user to a new array
+		// Then that answers is passed on to get validated
+		// Additionally it will clear the array entirely to save memory 
+		function getUserAnswer() {
+			var userAnswer = choiceSelection.userAnswers.pop();
+			validateAnswer(userAnswer);
+			choiceSelection.userAnswers = [];
+		}
+
+		// This function checks the correct answer with the answers provided by the user
+		// If the answer is correct it updates the totalcorrect answers and the questions
+		// gets pushed in a new array for future purpose; vice versa for the wrong answers
+		function validateAnswer(userAnswer) {
+			console.log("the current question is " + currentQuestion);
+			if(vm.correctAnswer === userAnswer) {
+				totalCorrectAnswers += 1;
+				vm.totalCorrectAnswers = totalCorrectAnswers;
+				vm.correctAnswersArr.push(vm.question);
+			} else {
+				totalWrongAnswers += 1;
+				wrongAnswersArr.push(userAnswer);
+			}
 		}
 
 		var choiceSelection = {
@@ -235,8 +271,16 @@ angular.module('myQuiz')
 				if(currentQuestion !== 0) {
 					return true;
 				}
+			},
+			nextQuestion: function() {
+				(currentQuestion >= 0) ? currentQuestion += 1 : false; 
+				return currentQuestion;
+			}, 
+			prevQuestion: function() {
+				(currentQuestion < 0) ? false : currentQuestion -= 1; 
 			}
 		};
+
 		vm.addQuestion = addQuestion;
 		vm.setSelection = choiceSelection.setSelection;
 		vm.hasMadeAChoice = choiceSelection.hasMadeAChoice;

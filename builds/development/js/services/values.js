@@ -6,4 +6,7 @@
 		.value("User", {
 			name: ""
 		})
+		.value("CurrentQuestion", {
+			question: 0
+		})
 })(); 

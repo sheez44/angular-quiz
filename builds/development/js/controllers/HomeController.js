@@ -9,6 +9,7 @@
 		$scope.test = "Enter your name to start the quiz";
 
 		$scope.user;
+		$scope.name;
 
 		function startQuiz (name) {
 			setUserName(name);
@@ -19,10 +20,17 @@
 			User.name = name;
 		}
 
+		
+		function onKeyDown(event, name) {
+			console.log(event);
+			if (event.keyCode === 13 && $scope.name.length > 2) {
+				startQuiz(name);
+			} 
+		}
+
+
 		$scope.startQuiz = startQuiz;
-
-
-
+		$scope.onKeyDown = onKeyDown;
 	};
 
 })(); 

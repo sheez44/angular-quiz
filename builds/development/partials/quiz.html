@@ -7,6 +7,12 @@
 
 <button class="button__next" ng-disabled="quiz.hasMadeAChoice()" ng-click="quiz.addQuestion()">add</button>
 
-<h2 ng-show="quiz.hasAnsweredOnce()">You answered {{quiz.currentQuestion}} correctly!</h2>
+<h2 ng-show="quiz.hasAnsweredOnce()">You answered {{quiz.totalCorrectAnswers}} correctly!</h2>
+
+<ul ng-show="quiz.hasAnsweredOnce()">
+	<li ng-repeat="answer in quiz.correctAnswersArr">
+		{{answer}}
+	</li>
+</ul>
 
 </div>
