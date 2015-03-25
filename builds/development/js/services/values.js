@@ -4,9 +4,11 @@
 		.module('myQuiz')
 		// Ask for username which will displayed during quiz
 		.value("User", {
-			name: ""
-		})
-		.value("CurrentQuestion", {
-			question: 0
-		})
+			name: "",
+			totalCorrect: 0,
+			totalIncorrect: 0,
+			correctQuestions: [],
+			incorrectQuestions: []
+		});
+
 })(); 

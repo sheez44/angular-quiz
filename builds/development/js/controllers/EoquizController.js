@@ -2,11 +2,16 @@
 	
 	angular
 		.module('myQuiz')
-		.controller('EoquizController', ['$scope', 'Data', EoquizController]);
+		.controller('EoquizController', ['$scope', 'User', EoquizController]);
 
-	function EoquizController($scope, Data) {
+	function EoquizController($scope, User) {
 
-		$scope.scores = Data.scores;
+		// numbers
+		$scope.totalIncorrect = User.totalIncorrect;
+		$scope.totalCorrect = User.totalCorrect;
+		// arrays
+		$scope.correctScores = User.correctQuestions;
+		$scope.incorrectScores = User.incorrectQuestions;
 
 	}
 

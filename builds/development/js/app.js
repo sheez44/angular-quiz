@@ -75,11 +75,13 @@ angular.module('myQuiz')
 		.module('myQuiz')
 		// Ask for username which will displayed during quiz
 		.value("User", {
-			name: ""
-		})
-		.value("CurrentQuestion", {
-			question: 0
-		})
+			name: "",
+			totalCorrect: 0,
+			totalIncorrect: 0,
+			correctQuestions: [],
+			incorrectQuestions: []
+		});
+
 })(); 
 (function () {
 	
@@ -121,11 +123,16 @@ angular.module('myQuiz')
 	
 	angular
 		.module('myQuiz')
-		.controller('EoquizController', ['$scope', 'Data', EoquizController]);
+		.controller('EoquizController', ['$scope', 'User', EoquizController]);
 
-	function EoquizController($scope, Data) {
+	function EoquizController($scope, User) {
 
-		$scope.scores = Data.scores;
+		// numbers
+		$scope.totalIncorrect = User.totalIncorrect;
+		$scope.totalCorrect = User.totalCorrect;
+		// arrays
+		$scope.correctScores = User.correctQuestions;
+		$scope.incorrectScores = User.incorrectQuestions;
 
 	}
 
@@ -189,17 +196,13 @@ angular.module('myQuiz')
 	angular
 		.module('myQuiz')
 		.controller('QuizController', 
-			['$scope', '$http', '$animate', 'Data', '$location', 'QuestionService', QuizController]);
+			['$scope', '$http', '$animate', 'Data', '$location', 'QuestionService', 'User', QuizController]);
 
-	function QuizController ($scope, $http, $animate, Data, $location, QuestionService) {
+	function QuizController ($scope, $http, $animate, Data, $location, QuestionService, User) {
 
 		var vm = this;
 		var totalQuestions;
 		var currentQuestion = 0;
-		var totalCorrectAnswers = 0;
-		var totalWrongAnswers = 0;
-		vm.correctAnswersArr = [];
-		var wrongAnswersArr = [];
 
 		// This function is used to call the questionService everytime the user clicks on the 'add' button
 		function getTheCurrentQuestion() {
@@ -219,13 +222,13 @@ angular.module('myQuiz')
 		// Every time a user clicks on the "add" button this function is called
 		// Will update the question and choices
 		function addQuestion() {
-			if(currentQuestion + 1 <= totalQuestions ) {
+			if(currentQuestion + 1 < totalQuestions ) {
 				vm.selected = false; // prevents highlight same question
 				getUserAnswer();
 				vm.test = choiceSelection.nextQuestion();
 				getTheCurrentQuestion();	
 			} else {
-				$location.path('/');
+				$location.path('/endofquiz');
 			}		
 		}
 
@@ -244,13 +247,16 @@ angular.module('myQuiz')
 		function validateAnswer(userAnswer) {
 			console.log("the current question is " + currentQuestion);
 			if(vm.correctAnswer === userAnswer) {
-				totalCorrectAnswers += 1;
-				vm.totalCorrectAnswers = totalCorrectAnswers;
-				vm.correctAnswersArr.push(vm.question);
+				User.totalCorrect += 1;
+				User.correctQuestions.push(vm.question);
 			} else {
-				totalWrongAnswers += 1;
-				wrongAnswersArr.push(userAnswer);
+				User.totalIncorrect += 1;
+				User.incorrectQuestions.push(userAnswer);
 			}
+		}
+
+		function addScores(totalCorrectAnswers) {
+
 		}
 
 		var choiceSelection = {

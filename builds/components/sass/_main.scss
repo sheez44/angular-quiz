@@ -1,5 +1,5 @@
 body {
-	background: $gray;
+	background: #63DFB9;
 	padding: 0;
 	margin: 0;
 }
@@ -28,8 +28,8 @@ header {
 
 .main {
 	width: 600px;
-	margin: 4em auto 0;
-	background: #eee;
+	margin: 0 auto;
+	background: #F4FF57;
 	padding: 15px;
 	border-radius: 15px;
 	box-shadow: 5px 5px 0 gray;
@@ -43,4 +43,11 @@ header {
 
 .choices {
 	padding: 15px 0 15px 15px;
+}
+
+.username {
+	color: black;
+	&__lockup {
+		background: tomato;
+	}
 }

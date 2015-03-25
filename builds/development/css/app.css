@@ -1,6 +1,6 @@
 /* line 1, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
 body {
-  background: #666;
+  background: #63DFB9;
   padding: 0;
   margin: 0; }
 
@@ -29,8 +29,8 @@ header {
 /* line 29, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
 .main {
   width: 600px;
-  margin: 4em auto 0;
-  background: #eee;
+  margin: 0 auto;
+  background: #F4FF57;
   padding: 15px;
   border-radius: 15px;
   box-shadow: 5px 5px 0 gray; }
@@ -44,6 +44,13 @@ header {
 /* line 44, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
 .choices {
   padding: 15px 0 15px 15px; }
+
+/* line 48, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+.username {
+  color: black; }
+  /* line 50, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+  .username__lockup {
+    background: tomato; }
 
 /* line 1, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_animations.scss */
 .choices.ng-enter, .choices.ng-move {
@@ -99,14 +106,7 @@ header {
 /* line 1, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_navbar.scss */
 .navigation {
   list-style-type: none;
-  text-align: center;
-  background: green;
-  height: auto; }
-  /* line 6, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_navbar.scss */
-  .navigation li {
-    display: inline;
-    padding: 15px;
-    background: yellow; }
+  text-align: center; }
 
 /* line 1, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_buttons.scss */
 .button__next {
