@@ -102,16 +102,15 @@ angular.module('myQuiz')
 			}).
 			when('/home', {
 				templateUrl: 'partials/home.html',
-				controller: 'HomeController',
-				controllerAs: 'vm',
-				resolve: function (User) {
-					$scope.user = User.name;
-				}
+				controller: 'HomeController'
 			}).
 			when('/', {
 				templateUrl: 'partials/home.html',
-				controller: 'HomeController',
-				controllerAs: 'vm'
+				controller: 'HomeController'
+			}).
+			when('/register', {
+				templateUrl: 'partials/register.html',
+				controller: 'HomeController'
 			}).
 			otherwise({
 				redirectTo: '/home'
@@ -145,7 +144,7 @@ angular.module('myQuiz')
 
 	function HomeController($scope, $location, User) {
 
-		$scope.test = "Enter your name to start the quiz";
+		$scope.test = "Login to start the quiz";
 
 		$scope.user;
 		$scope.name;
@@ -202,7 +201,7 @@ angular.module('myQuiz')
 
 		var vm = this;
 		var totalQuestions;
-		var currentQuestion = 0;
+		var currentQuestion = 9;
 
 		// This function is used to call the questionService everytime the user clicks on the 'add' button
 		function getTheCurrentQuestion() {
@@ -225,9 +224,9 @@ angular.module('myQuiz')
 			if(currentQuestion + 1 < totalQuestions ) {
 				vm.selected = false; // prevents highlight same question
 				getUserAnswer();
-				vm.test = choiceSelection.nextQuestion();
 				getTheCurrentQuestion();	
 			} else {
+				getUserAnswer();
 				$location.path('/endofquiz');
 			}		
 		}

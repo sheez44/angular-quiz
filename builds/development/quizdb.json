@@ -1,7 +1,7 @@
 {
     "allQuestions": [
         {
-            "question": "Who is Prime Minister of the United Kingdom? (FIRST)",
+            "question": "Who is Prime Minister of the United Kingdom?",
             "choices": ["David Cameron", "Gordon Brown", "Winston Churchill", "Tony Blair"],
             "correctAnswer": "David Cameron"
         },
@@ -46,7 +46,7 @@
             "correctAnswer": "Four"
         },
         {
-            "question": "In cricket, where would you find the chain ? (LAST) ",
+            "question": "In cricket, where would you find the chain ?",
             "choices": ["Between the wickets", "In the caps", "Locker room", "Clever"],
             "correctAnswer": "Between the wickets"
         }

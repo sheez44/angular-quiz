@@ -8,7 +8,7 @@
 
 		var vm = this;
 		var totalQuestions;
-		var currentQuestion = 0;
+		var currentQuestion = 9;
 
 		// This function is used to call the questionService everytime the user clicks on the 'add' button
 		function getTheCurrentQuestion() {
@@ -31,9 +31,9 @@
 			if(currentQuestion + 1 < totalQuestions ) {
 				vm.selected = false; // prevents highlight same question
 				getUserAnswer();
-				vm.test = choiceSelection.nextQuestion();
 				getTheCurrentQuestion();	
 			} else {
+				getUserAnswer();
 				$location.path('/endofquiz');
 			}		
 		}

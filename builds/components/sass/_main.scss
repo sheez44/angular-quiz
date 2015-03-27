@@ -2,6 +2,7 @@ body {
 	background: #63DFB9;
 	padding: 0;
 	margin: 0;
+	font-family: $font-main;
 }
 
 ul, ol {
@@ -33,6 +34,7 @@ header {
 	padding: 15px;
 	border-radius: 15px;
 	box-shadow: 5px 5px 0 gray;
+
 }
 
 .active {
@@ -49,5 +51,38 @@ header {
 	color: black;
 	&__lockup {
 		background: tomato;
+		margin-bottom: 2em;
+	}
+}
+
+.scores {
+	list-style-type: disc;
+	margin-bottom: 10px;
+	font-family: $font-sec;
+	font-style: italic;
+	font-size: 20px;
+}
+
+.eoquiz {
+	background: rgb(248, 248, 248);
+	font-family: $font-sec;
+	h1 {
+		font-family: $font-main;
+	}
+}
+
+h3.lead {
+	font-size: 200%;
+	color: blue;
+}
+
+.quiz {
+	&__image {
+		float: right;
+		width: 237px;
+		height: 169px;
+	}
+	&__login {
+		float: left;
 	}
 }

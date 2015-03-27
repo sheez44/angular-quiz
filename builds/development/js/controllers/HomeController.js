@@ -6,7 +6,7 @@
 
 	function HomeController($scope, $location, User) {
 
-		$scope.test = "Enter your name to start the quiz";
+		$scope.test = "Login to start the quiz";
 
 		$scope.user;
 		$scope.name;

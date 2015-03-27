@@ -17,16 +17,15 @@
 			}).
 			when('/home', {
 				templateUrl: 'partials/home.html',
-				controller: 'HomeController',
-				controllerAs: 'vm',
-				resolve: function (User) {
-					$scope.user = User.name;
-				}
+				controller: 'HomeController'
 			}).
 			when('/', {
 				templateUrl: 'partials/home.html',
-				controller: 'HomeController',
-				controllerAs: 'vm'
+				controller: 'HomeController'
+			}).
+			when('/register', {
+				templateUrl: 'partials/register.html',
+				controller: 'HomeController'
 			}).
 			otherwise({
 				redirectTo: '/home'
