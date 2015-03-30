@@ -3,14 +3,21 @@
 	<div class="quiz__login">
 		<h2>{{test}}</h2>
 
-		<form id="login-form">
+		<form id="login-form" ng-submit="addMessage()">
 			<label for="userName">Username</label>
-			<input type="text" name="login" id="userName"><br>
-			<label for="password">Password</label>
-			<input type="password" name="login" id="password"><br>
+			<input type="text" ng-model="message" name="login" id="userName"><br>
+<!-- 			<label for="password">Password</label>
+			<input type="password" name="login" id="password"><br> -->
 			<input type="submit" value="Log in">
 		</form>
 		<button ng-show="name" ng-click="startQuiz(name)">Start</button>
+
+		<ul>
+			<li ng-repeat="message in messages">
+				{{message.from}} : {{ message.content }<a href="" ng-click="messages.$remove(message)">X</a>}
+				<a href="" ng-click="messages.$remove(message)">X</a>
+			</li>
+		</ul>
 	</div>
 	<img class="quiz__image img-responsive" src="http://www.gretchenrubin.com/wp-content/uploads/2014/03/quiz-.jpg.jpg" alt="quiz image">
 
