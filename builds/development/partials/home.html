@@ -1,15 +1,17 @@
 
 <div class="container main clearfix">
 	<div class="quiz__login">
-		<h2>{{test}}</h2>
+		<h2 ng-bind="test"></h2>
 
-		<form id="login-form" ng-submit="addMessage()">
+		<form id="login-form">
 			<label for="userName">Username</label>
-			<input type="text" ng-model="message" name="login" id="userName"><br>
-<!-- 			<label for="password">Password</label>
-			<input type="password" name="login" id="password"><br> -->
-			<input type="submit" value="Log in">
+			<input type="email" name="login" id="userName" ng-model="email"><br>
+			<label for="password">Password</label>
+			<input type="password" name="login" id="password" ng-model="password"><br>
+<!-- 			<input type="submit" value="Log in"> -->
 		</form>
+		<button ng-click="createUser(email, password)">Create user</button>
+		<button ng-click="loginUser(email, password)">Login</button>
 		<button ng-show="name" ng-click="startQuiz(name)">Start</button>
 
 		<ul>

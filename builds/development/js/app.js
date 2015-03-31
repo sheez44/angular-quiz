@@ -6,6 +6,40 @@
 		]);
 
 (function () {
+	angular
+		.module("myQuiz")
+		.factory("Auth", ["$firebaseAuth", "$location", "$rootScope", function($firebaseAuth, $location, $rootScope) {
+			var ref = new Firebase("https://angularquiz.firebaseio.com/");
+
+			return {
+				createUser: function(email, password) {
+					ref.createUser({
+						email: email,
+						password: password
+					}, function(error, userData) {
+						if(error) {
+							console.log("Error creating user: ", error);
+						} else {
+							console.log("Succesfully created an account with uid: " + userData.uid);
+						}
+					});
+				},
+				loginUser: function(email, password) {
+					ref.authWithPassword({
+						email: email,
+						password: password
+					}, function(error, authData) {
+						if(error) {
+							console.log("Login failed! " + error);
+						} else {
+							$location.path('#/quiz')
+						}
+					});
+				}
+			}
+	}]);
+})(); 
+(function () {
 	
 	angular
 		.module('myQuiz')
@@ -69,19 +103,6 @@ angular.module('myQuiz')
 			};
 	}]);
 
-})(); 
-(function () {
-	angular
-		.module("myQuiz")
-		.factory("fireTest", ["$firebaseArray",
-
-		function($firebaseArray) {
-			var randomRoomId = Math.round(Math.random() * 10000000);
-			var ref = new Firebase("https://angularquiz.firebaseio.com/Users/" + randomRoomId);
-
-			return $firebaseArray;
-		}
-		]);
 })(); 
 (function () {
 	
@@ -154,33 +175,23 @@ angular.module('myQuiz')
 
 	angular
 		.module('myQuiz')
-		.controller('HomeController', ['$scope', '$location', 'User', 'fireTest', HomeController]);
+		.controller('HomeController', ['$scope', '$location', 'User', 'Auth', HomeController]);
 
-	function HomeController($scope, $location, User, fireTest) {
+	function HomeController($scope, $location, User, Auth) {
 
-		// var ref = new Firebase("https://angularquiz.firebaseio.com/");
+		console.log(Auth);
 
-		// $scope.profile = $firebaseObject(ref);
+		$scope.email;
+		$scope.password;
 
-		// $scope.profile.$loaded().then(function() {
-		// 	// $scope.profile.Users.test = "test";
-		// 	// $scope.profile.$save();
-		// 	console.log($scope.profile);
-		// });
 
-		$scope.testUser = "Guest " + Math.round(Math.random() * 100);
+		$scope.createUser = function(email, password) {
+			Auth.createUser(email, password); 
+		}
 
-		$scope.messages = fireTest;
-
-		$scope.addMessage = function() {
-			$scope.messages.$add({
-				from: $scope.user,
-				content: $scope.message,
-				timestamp: Firebase.ServerValue.TIMESTAMP
-			});
-
-			$scope.message = '';
-		};
+		$scope.loginUser = function(email, password) {
+			Auth.loginUser(email, password);
+		}
 
 		$scope.test = "Login to start the quiz";
 

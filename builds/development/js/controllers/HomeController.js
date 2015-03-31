@@ -2,33 +2,23 @@
 
 	angular
 		.module('myQuiz')
-		.controller('HomeController', ['$scope', '$location', 'User', 'fireTest', HomeController]);
+		.controller('HomeController', ['$scope', '$location', 'User', 'Auth', HomeController]);
 
-	function HomeController($scope, $location, User, fireTest) {
+	function HomeController($scope, $location, User, Auth) {
 
-		// var ref = new Firebase("https://angularquiz.firebaseio.com/");
+		console.log(Auth);
 
-		// $scope.profile = $firebaseObject(ref);
+		$scope.email;
+		$scope.password;
 
-		// $scope.profile.$loaded().then(function() {
-		// 	// $scope.profile.Users.test = "test";
-		// 	// $scope.profile.$save();
-		// 	console.log($scope.profile);
-		// });
 
-		$scope.testUser = "Guest " + Math.round(Math.random() * 100);
+		$scope.createUser = function(email, password) {
+			Auth.createUser(email, password); 
+		}
 
-		$scope.messages = fireTest;
-
-		$scope.addMessage = function() {
-			$scope.messages.$add({
-				from: $scope.user,
-				content: $scope.message,
-				timestamp: Firebase.ServerValue.TIMESTAMP
-			});
-
-			$scope.message = '';
-		};
+		$scope.loginUser = function(email, password) {
+			Auth.loginUser(email, password);
+		}
 
 		$scope.test = "Login to start the quiz";
 
