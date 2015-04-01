@@ -187,10 +187,14 @@ angular.module('myQuiz')
 
 		$scope.createUser = function(email, password) {
 			Auth.createUser(email, password); 
+			$scope.email = '';
+			$scope.password = '';
 		}
 
 		$scope.loginUser = function(email, password) {
 			Auth.loginUser(email, password);
+			$scope.email = '';
+			$scope.password = '';
 		}
 
 		$scope.test = "Login to start the quiz";

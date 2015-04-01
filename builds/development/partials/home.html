@@ -3,16 +3,15 @@
 	<div class="quiz__login">
 		<h2 ng-bind="test"></h2>
 
-		<form id="login-form">
+		<form id="login-form" ng-submit="loginUser(email, password)" name="myForm" novalidate>
 			<label for="userName">Username</label>
-			<input type="email" name="login" id="userName" ng-model="email"><br>
+			<input type="email" name="login" id="userName" ng-model="email" ng-required="true"><br>
 			<label for="password">Password</label>
-			<input type="password" name="login" id="password" ng-model="password"><br>
-<!-- 			<input type="submit" value="Log in"> -->
+			<input type="password" name="login" id="password" ng-model="password" ng-required="true"><br>
+			<button type="submit" ng-disabled="myForm.$invalid">Login</button>
 		</form>
-		<button ng-click="createUser(email, password)">Create user</button>
-		<button ng-click="loginUser(email, password)">Login</button>
-		<button ng-show="name" ng-click="startQuiz(name)">Start</button>
+<!-- 		<button ng-disabled="myform.$invalid" ng-click="createUser(email, password)">Create user</button>
+ -->
 
 		<ul>
 			<li ng-repeat="message in messages">
