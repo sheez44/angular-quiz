@@ -17,15 +17,15 @@
 			}).
 			when('/home', {
 				templateUrl: 'partials/home.html',
-				controller: 'HomeController'
+				controller: 'RegistrationController'
 			}).
 			when('/', {
 				templateUrl: 'partials/home.html',
-				controller: 'HomeController'
+				controller: 'RegistrationController'
 			}).
 			when('/register', {
 				templateUrl: 'partials/register.html',
-				controller: 'HomeController'
+				controller: 'RegistrationController'
 			}).
 			otherwise({
 				redirectTo: '/home'

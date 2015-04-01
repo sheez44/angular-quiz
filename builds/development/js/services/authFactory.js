@@ -1,34 +1,23 @@
 (function () {
 	angular
 		.module("myQuiz")
-		.factory("Auth", ["$firebaseAuth", "$location", "$rootScope", function($firebaseAuth, $location, $rootScope) {
-			var ref = new Firebase("https://angularquiz.firebaseio.com/");
+		.factory("Auth", ["$firebaseAuth", 
+			"$firebase", "$location", "$routeParams", "CONSTANTS", function($firebaseAuth, 
+				$firebase, routeParams, $location, CONSTANTS) {
+			
+			var ref = new Firebase(CONSTANTS.FIREBASE_URL);
+			var auth = $firebaseAuth(ref);
 
-			return {
-				createUser: function(email, password) {
-					ref.createUser({
-						email: email,
-						password: password
-					}, function(error, userData) {
-						if(error) {
-							console.log("Error creating user: ", error);
-						} else {
-							console.log("Succesfully created an account with uid: " + userData.uid);
-						}
+			var myObject = {
+				login: function(user) {
+					return auth.$authWithPassword({
+						email: user.email,
+						password: user.password
 					});
-				},
-				loginUser: function(email, password) {
-					ref.authWithPassword({
-						email: email,
-						password: password
-					}, function(error, authData) {
-						if(error) {
-							console.log("Login failed! " + error);
-						} else {
-							$location.path('#/quiz')
-						}
-					});
-				}
-			}
+				} // login
+
+			}; // myObject
+
+			return myObject;
 	}]);
 })(); 

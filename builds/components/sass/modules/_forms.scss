@@ -5,4 +5,10 @@
 	input[type="submit"] {
 		margin-top: 2%;
 	}
+	.form {
+		&__errormsg {
+			color: red;
+			font-size: 1.3em;
+		}
+	}
 }

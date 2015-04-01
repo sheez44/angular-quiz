@@ -8,35 +8,24 @@
 (function () {
 	angular
 		.module("myQuiz")
-		.factory("Auth", ["$firebaseAuth", "$location", "$rootScope", function($firebaseAuth, $location, $rootScope) {
-			var ref = new Firebase("https://angularquiz.firebaseio.com/");
+		.factory("Auth", ["$firebaseAuth", 
+			"$firebase", "$location", "$routeParams", "CONSTANTS", function($firebaseAuth, 
+				$firebase, routeParams, $location, CONSTANTS) {
+			
+			var ref = new Firebase(CONSTANTS.FIREBASE_URL);
+			var auth = $firebaseAuth(ref);
 
-			return {
-				createUser: function(email, password) {
-					ref.createUser({
-						email: email,
-						password: password
-					}, function(error, userData) {
-						if(error) {
-							console.log("Error creating user: ", error);
-						} else {
-							console.log("Succesfully created an account with uid: " + userData.uid);
-						}
+			var myObject = {
+				login: function(user) {
+					return auth.$authWithPassword({
+						email: user.email,
+						password: user.password
 					});
-				},
-				loginUser: function(email, password) {
-					ref.authWithPassword({
-						email: email,
-						password: password
-					}, function(error, authData) {
-						if(error) {
-							console.log("Login failed! " + error);
-						} else {
-							$location.path('#/quiz')
-						}
-					});
-				}
-			}
+				} // login
+
+			}; // myObject
+
+			return myObject;
 	}]);
 })(); 
 (function () {
@@ -69,7 +58,8 @@
 
 angular.module('myQuiz')
 	.constant("CONSTANTS", {
-		"TITLE": "My first Quiz!"
+		"TITLE": "My first Quiz!",
+		"FIREBASE_URL": "https://angularquiz.firebaseio.com/"
 	});
 
 })();	
@@ -137,15 +127,15 @@ angular.module('myQuiz')
 			}).
 			when('/home', {
 				templateUrl: 'partials/home.html',
-				controller: 'HomeController'
+				controller: 'RegistrationController'
 			}).
 			when('/', {
 				templateUrl: 'partials/home.html',
-				controller: 'HomeController'
+				controller: 'RegistrationController'
 			}).
 			when('/register', {
 				templateUrl: 'partials/register.html',
-				controller: 'HomeController'
+				controller: 'RegistrationController'
 			}).
 			otherwise({
 				redirectTo: '/home'
@@ -348,3 +338,36 @@ angular.module('myQuiz')
 	};
 	
 })(); 
+(function () {
+	
+	angular
+		.module('myQuiz')
+		.controller('RegistrationController', ['$scope', '$location', 'Auth', RegController]);
+
+	function RegController($scope, $location, Auth) {
+
+		$scope.login = function () {
+			Auth.login($scope.user) // user object contains user.email and user.password
+			.then(function(user) {
+				console.log(user);
+				$location.path('/quiz');
+			}).catch(function(error) {
+				$scope.message = error.message;
+			});
+		} // login
+
+		$scope.register = function() {
+			Auth.register($scope.user)
+			.then(function(user) {
+				Auth.login($scope.user);
+				$location.path('/quiz');
+			}).catch(function(error) {
+				$scope.message = error.message;
+			});
+		} // register
+
+	}
+
+})(); 
+
+// 3:55

@@ -3,11 +3,14 @@
 	<div class="quiz__login">
 		<h2 ng-bind="test"></h2>
 
-		<form id="login-form" ng-submit="loginUser(email, password)" name="myForm" novalidate>
-			<label for="userName">Username</label>
-			<input type="email" name="login" id="userName" ng-model="email" ng-required="true"><br>
+		<form id="login-form" ng-submit="login()" name="myForm" novalidate>
+
+			<p class="form__errormsg" ng-show="message">{{ message }}</p>
+
+			<label for="userName">Email</label>
+			<input type="email" name="login" id="userName" ng-model="user.email" ng-required="true" placeholder="Email"><br>
 			<label for="password">Password</label>
-			<input type="password" name="login" id="password" ng-model="password" ng-required="true"><br>
+			<input type="password" name="login" id="password" ng-model="user.password" ng-required="true" placeholder="Password"><br>
 			<button type="submit" ng-disabled="myForm.$invalid">Login</button>
 		</form>
 <!-- 		<button ng-disabled="myform.$invalid" ng-click="createUser(email, password)">Create user</button>

@@ -28,12 +28,15 @@ header {
 }
 
 .main {
-	width: 600px;
+	width: 800px;
 	margin: 0 auto;
 	background: #F4FF57;
 	padding: 15px;
 	border-radius: 15px;
 	box-shadow: 5px 5px 0 gray;
+	h2 {
+		text-align: center;
+	}
 
 }
 
@@ -41,6 +44,9 @@ header {
 	background: green;
 	color: #eee;
 	border-radius: 5px;
+	text-indent: 1em;
+	font-weight: 700;
+	letter-spacing: 0.1em;
 }
 
 .choices {
