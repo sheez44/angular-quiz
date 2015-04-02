@@ -8,11 +8,11 @@
 		<p ng-show="message">{{ message }}</p>
 
 		<label for="name">Name</label>
-		<input type="firstname" name="firstname" id="name" ng-model="user.firstname" ng-required="true"><br>
-		<p ng-show="myform.firstname.$invalid && myform.firstname.$touched">First name is required</p>
+		<input type="name" name="name" id="name" ng-model="user.name" ng-required="true"><br>
+		<p ng-show="myform.name.$invalid && myform.name.$touched">First name is required</p>
 		
 		<label for="username">Username</label>
-		<input type="username" name="lastname" id="username" ng-model="user.username" ng-required="true"><br>
+		<input type="username" name="username" id="username" ng-model="user.username" ng-required="true"><br>
 		<p ng-show="myform.username.$invalid && myform.username.$touched">Username is required</p>
 
 		<label for="email">Email</label>
