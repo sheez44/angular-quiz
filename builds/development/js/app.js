@@ -21,7 +21,14 @@
 						email: user.email,
 						password: user.password
 					});
-				} // login
+				}, // login
+
+				register: function(user) {
+					return auth.$createUser({
+						email: user.email,
+						password: user.password
+					});
+				} // register
 
 			}; // myObject
 
