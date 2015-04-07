@@ -55,9 +55,13 @@ header {
 
 .username {
 	color: black;
+	position: relative;
 	&__lockup {
 		background: tomato;
 		margin-bottom: 2em;
+		a {
+			color: black;
+		}
 	}
 }
 
@@ -90,5 +94,11 @@ h3.lead {
 	}
 	&__login {
 		float: left;
+	}
+}
+
+.userinfo {
+	a {
+		color: black;
 	}
 }

@@ -33,9 +33,9 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 
-	<div class="container username__lockup">
-		<h3 class="lead text-center"> Hello <span class="username">{{ main.user.user.username }}</span></h3>
-
+	<div class="container username__lockup" ng-controller="StatusController" ng-show="main.user.user.username">
+			<h3 class="lead text-center"> Hello <span class="username">{{ main.user.user.username }}</span></h3>
+			<a class="btn btn-default logout" ng-href="#/logout" ng-click="logout()">logout</a>
 	</div>
 	
 

@@ -55,13 +55,17 @@ header {
 
 /* line 56, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
 .username {
-  color: black; }
-  /* line 58, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+  color: black;
+  position: relative; }
+  /* line 59, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
   .username__lockup {
     background: tomato;
     margin-bottom: 2em; }
+    /* line 62, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+    .username__lockup a {
+      color: black; }
 
-/* line 64, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 68, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
 .scores {
   list-style-type: disc;
   margin-bottom: 10px;
@@ -69,27 +73,31 @@ header {
   font-style: italic;
   font-size: 20px; }
 
-/* line 72, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 76, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
 .eoquiz {
   background: #f8f8f8;
   font-family: 'Lora', serif; }
-  /* line 75, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+  /* line 79, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
   .eoquiz h1 {
     font-family: 'Istok Web', sans-serif; }
 
-/* line 80, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 84, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
 h3.lead {
   font-size: 200%;
   color: blue; }
 
-/* line 86, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 90, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
 .quiz__image {
   float: right;
   width: 237px;
   height: 169px; }
-/* line 91, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 95, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
 .quiz__login {
   float: left; }
+
+/* line 101, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+.userinfo a {
+  color: black; }
 
 /* line 1, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_animations.scss */
 .choices.ng-enter, .choices.ng-move {
@@ -159,6 +167,12 @@ h3.lead {
 button[disabled] {
   background: gray;
   color: black; }
+
+/* line 14, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_buttons.scss */
+.logout {
+  position: absolute;
+  bottom: 28%;
+  right: 2%; }
 
 /* line 1, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_state.scss */
 .is-correct {

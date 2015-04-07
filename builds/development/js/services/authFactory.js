@@ -14,7 +14,7 @@
 					var userObject = $firebaseObject(ref); // returns authUser.uid object with all the registered information (date, username etc)
 					User.user = userObject;
 				} else {
-					User.user = {username: 'not online'}; // if no user is not logged in, this value becomes empty  
+					User.user = {}; // if no user is not logged in, this value becomes empty  
 				}
 			});
 
@@ -25,6 +25,10 @@
 						password: user.password
 					});
 				}, // login
+
+				logout: function(user) {
+					return auth.$unauth();
+				}, // logout
 
 				register: function(user) {
 					return auth.$createUser({
