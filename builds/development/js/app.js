@@ -9,11 +9,21 @@
 	angular
 		.module("myQuiz")
 		.factory("Auth", ["$firebaseAuth", 
-			"$firebase", "$location", "$routeParams", "CONSTANTS", function($firebaseAuth, 
-				$firebase, routeParams, $location, CONSTANTS) {
+			"$firebaseObject", "$rootScope", "$location", "$routeParams", "CONSTANTS", "User", function($firebaseAuth, 
+				$firebaseObject, routeParams, $rootScope, $location, CONSTANTS, User) {
 
 			var ref = new Firebase(CONSTANTS.FIREBASE_URL);
 			var auth = $firebaseAuth(ref);
+
+			auth.$onAuth(function(authUser) {
+				if (authUser) {
+					var ref = new Firebase(CONSTANTS.FIREBASE_URL + "users/" + authUser.uid);
+					var userObject = $firebaseObject(ref); // returns authUser.uid object with all the registered information (date, username etc)
+					User.user = userObject;
+				} else {
+					User.user = {username: 'not online'}; // if no user is not logged in, this value becomes empty  
+				}
+			});
 
 			var myObject = {
 				login: function(user) {
@@ -37,8 +47,6 @@
 							username: user.username,
 							email: user.email
 						}; // User Info object
-
-						console.log(userInfo);
 
 						ref.set(userInfo, function(error) {
 							if(error) {
@@ -129,7 +137,7 @@ angular.module('myQuiz')
 		.module('myQuiz')
 		// Ask for username which will displayed during quiz
 		.value("User", {
-			name: "",
+			user: {},
 			totalCorrect: 0,
 			totalIncorrect: 0,
 			correctQuestions: [],
@@ -154,10 +162,6 @@ angular.module('myQuiz')
 				templateUrl: 'partials/endofquiz.html',
 				controller: 'EoquizController'
 			}).
-			when('/home', {
-				templateUrl: 'partials/home.html',
-				controller: 'RegistrationController'
-			}).
 			when('/', {
 				templateUrl: 'partials/home.html',
 				controller: 'RegistrationController'
@@ -167,7 +171,7 @@ angular.module('myQuiz')
 				controller: 'RegistrationController'
 			}).
 			otherwise({
-				redirectTo: '/home'
+				redirectTo: '/'
 			});
 	}
 
@@ -190,74 +194,20 @@ angular.module('myQuiz')
 	}
 
 })(); 
-(function () {
-
-	angular
-		.module('myQuiz')
-		.controller('HomeController', ['$scope', '$location', 'User', 'Auth', HomeController]);
-
-	function HomeController($scope, $location, User, Auth) {
-
-		console.log(Auth);
-
-		$scope.email;
-		$scope.password;
-
-
-		$scope.createUser = function(email, password) {
-			Auth.createUser(email, password); 
-			$scope.email = '';
-			$scope.password = '';
-		}
-
-		$scope.loginUser = function(email, password) {
-			Auth.loginUser(email, password);
-			$scope.email = '';
-			$scope.password = '';
-		}
-
-		$scope.test = "Login to start the quiz";
-
-		$scope.user;
-		$scope.name;
-
-		function startQuiz (name) {
-			setUserName(name);
-			return $location.path('/quiz');
-		}
-
-		function setUserName(name) {
-			User.name = name;
-		}
-
-		
-		function onKeyDown(event, name) {
-			console.log(event);
-			if (event.keyCode === 13 && $scope.name.length > 2) {
-				startQuiz(name);
-			} 
-		}
-
-
-		$scope.startQuiz = startQuiz;
-		$scope.onKeyDown = onKeyDown;
-	};
-
-})(); 
-
 (function() {
 
 	angular
 		.module('myQuiz')
-		.controller('MainController', ["CONSTANTS", 'User', MainController]);
+		.controller('MainController', ["CONSTANTS", 'User', '$rootScope', 'Auth', MainController]);
 
-	function MainController(CONSTANTS, User) {	
+	function MainController(CONSTANTS, User, $rootScope, Auth) {	
 		
 		vm = this;
 
 		vm.title = CONSTANTS.TITLE;
 
 		vm.user = User;	 
+
 	};
 
 })();
@@ -371,14 +321,15 @@ angular.module('myQuiz')
 	
 	angular
 		.module('myQuiz')
-		.controller('RegistrationController', ['$scope', '$location', 'Auth', RegController]);
+		.controller('RegistrationController', ['$rootScope', '$scope', '$location', 'Auth', RegController]);
 
-	function RegController($scope, $location, Auth) {
+	function RegController($rootScope, $scope, $location, Auth) {
+
+		$rootScope.currentUser = "afcart1";
 
 		$scope.login = function () {
 			Auth.login($scope.user) // user object contains user.email and user.password
 			.then(function(user) {
-				console.log(user);
 				$location.path('/quiz');
 			}).catch(function(error) {
 				$scope.message = error.message;

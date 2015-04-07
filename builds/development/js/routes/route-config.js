@@ -15,10 +15,6 @@
 				templateUrl: 'partials/endofquiz.html',
 				controller: 'EoquizController'
 			}).
-			when('/home', {
-				templateUrl: 'partials/home.html',
-				controller: 'RegistrationController'
-			}).
 			when('/', {
 				templateUrl: 'partials/home.html',
 				controller: 'RegistrationController'
@@ -28,7 +24,7 @@
 				controller: 'RegistrationController'
 			}).
 			otherwise({
-				redirectTo: '/home'
+				redirectTo: '/'
 			});
 	}
 

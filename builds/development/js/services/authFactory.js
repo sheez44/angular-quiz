@@ -2,11 +2,21 @@
 	angular
 		.module("myQuiz")
 		.factory("Auth", ["$firebaseAuth", 
-			"$firebase", "$location", "$routeParams", "CONSTANTS", function($firebaseAuth, 
-				$firebase, routeParams, $location, CONSTANTS) {
+			"$firebaseObject", "$rootScope", "$location", "$routeParams", "CONSTANTS", "User", function($firebaseAuth, 
+				$firebaseObject, routeParams, $rootScope, $location, CONSTANTS, User) {
 
 			var ref = new Firebase(CONSTANTS.FIREBASE_URL);
 			var auth = $firebaseAuth(ref);
+
+			auth.$onAuth(function(authUser) {
+				if (authUser) {
+					var ref = new Firebase(CONSTANTS.FIREBASE_URL + "users/" + authUser.uid);
+					var userObject = $firebaseObject(ref); // returns authUser.uid object with all the registered information (date, username etc)
+					User.user = userObject;
+				} else {
+					User.user = {username: 'not online'}; // if no user is not logged in, this value becomes empty  
+				}
+			});
 
 			var myObject = {
 				login: function(user) {
@@ -30,8 +40,6 @@
 							username: user.username,
 							email: user.email
 						}; // User Info object
-
-						console.log(userInfo);
 
 						ref.set(userInfo, function(error) {
 							if(error) {

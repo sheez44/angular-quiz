@@ -132,18 +132,10 @@
 			}
 		},
 		{
-			"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/js/controllers/HomeController.js",
-			"settings":
-			{
-				"buffer_size": 983,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/js/controllers/RegController.js",
 			"settings":
 			{
-				"buffer_size": 720,
+				"buffer_size": 723,
 				"line_ending": "Windows"
 			}
 		},
@@ -151,7 +143,7 @@
 			"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/partials/register.html",
 			"settings":
 			{
-				"buffer_size": 420,
+				"buffer_size": 1295,
 				"line_ending": "Windows"
 			}
 		},
@@ -159,15 +151,7 @@
 			"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/js/routes/route-config.js",
 			"settings":
 			{
-				"buffer_size": 731,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/partials/home.html",
-			"settings":
-			{
-				"buffer_size": 1114,
+				"buffer_size": 621,
 				"line_ending": "Windows"
 			}
 		},
@@ -175,31 +159,31 @@
 			"file": "authFactory.js",
 			"settings":
 			{
-				"buffer_size": 523,
+				"buffer_size": 1726,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/Users/johan/Desktop/Angularquiz/builds/components/sass/_main.scss",
+			"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/index.html",
 			"settings":
 			{
-				"buffer_size": 1132,
+				"buffer_size": 2273,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "constants.js",
+			"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/js/controllers/QuizController.js",
 			"settings":
 			{
-				"buffer_size": 163,
+				"buffer_size": 3123,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_forms.scss",
+			"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/js/controllers/MainController.js",
 			"settings":
 			{
-				"buffer_size": 155,
+				"buffer_size": 306,
 				"line_ending": "Windows"
 			}
 		}
@@ -261,14 +245,16 @@
 	],
 	"file_history":
 	[
+		"/C/Users/johan/Desktop/Angularquiz/builds/development/partials/home.html",
+		"/C/Users/johan/Desktop/Angularquiz/builds/development/js/controllers/HomeController.js",
+		"/C/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_forms.scss",
+		"/C/Users/johan/Desktop/Angularquiz/builds/components/sass/_main.scss",
+		"/C/Users/johan/Desktop/Angularquiz/builds/development/js/services/constants.js",
 		"/C/Users/johan/Desktop/Angularquiz/builds/development/js/services/authFactory.js",
 		"/C/Users/johan/Desktop/Angularquiz/builds/development/js/controllers/MainController.js",
 		"/C/Users/johan/Desktop/Angularquiz/builds/development/js/controllers/EoquizController.js",
 		"/C/Users/johan/Desktop/Angularquiz/builds/development/quizdb.json",
 		"/C/Users/johan/Desktop/Angularquiz/builds/development/js/controllers/QuizController.js",
-		"/C/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_forms.scss",
-		"/C/Users/johan/Desktop/Angularquiz/builds/development/partials/home.html",
-		"/C/Users/johan/Desktop/Angularquiz/builds/development/js/controllers/HomeController.js",
 		"/C/Users/johan/Desktop/Angularquiz/builds/development/js/services/values.js",
 		"/C/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_state.scss",
 		"/C/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_navbar.scss",
@@ -278,14 +264,12 @@
 		"/C/Users/johan/Desktop/Angularquiz/builds/development/css/app.css",
 		"/C/Users/johan/Desktop/Angularquiz/builds/development/js/routes/route-config.js",
 		"/C/Users/johan/Desktop/Angularquiz/builds/development/partials/register.html",
-		"/C/Users/johan/Desktop/Angularquiz/builds/components/sass/_main.scss",
 		"/C/Users/johan/Desktop/Angularquiz/builds/components/sass/app.scss",
 		"/C/Users/johan/Desktop/Angularquiz/builds/development/index.html",
 		"/C/Users/johan/Desktop/Angularquiz/builds/development/partials/quiz.html",
 		"/C/Users/johan/Desktop/Angularquiz/builds/development/js/services/questionservice.js",
 		"/C/Users/johan/Desktop/Angularquiz/builds/development/js/services/questionLogicService.js",
 		"/C/Users/johan/Desktop/Angularquiz/builds/development/js/services/bindTestScores.js",
-		"/C/Users/johan/Desktop/Angularquiz/builds/development/js/services/constants.js",
 		"/C/Users/johan/Desktop/Angularquiz/gulpfile.js",
 		"/C/Users/johan/Desktop/Angularquiz/builds/development/js/app.js",
 		"/C/Users/johan/Desktop/Angularquiz/.sass-cache/9915db12ec405d498564e5d13b8b0f1cfc6590c8/app.scssc",
@@ -344,6 +328,12 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"currentUser",
+			"first",
+			"firstname",
+			"user",
+			"firstname",
+			"password",
 			"HomeController",
 			"Auth",
 			"fireTest",
@@ -384,7 +374,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -412,114 +402,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/js/controllers/HomeController.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 983,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								14,
-								14
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/js/controllers/RegController.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 720,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								174,
-								174
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/partials/register.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 420,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								86,
-								86
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
 					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/js/routes/route-config.js",
+					"buffer": 1,
+					"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/js/controllers/RegController.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 731,
+						"buffer_size": 723,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								450,
-								450
-							],
-							[
-								552,
-								552
+								350,
+								350
 							]
 						],
 						"settings":
@@ -531,24 +431,36 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/partials/home.html",
+					"buffer": 2,
+					"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/partials/register.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1114,
+						"buffer_size": 1295,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								546,
-								546
+								258,
+								258
+							],
+							[
+								301,
+								301
+							],
+							[
+								352,
+								352
+							],
+							[
+								376,
+								376
 							]
 						],
 						"settings":
@@ -564,20 +476,49 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "authFactory.js",
+					"buffer": 3,
+					"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/js/routes/route-config.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 523,
+						"buffer_size": 621,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								257,
-								257
+								367,
+								367
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "authFactory.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1726,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								637,
+								615
 							]
 						],
 						"settings":
@@ -593,49 +534,84 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "/C/Users/johan/Desktop/Angularquiz/builds/components/sass/_main.scss",
+					"buffer": 5,
+					"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1132,
+						"buffer_size": 2273,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								614,
-								614
+								1490,
+								1490
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Sass/Syntaxes/Sass.tmLanguage",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": -0.0,
-						"translation.y": 399.0,
+						"translation.x": 0.0,
+						"translation.y": 190.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "constants.js",
-					"semi_transient": false,
+					"buffer": 6,
+					"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/js/controllers/QuizController.js",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 163,
+						"buffer_size": 3123,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								48,
-								48
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 7,
+					"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/js/controllers/MainController.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 306,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								292,
+								292
 							]
 						],
 						"settings":
@@ -646,35 +622,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "/C/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_forms.scss",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 155,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								145,
-								145
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Sass/Syntaxes/Sass.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -697,11 +645,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.544621026895,
 			1.0
 		],
 		"rows":
@@ -751,7 +706,7 @@
 		[
 			[
 				"",
-				"C:\\wamp\\www\\wordpress\\wp-content\\themes\\Blog\\psyblog.sublime-project"
+				"C:\\wamp\\www\\wordpress\\wp-content\\themes\\tafeltennisvereniging-attc-77\\sass\\site\\secondary\\wp.sublime-project"
 			]
 		],
 		"width": 380.0
@@ -765,7 +720,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},

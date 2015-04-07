@@ -2,14 +2,15 @@
 	
 	angular
 		.module('myQuiz')
-		.controller('RegistrationController', ['$scope', '$location', 'Auth', RegController]);
+		.controller('RegistrationController', ['$rootScope', '$scope', '$location', 'Auth', RegController]);
 
-	function RegController($scope, $location, Auth) {
+	function RegController($rootScope, $scope, $location, Auth) {
+
+		$rootScope.currentUser = "afcart1";
 
 		$scope.login = function () {
 			Auth.login($scope.user) // user object contains user.email and user.password
 			.then(function(user) {
-				console.log(user);
 				$location.path('/quiz');
 			}).catch(function(error) {
 				$scope.message = error.message;

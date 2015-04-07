@@ -24,7 +24,6 @@
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav navigation" ng-init="logged-in">
-	        <li><a href="\#home">Home</a></li>
 	       	<li><a href="\#register">Register</a></li>
 	        <li><a href="\#home">Logout</a></li>
 	        <li ng-show="logged-in"><a href="\#scoreboard">Scoreboard</a></li>
@@ -35,9 +34,12 @@
 	</nav>
 
 	<div class="container username__lockup">
-		<h3 class="lead text-center">Hello <span class="username"> {{main.user.name}}</span></h3>
+		<h3 class="lead text-center"> Hello <span class="username">{{ main.user.user.username }}</span></h3>
+
 	</div>
 	
+
+
 	<div class="ng-view"></div>	
 
 	<!-- Angular -->
