@@ -62,7 +62,15 @@
 
 						
 					}); 
-				} // register
+				}, // register
+
+				requireAuth: function() {
+					return auth.$requireAuth();
+				}, // require Authentication
+
+				waitForAuth: function() {
+					return auth.$waitForAuth();
+				} // Wait until the user is authenticated
 
 			}; // myObject
 
@@ -153,14 +161,27 @@ angular.module('myQuiz')
 	
 	angular
 		.module('myQuiz')
-		.config(config);
+		.config(config)
+		.run(['$rootScope', '$location', function ($rootScope, $location) {
+			$rootScope.$on('$routeChangeError', function(event, next, previous, error) {
+				if(error === 'AUTH_REQUIRED') {
+					$rootScope.message = 'Sorry, you must log in to acces that page';
+					$location.path('/login');
+				}
+			});
+		}]);
 
 	function config($routeProvider) {
 		$routeProvider.
 			when('/quiz', {
 				templateUrl: 'partials/quiz.html',
 				controller: 'QuizController',
-				controllerAs: 'quiz'
+				controllerAs: 'quiz',
+				resolve: {
+					currentAuth: function(Auth) { // checks whether the user is authenticated (has acces) to view this page
+						return Auth.requireAuth();
+					}
+				}
 			}).
 			when('/endofquiz', {
 				templateUrl: 'partials/endofquiz.html',
@@ -180,6 +201,7 @@ angular.module('myQuiz')
 	}
 
 })(); 
+
 (function () {
 	
 	angular

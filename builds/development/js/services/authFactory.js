@@ -55,7 +55,15 @@
 
 						
 					}); 
-				} // register
+				}, // register
+
+				requireAuth: function() {
+					return auth.$requireAuth();
+				}, // require Authentication
+
+				waitForAuth: function() {
+					return auth.$waitForAuth();
+				} // Wait until the user is authenticated
 
 			}; // myObject
 

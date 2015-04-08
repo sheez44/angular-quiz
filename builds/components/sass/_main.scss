@@ -55,10 +55,11 @@ header {
 
 .username {
 	color: black;
-	position: relative;
+
 	&__lockup {
 		background: tomato;
 		margin-bottom: 2em;
+		position: relative;
 		a {
 			color: black;
 		}

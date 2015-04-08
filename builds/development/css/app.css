@@ -55,17 +55,17 @@ header {
 
 /* line 56, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
 .username {
-  color: black;
-  position: relative; }
+  color: black; }
   /* line 59, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
   .username__lockup {
     background: tomato;
-    margin-bottom: 2em; }
-    /* line 62, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+    margin-bottom: 2em;
+    position: relative; }
+    /* line 63, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
     .username__lockup a {
       color: black; }
 
-/* line 68, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 69, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
 .scores {
   list-style-type: disc;
   margin-bottom: 10px;
@@ -73,29 +73,29 @@ header {
   font-style: italic;
   font-size: 20px; }
 
-/* line 76, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 77, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
 .eoquiz {
   background: #f8f8f8;
   font-family: 'Lora', serif; }
-  /* line 79, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+  /* line 80, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
   .eoquiz h1 {
     font-family: 'Istok Web', sans-serif; }
 
-/* line 84, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 85, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
 h3.lead {
   font-size: 200%;
   color: blue; }
 
-/* line 90, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 91, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
 .quiz__image {
   float: right;
   width: 237px;
   height: 169px; }
-/* line 95, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 96, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
 .quiz__login {
   float: left; }
 
-/* line 101, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 102, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
 .userinfo a {
   color: black; }
 
@@ -183,12 +183,12 @@ button[disabled] {
   color: red; }
 
 /* line 2, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_forms.scss */
-#login-form label {
+.login-form label {
   width: 75px; }
 /* line 5, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_forms.scss */
-#login-form input[type="submit"] {
+.login-form input[type="submit"] {
   margin-top: 2%; }
 /* line 9, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_forms.scss */
-#login-form .form__errormsg {
+.login-form .form__errormsg {
   color: red;
   font-size: 1.3em; }
