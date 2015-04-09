@@ -2,3 +2,19 @@
 	list-style-type: none;
 	text-align: center;
 }
+
+.navbar-right {
+	min-height: 50px;
+	min-width: 220px;
+}
+
+.lead.text-center {
+	float: left;
+	margin: 5% 0 0;
+}
+
+.logout {
+	float: right;
+	min-width: 2%;
+	margin-top: 3%;
+}

@@ -164,8 +164,8 @@ angular.module('myQuiz')
 		.config(config)
 		.run(['$rootScope', '$location', function ($rootScope, $location) {
 			$rootScope.$on('$routeChangeError', function(event, next, previous, error) {
-				if(error === 'AUTH_REQUIRED') {
-					$rootScope.message = 'Sorry, you must log in to acces that page';
+				if(error === 'AUTH_REQUIRED') { // Whenever an unauthenticated user tries to acces the quiz
+					$rootScope.message = 'Sorry, you must log in to acces the quiz'; // this error gets displayed
 					$location.path('/login');
 				}
 			});
@@ -347,11 +347,11 @@ angular.module('myQuiz')
 	
 	angular
 		.module('myQuiz')
-		.controller('RegistrationController', ['$rootScope', '$scope', '$location', 'Auth', RegController]);
+		.controller('RegistrationController', ['User', '$scope', '$location', 'Auth', RegController]);
 
-	function RegController($rootScope, $scope, $location, Auth) {
+	function RegController(User, $scope, $location, Auth) {
 
-		$rootScope.currentUser = "afcart1";
+		$scope.user = User;
 
 		$scope.login = function () {
 			Auth.login($scope.user) // user object contains user.email and user.password
@@ -371,6 +371,10 @@ angular.module('myQuiz')
 				$scope.message = error.message;
 			});
 		} // register
+
+		$scope.resumeQuiz = function () {
+			$location.path('/quiz');
+		}
 
 	}
 

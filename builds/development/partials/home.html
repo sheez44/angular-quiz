@@ -1,8 +1,7 @@
 
 <div class="container main clearfix">
-	<div class="quiz__login">
-		<h2 ng-bind="test"></h2>
-
+	<div class="quiz__login" ng-hide="user.user.username">
+		
 		<form class="login-form" ng-submit="login()" name="myForm" novalidate>
 
 			<p class="form__errormsg" ng-show="message">{{ message }}</p>
@@ -12,17 +11,20 @@
 			<label for="password">Password</label>
 			<input type="password" name="login" id="password" ng-model="user.password" ng-required="true" placeholder="Password"><br>
 			<button type="submit" ng-disabled="myForm.$invalid">Login</button>
+			
 		</form>
-<!-- 		<button ng-disabled="myform.$invalid" ng-click="createUser(email, password)">Create user</button>
- -->
-
-		<ul>
-			<li ng-repeat="message in messages">
-				{{message.from}} : {{ message.content }<a href="" ng-click="messages.$remove(message)">X</a>}
-				<a href="" ng-click="messages.$remove(message)">X</a>
-			</li>
-		</ul>
+		<img class="quiz__image img-responsive" src="http://www.gretchenrubin.com/wp-content/uploads/2014/03/quiz-.jpg.jpg" alt="quiz image">
 	</div>
-	<img class="quiz__image img-responsive" src="http://www.gretchenrubin.com/wp-content/uploads/2014/03/quiz-.jpg.jpg" alt="quiz image">
+	
+	<div class="home__loggedin" ng-show="user.user.username">
+			<h2>Personal Page <span>{{user.user.username}}</span></h2>
+
+			<p>Name: {{user.user.name}}</p>
+			<p>Email: {{user.user.email}}</p>
+			<p>Top score:</p>
+
+			<button ng-click="resumeQuiz()">Resume quiz</button>
+
+	</div>
 
 </div>

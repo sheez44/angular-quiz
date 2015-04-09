@@ -24,19 +24,18 @@
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav navigation" ng-init="logged-in">
-	       	<li><a href="\#register">Register</a></li>
-	        <li><a href="\#home">Logout</a></li>
-	        <li ng-show="logged-in"><a href="\#scoreboard">Scoreboard</a></li>
-
+	       	<li ng-hide="main.user.user.username"><a href="\#register">Register</a></li>
+	        <li ng-show="main.user.user.username"><a href="\#scoreboard">Scoreboard</a></li>
 	      </ul>
+	      <div class="navbar-right" ng-controller="StatusController" ng-show="main.user.user.username">
+	      		<h3 class="lead text-center"> Hello <span class="username">{{ main.user.user.username }}</span></h3>
+	      		<a class="btn btn-default logout" ng-href="#/logout" ng-click="logout()">logout</a>
+	      </div>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
 
-	<div class="container username__lockup" ng-controller="StatusController" ng-show="main.user.user.username">
-			<h3 class="lead text-center"> Hello <span class="username">{{ main.user.user.username }}</span></h3>
-			<a class="btn btn-default logout" ng-href="#/logout" ng-click="logout()">logout</a>
-	</div>
+	
 	
 
 

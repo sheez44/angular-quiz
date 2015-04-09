@@ -1,34 +1,34 @@
 @import url(http://fonts.googleapis.com/css?family=Lora|Istok+Web:400,400italic);
-/* line 1, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 1, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/_main.scss */
 body {
   background: #63DFB9;
   padding: 0;
   margin: 0;
   font-family: 'Istok Web', sans-serif; }
 
-/* line 8, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 8, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/_main.scss */
 ul, ol {
   list-style-type: none;
   padding: 0;
   margin: 0; }
 
-/* line 14, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 14, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/_main.scss */
 a {
   text-decoration: none;
   color: tomato; }
 
-/* line 19, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 19, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/_main.scss */
 header {
   height: 100px;
   text-align: center;
   background: #336699;
   line-height: 100px;
   color: #999; }
-  /* line 25, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+  /* line 25, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/_main.scss */
   header h1 {
     margin-top: 0; }
 
-/* line 30, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 30, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/_main.scss */
 .main {
   width: 800px;
   margin: 0 auto;
@@ -36,11 +36,11 @@ header {
   padding: 15px;
   border-radius: 15px;
   box-shadow: 5px 5px 0 gray; }
-  /* line 37, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+  /* line 37, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/_main.scss */
   .main h2 {
     text-align: center; }
 
-/* line 43, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 43, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/_main.scss */
 .active {
   background: green;
   color: #eee;
@@ -49,23 +49,23 @@ header {
   font-weight: 700;
   letter-spacing: 0.1em; }
 
-/* line 52, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 52, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/_main.scss */
 .choices {
   padding: 15px 0 15px 15px; }
 
-/* line 56, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 56, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/_main.scss */
 .username {
   color: black; }
-  /* line 59, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+  /* line 59, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/_main.scss */
   .username__lockup {
     background: tomato;
     margin-bottom: 2em;
     position: relative; }
-    /* line 63, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+    /* line 63, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/_main.scss */
     .username__lockup a {
       color: black; }
 
-/* line 69, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 69, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/_main.scss */
 .scores {
   list-style-type: disc;
   margin-bottom: 10px;
@@ -73,62 +73,59 @@ header {
   font-style: italic;
   font-size: 20px; }
 
-/* line 77, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 77, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/_main.scss */
 .eoquiz {
   background: #f8f8f8;
   font-family: 'Lora', serif; }
-  /* line 80, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+  /* line 80, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/_main.scss */
   .eoquiz h1 {
     font-family: 'Istok Web', sans-serif; }
 
-/* line 85, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 85, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/_main.scss */
 h3.lead {
-  font-size: 200%;
+  font-size: 150%;
   color: blue; }
 
-/* line 91, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 91, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/_main.scss */
 .quiz__image {
   float: right;
   width: 237px;
   height: 169px; }
-/* line 96, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
-.quiz__login {
-  float: left; }
 
-/* line 102, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 99, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/_main.scss */
 .userinfo a {
   color: black; }
 
-/* line 1, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_animations.scss */
+/* line 1, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_animations.scss */
 .choices.ng-enter, .choices.ng-move {
   transition: 1.5s linear all;
   opacity: 0; }
 
-/* line 8, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_animations.scss */
+/* line 8, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_animations.scss */
 .choices.ng-enter-stagger, .choices.ng-leave-stagger, .choices.ng-move-stagger {
   -webkit-transition-delay: 0.2s;
   transition-delay: 0.2s;
   -webkit-transition-duration: 0;
   transition-duration: 0; }
 
-/* line 16, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_animations.scss */
+/* line 16, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_animations.scss */
 .choices.ng-enter.ng-enter-active, .choices.ng-move.ng-move-active {
   opacity: 1; }
 
-/* line 20, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_animations.scss */
+/* line 20, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_animations.scss */
 .choices.ng-leave {
   animation: 1.5s animation; }
 
 @keyframes animation {
-  /* line 25, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_animations.scss */
+  /* line 25, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_animations.scss */
   from {
     opacity: 1; }
 
-  /* line 28, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_animations.scss */
+  /* line 28, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_animations.scss */
   to {
     opacity: 0; } }
 
-/* line 34, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_animations.scss */
+/* line 34, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_animations.scss */
 .animate-enter, .animate-leave {
   -webkit-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
   -moz-transition: 400ms cubic-bezier(0.25, 0.25, 0.75, 0.75) all;
@@ -138,24 +135,40 @@ h3.lead {
   position: relative;
   display: block; }
 
-/* line 46, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_animations.scss */
+/* line 46, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_animations.scss */
 .animate-enter.animate-enter-active, .animate-leave {
   opacity: 1;
   top: 0;
   height: 30px; }
 
-/* line 53, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_animations.scss */
+/* line 53, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_animations.scss */
 .animate-leave.animate-leave-active, .animate-enter {
   opacity: 0;
   top: -50px;
   height: 0px; }
 
-/* line 1, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_navbar.scss */
+/* line 1, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_navbar.scss */
 .navigation {
   list-style-type: none;
   text-align: center; }
 
-/* line 1, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_buttons.scss */
+/* line 6, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_navbar.scss */
+.navbar-right {
+  min-height: 50px;
+  min-width: 220px; }
+
+/* line 11, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_navbar.scss */
+.lead.text-center {
+  float: left;
+  margin: 5% 0 0; }
+
+/* line 16, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_navbar.scss */
+.logout {
+  float: right;
+  min-width: 2%;
+  margin-top: 3%; }
+
+/* line 1, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_buttons.scss */
 .button__next {
   margin-top: 1em;
   background: blue;
@@ -163,32 +176,29 @@ h3.lead {
   width: 75px;
   color: white; }
 
-/* line 9, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_buttons.scss */
+/* line 9, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_buttons.scss */
 button[disabled] {
   background: gray;
   color: black; }
 
-/* line 14, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_buttons.scss */
-.logout {
-  position: absolute;
-  bottom: 28%;
-  right: 2%; }
-
-/* line 1, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_state.scss */
+/* line 1, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_state.scss */
 .is-correct {
   color: green; }
 
-/* line 5, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_state.scss */
+/* line 5, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_state.scss */
 .is-incorrect {
   color: red; }
 
-/* line 2, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_forms.scss */
-.login-form label {
-  width: 75px; }
-/* line 5, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_forms.scss */
-.login-form input[type="submit"] {
-  margin-top: 2%; }
-/* line 9, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_forms.scss */
-.login-form .form__errormsg {
-  color: red;
-  font-size: 1.3em; }
+/* line 1, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_forms.scss */
+.login-form {
+  float: left; }
+  /* line 3, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_forms.scss */
+  .login-form label {
+    width: 75px; }
+  /* line 6, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_forms.scss */
+  .login-form input[type="submit"] {
+    margin-top: 2%; }
+  /* line 10, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_forms.scss */
+  .login-form .form__errormsg {
+    color: red;
+    font-size: 1.3em; }

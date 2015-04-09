@@ -5,8 +5,8 @@
 		.config(config)
 		.run(['$rootScope', '$location', function ($rootScope, $location) {
 			$rootScope.$on('$routeChangeError', function(event, next, previous, error) {
-				if(error === 'AUTH_REQUIRED') {
-					$rootScope.message = 'Sorry, you must log in to acces that page';
+				if(error === 'AUTH_REQUIRED') { // Whenever an unauthenticated user tries to acces the quiz
+					$rootScope.message = 'Sorry, you must log in to acces the quiz'; // this error gets displayed
 					$location.path('/login');
 				}
 			});
