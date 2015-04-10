@@ -26,15 +26,18 @@
 			}).
 			when('/endofquiz', {
 				templateUrl: 'partials/endofquiz.html',
-				controller: 'EoquizController'
+				controller: 'EoquizController',
+				controllerAs: 'eo'
 			}).
 			when('/', {
 				templateUrl: 'partials/home.html',
-				controller: 'RegistrationController'
+				controller: 'RegistrationController',
+				controllerAs: 'reg'
 			}).
 			when('/register', {
 				templateUrl: 'partials/register.html',
-				controller: 'RegistrationController'
+				controller: 'RegistrationController',
+				controllerAs: 'reg'
 			}).
 			otherwise({
 				redirectTo: '/'

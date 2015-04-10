@@ -2,32 +2,34 @@
 	
 	angular
 		.module('myQuiz')
-		.controller('RegistrationController', ['User', '$scope', '$location', 'Auth', RegController]);
+		.controller('RegistrationController', ['User', '$location', 'Auth', RegController]);
 
-	function RegController(User, $scope, $location, Auth) {
+	function RegController(User, $location, Auth) {
 
-		$scope.user = User;
+		var vm = this;
 
-		$scope.login = function () {
-			Auth.login($scope.user) // user object contains user.email and user.password
+		vm.user = User;
+
+		vm.login = function () {
+			Auth.login(vm.user) // user object contains user.email and user.password
 			.then(function(user) {
 				$location.path('/quiz');
 			}).catch(function(error) {
-				$scope.message = error.message;
+				vm.message = error.message;
 			});
 		} // login
 
-		$scope.register = function() {
-			Auth.register($scope.user)
+		vm.register = function() {
+			Auth.register(vm.user)
 			.then(function(user) {
-				Auth.login($scope.user);
+				Auth.login(vm.user);
 				$location.path('/quiz');
 			}).catch(function(error) {
-				$scope.message = error.message;
+				vm.message = error.message;
 			});
 		} // register
 
-		$scope.resumeQuiz = function () {
+		vm.resumeQuiz = function () {
 			$location.path('/quiz');
 		}
 

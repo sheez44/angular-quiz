@@ -2,9 +2,9 @@
 	angular
 		.module('myQuiz')
 		.controller('QuizController', 
-			['$scope', '$http', '$animate', 'Data', '$location', 'QuestionService', 'User', QuizController]);
+			['$http', '$animate', 'Data', '$location', 'QuestionService', 'User', QuizController]);
 
-	function QuizController ($scope, $http, $animate, Data, $location, QuestionService, User) {
+	function QuizController ($http, $animate, Data, $location, QuestionService, User) {
 
 		var vm = this;
 		var totalQuestions;
@@ -61,9 +61,9 @@
 			}
 		}
 
-		function addScores(totalCorrectAnswers) {
+		// function addScores(totalCorrectAnswers) {
 
-		}
+		// }
 
 		var choiceSelection = {
 			userAnswers: [],

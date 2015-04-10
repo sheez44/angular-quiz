@@ -2,16 +2,18 @@
 	
 	angular
 		.module('myQuiz')
-		.controller('EoquizController', ['$scope', 'User', EoquizController]);
+		.controller('EoquizController', ['User', EoquizController]);
 
-	function EoquizController($scope, User) {
+	function EoquizController(User) {
+
+		var vm = this;
 
 		// numbers
-		$scope.totalIncorrect = User.totalIncorrect;
-		$scope.totalCorrect = User.totalCorrect;
+		vm.totalIncorrect = User.totalIncorrect;
+		vm.totalCorrect = User.totalCorrect;
 		// arrays
-		$scope.correctScores = User.correctQuestions;
-		$scope.incorrectScores = User.incorrectQuestions;
+		vm.correctScores = User.correctQuestions;
+		vm.incorrectScores = User.incorrectQuestions;
 
 	}
 

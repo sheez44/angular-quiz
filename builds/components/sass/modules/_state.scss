@@ -1,7 +1,19 @@
+// End of the quiz, displays the wrong answers in red and vice versa
+
 .is-correct {
 	color: green;
 }
 
 .is-incorrect {
 	color: red;
+}
+
+// When the user clicks an answer, .active is set on that listitem
+.active {
+	background: green;
+	color: #eee;
+	border-radius: 5px;
+	text-indent: 1em;
+	font-weight: 700;
+	letter-spacing: 0.1em;
 }

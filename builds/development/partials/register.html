@@ -1,26 +1,26 @@
 <div class="container">
 
-	<form class="login-form" name="myform" ng-submit="register()" novalidate>
+	<form class="login-form" name="myform" ng-submit="reg.register()" novalidate>
 
 		<h1>Register</h1>
 		<h3>To access all features of the quiz</h3>
 
-		<p ng-show="message">{{ message }}</p>
+		<p ng-show="reg.message">{{ message }}</p>
 
 		<label for="name">Name</label>
-		<input type="name" name="name" id="name" ng-model="user.name" ng-required="true"><br>
+		<input type="name" name="name" id="name" ng-model="reg.user.name" ng-required="true"><br>
 		<p ng-show="myform.name.$invalid && myform.name.$touched">First name is required</p>
 		
 		<label for="username">Username</label>
-		<input type="username" name="username" id="username" ng-model="user.username" ng-required="true"><br>
+		<input type="username" name="username" id="username" ng-model="reg.user.username" ng-required="true"><br>
 		<p ng-show="myform.username.$invalid && myform.username.$touched">Username is required</p>
 
 		<label for="email">Email</label>
-		<input type="email" name="email" id="email" ng-model="user.email" ng-required="true"><br>
+		<input type="email" name="email" id="email" ng-model="reg.user.email" ng-required="true"><br>
 		<p ng-show="myform.email.$invalid && myform.email.$touched">A valid email address is required</p>
 
 		<label for="password">Password</label>
-		<input type="password" name="password" id="password" ng-model="user.password" ng-required="true"><br>
+		<input type="password" name="password" id="password" ng-model="reg.user.password" ng-required="true"><br>
 		<p ng-show="myform.password.$invalid && myform.password.$touched">A valid password is required</p>
 
 		<button type="submit" class="btn btn-default"

@@ -1,29 +1,32 @@
 
 <div class="container main clearfix">
-	<div class="quiz__login" ng-hide="user.user.username">
+	<div class="quiz__login" ng-hide="reg.user.user.username">
 		
-		<form class="login-form" ng-submit="login()" name="myForm" novalidate>
+		<form class="login-form" ng-submit="reg.login()" name="myForm" novalidate>
 
-			<p class="form__errormsg" ng-show="message">{{ message }}</p>
+			<p class="form__errormsg" ng-show="reg.message">{{ message }}</p>
 
 			<label for="userName">Email</label>
-			<input type="email" name="login" id="userName" ng-model="user.email" ng-required="true" placeholder="Email"><br>
+			<input type="email" name="login" id="userName" ng-model="reg.user.email" ng-required="true" placeholder="Email"><br>
 			<label for="password">Password</label>
-			<input type="password" name="login" id="password" ng-model="user.password" ng-required="true" placeholder="Password"><br>
+			<input type="password" name="login" id="password" ng-model="reg.user.password" ng-required="true" placeholder="Password"><br>
 			<button type="submit" ng-disabled="myForm.$invalid">Login</button>
 			
 		</form>
 		<img class="quiz__image img-responsive" src="http://www.gretchenrubin.com/wp-content/uploads/2014/03/quiz-.jpg.jpg" alt="quiz image">
 	</div>
 	
-	<div class="home__loggedin" ng-show="user.user.username">
+	<div class="home__loggedin" ng-show="reg.user.user.username">
 			<h2>Personal Page <span>{{user.user.username}}</span></h2>
 
-			<p>Name: {{user.user.name}}</p>
-			<p>Email: {{user.user.email}}</p>
-			<p>Top score:</p>
+			<div class="well">
+				<p>Name: {{reg.user.user.name}}</p>
+				<p>Email: {{reg.user.user.email}}</p>
+				<p>Top score: {{ "Not set" || user.user.topscore}}</p>
 
-			<button ng-click="resumeQuiz()">Resume quiz</button>
+			</div>
+
+			<button ng-click="reg.resumeQuiz()">Resume quiz</button>
 
 	</div>
 

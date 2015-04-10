@@ -1,0 +1,42 @@
+.home__loggedin h2 {
+	margin-top: 0;
+	padding: 15px 0;
+	background-color: tomato;
+}
+
+.well {
+	margin-bottom: 10px;
+}
+
+h3.lead {
+	font-size: 150%;
+	color: blue;
+}
+
+.quiz {
+	&__image {
+		float: right;
+		width: 237px;
+		height: 169px;
+	}
+}
+
+.scores {
+	list-style-type: disc;
+	margin-bottom: 10px;
+	font-family: $font-sec;
+	font-style: italic;
+	font-size: 20px;
+}
+
+.eoquiz {
+	background: rgb(248, 248, 248);
+	font-family: $font-sec;
+	h1 {
+		font-family: $font-main;
+	}
+}
+
+.choices {
+	padding: 15px 0 15px 15px;
+}

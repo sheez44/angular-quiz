@@ -1,11 +1,13 @@
 (function () {
 	angular
 		.module('myQuiz')
-		.controller('StatusController', ['$scope', '$location', 'Auth', StatusController]);
+		.controller('StatusController', ['$location', 'Auth', StatusController]);
 
-		function StatusController($scope, $location, Auth) {
+		function StatusController($location, Auth) {
 
-			$scope.logout = function() {
+			var vm = this
+
+			vm.logout = function() {
 				Auth.logout();
 				$location.path('/');
 			} // logout

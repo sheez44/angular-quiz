@@ -185,15 +185,18 @@ angular.module('myQuiz')
 			}).
 			when('/endofquiz', {
 				templateUrl: 'partials/endofquiz.html',
-				controller: 'EoquizController'
+				controller: 'EoquizController',
+				controllerAs: 'eo'
 			}).
 			when('/', {
 				templateUrl: 'partials/home.html',
-				controller: 'RegistrationController'
+				controller: 'RegistrationController',
+				controllerAs: 'reg'
 			}).
 			when('/register', {
 				templateUrl: 'partials/register.html',
-				controller: 'RegistrationController'
+				controller: 'RegistrationController',
+				controllerAs: 'reg'
 			}).
 			otherwise({
 				redirectTo: '/'
@@ -206,16 +209,18 @@ angular.module('myQuiz')
 	
 	angular
 		.module('myQuiz')
-		.controller('EoquizController', ['$scope', 'User', EoquizController]);
+		.controller('EoquizController', ['User', EoquizController]);
 
-	function EoquizController($scope, User) {
+	function EoquizController(User) {
+
+		var vm = this;
 
 		// numbers
-		$scope.totalIncorrect = User.totalIncorrect;
-		$scope.totalCorrect = User.totalCorrect;
+		vm.totalIncorrect = User.totalIncorrect;
+		vm.totalCorrect = User.totalCorrect;
 		// arrays
-		$scope.correctScores = User.correctQuestions;
-		$scope.incorrectScores = User.incorrectQuestions;
+		vm.correctScores = User.correctQuestions;
+		vm.incorrectScores = User.incorrectQuestions;
 
 	}
 
@@ -224,11 +229,11 @@ angular.module('myQuiz')
 
 	angular
 		.module('myQuiz')
-		.controller('MainController', ["CONSTANTS", 'User', '$rootScope', 'Auth', MainController]);
+		.controller('MainController', ["CONSTANTS", 'User', 'Auth', MainController]);
 
-	function MainController(CONSTANTS, User, $rootScope, Auth) {	
+	function MainController(CONSTANTS, User, Auth) {	
 		
-		vm = this;
+		var vm = this;
 
 		vm.title = CONSTANTS.TITLE;
 
@@ -243,9 +248,9 @@ angular.module('myQuiz')
 	angular
 		.module('myQuiz')
 		.controller('QuizController', 
-			['$scope', '$http', '$animate', 'Data', '$location', 'QuestionService', 'User', QuizController]);
+			['$http', '$animate', 'Data', '$location', 'QuestionService', 'User', QuizController]);
 
-	function QuizController ($scope, $http, $animate, Data, $location, QuestionService, User) {
+	function QuizController ($http, $animate, Data, $location, QuestionService, User) {
 
 		var vm = this;
 		var totalQuestions;
@@ -302,9 +307,9 @@ angular.module('myQuiz')
 			}
 		}
 
-		function addScores(totalCorrectAnswers) {
+		// function addScores(totalCorrectAnswers) {
 
-		}
+		// }
 
 		var choiceSelection = {
 			userAnswers: [],
@@ -347,32 +352,34 @@ angular.module('myQuiz')
 	
 	angular
 		.module('myQuiz')
-		.controller('RegistrationController', ['User', '$scope', '$location', 'Auth', RegController]);
+		.controller('RegistrationController', ['User', '$location', 'Auth', RegController]);
 
-	function RegController(User, $scope, $location, Auth) {
+	function RegController(User, $location, Auth) {
 
-		$scope.user = User;
+		var vm = this;
 
-		$scope.login = function () {
-			Auth.login($scope.user) // user object contains user.email and user.password
+		vm.user = User;
+
+		vm.login = function () {
+			Auth.login(vm.user) // user object contains user.email and user.password
 			.then(function(user) {
 				$location.path('/quiz');
 			}).catch(function(error) {
-				$scope.message = error.message;
+				vm.message = error.message;
 			});
 		} // login
 
-		$scope.register = function() {
-			Auth.register($scope.user)
+		vm.register = function() {
+			Auth.register(vm.user)
 			.then(function(user) {
-				Auth.login($scope.user);
+				Auth.login(vm.user);
 				$location.path('/quiz');
 			}).catch(function(error) {
-				$scope.message = error.message;
+				vm.message = error.message;
 			});
 		} // register
 
-		$scope.resumeQuiz = function () {
+		vm.resumeQuiz = function () {
 			$location.path('/quiz');
 		}
 
@@ -384,11 +391,13 @@ angular.module('myQuiz')
 (function () {
 	angular
 		.module('myQuiz')
-		.controller('StatusController', ['$scope', '$location', 'Auth', StatusController]);
+		.controller('StatusController', ['$location', 'Auth', StatusController]);
 
-		function StatusController($scope, $location, Auth) {
+		function StatusController($location, Auth) {
 
-			$scope.logout = function() {
+			var vm = this
+
+			vm.logout = function() {
 				Auth.logout();
 				$location.path('/');
 			} // logout
