@@ -7,7 +7,7 @@
 			$rootScope.$on('$routeChangeError', function(event, next, previous, error) {
 				if(error === 'AUTH_REQUIRED') { // Whenever an unauthenticated user tries to acces the quiz
 					$rootScope.message = 'Sorry, you must log in to acces the quiz'; // this error gets displayed
-					$location.path('/login');
+					$location.path('/');
 				}
 			});
 		}]);
@@ -27,7 +27,18 @@
 			when('/endofquiz', {
 				templateUrl: 'partials/endofquiz.html',
 				controller: 'EoquizController',
-				controllerAs: 'eo'
+				controllerAs: 'eo',
+				resolve: {
+					app: function(User, $q) {
+						var defer = $q.defer();
+						if(User.quizStatus === true) {
+							defer.reject();
+						} else {
+							return defer.resolve();
+						}
+						return defer.promise; 
+					}
+				}
 			}).
 			when('/', {
 				templateUrl: 'partials/home.html',

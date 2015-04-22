@@ -153,7 +153,8 @@ angular.module('myQuiz')
 			totalCorrect: 0,
 			totalIncorrect: 0,
 			correctQuestions: [],
-			incorrectQuestions: []
+			incorrectQuestions: [],
+			quizStatus: true
 		});
 
 })(); 
@@ -166,7 +167,7 @@ angular.module('myQuiz')
 			$rootScope.$on('$routeChangeError', function(event, next, previous, error) {
 				if(error === 'AUTH_REQUIRED') { // Whenever an unauthenticated user tries to acces the quiz
 					$rootScope.message = 'Sorry, you must log in to acces the quiz'; // this error gets displayed
-					$location.path('/login');
+					$location.path('/');
 				}
 			});
 		}]);
@@ -186,7 +187,18 @@ angular.module('myQuiz')
 			when('/endofquiz', {
 				templateUrl: 'partials/endofquiz.html',
 				controller: 'EoquizController',
-				controllerAs: 'eo'
+				controllerAs: 'eo',
+				resolve: {
+					app: function(User, $q) {
+						var defer = $q.defer();
+						if(User.quizStatus === true) {
+							defer.reject();
+						} else {
+							return defer.resolve();
+						}
+						return defer.promise; 
+					}
+				}
 			}).
 			when('/', {
 				templateUrl: 'partials/home.html',
@@ -229,16 +241,25 @@ angular.module('myQuiz')
 
 	angular
 		.module('myQuiz')
-		.controller('MainController', ["CONSTANTS", 'User', 'Auth', MainController]);
+		.controller('MainController', ["CONSTANTS", 'User', 'Auth', '$rootScope', MainController]);
 
-	function MainController(CONSTANTS, User, Auth) {	
+	function MainController(CONSTANTS, User, Auth, $rootScope) {	
 		
 		var vm = this;
 
+
+		vm.errorMessage;
+
+		$rootScope.$on('$routeChangeError', function() {
+			vm.errorMessage = "You are not allowed to view this part of the website!";
+		});
+
+		
 		vm.title = CONSTANTS.TITLE;
 
 		vm.user = User;	 
 
+		vm.logout = Auth.logout;
 	};
 
 })();
@@ -248,13 +269,14 @@ angular.module('myQuiz')
 	angular
 		.module('myQuiz')
 		.controller('QuizController', 
-			['$http', '$animate', 'Data', '$location', 'QuestionService', 'User', QuizController]);
+			['$http', '$animate', 'Data', '$location', 'QuestionService', 'User', '$firebaseObject', 'CONSTANTS', QuizController]);
 
-	function QuizController ($http, $animate, Data, $location, QuestionService, User) {
+	function QuizController ($http, $animate, Data, $location, QuestionService, User, $firebaseObject, CONSTANTS) {
 
 		var vm = this;
 		var totalQuestions;
 		var currentQuestion = 9;
+		var quizIsRunning = false;
 
 		// This function is used to call the questionService everytime the user clicks on the 'add' button
 		function getTheCurrentQuestion() {
@@ -267,6 +289,7 @@ angular.module('myQuiz')
 
 		// Initial call of the data => first question
 		QuestionService.getQuestion(currentQuestion).then(function(data) {
+			quizIsRunning = true;
 			totalQuestions = data.totalQuestions;
 			getTheCurrentQuestion();
 		});
@@ -280,6 +303,7 @@ angular.module('myQuiz')
 				getTheCurrentQuestion();	
 			} else {
 				getUserAnswer();
+				addTopscore();
 				$location.path('/endofquiz');
 			}		
 		}
@@ -297,7 +321,6 @@ angular.module('myQuiz')
 		// If the answer is correct it updates the totalcorrect answers and the questions
 		// gets pushed in a new array for future purpose; vice versa for the wrong answers
 		function validateAnswer(userAnswer) {
-			console.log("the current question is " + currentQuestion);
 			if(vm.correctAnswer === userAnswer) {
 				User.totalCorrect += 1;
 				User.correctQuestions.push(vm.question);
@@ -305,6 +328,38 @@ angular.module('myQuiz')
 				User.totalIncorrect += 1;
 				User.incorrectQuestions.push(userAnswer);
 			}
+		}
+
+		function addTopscore() {
+			console.log(User.user.$id);
+			var ref = new Firebase(CONSTANTS.FIREBASE_URL + 'users/' + User.user.$id);
+
+			var userObject = $firebaseObject(ref);
+
+			userObject.$loaded().then(function() {
+				angular.forEach(userObject, function(key, value) {
+					if(key === 'topscore') {
+						console.log(User.topscore);
+					} else {
+						saveTopscore();
+					}
+				});
+			}).
+			catch(function(error) {
+				console.log("error: " + error);
+			});
+		}
+
+		function saveTopscore() {
+			var ref = new Firebase(CONSTANTS.FIREBASE_URL + 'users/' + User.user.$id + '/');
+			var userObject = $firebaseObject(ref);
+
+			userObject.topscore = User.totalCorrect;
+			userObject.$save().then(function(ref) {
+				console.log("worked");
+			}, function(error) {
+				console.log(error);
+			});
 		}
 
 		// function addScores(totalCorrectAnswers) {
@@ -360,6 +415,8 @@ angular.module('myQuiz')
 
 		vm.user = User;
 
+		console.log(vm.user);
+
 		vm.login = function () {
 			Auth.login(vm.user) // user object contains user.email and user.password
 			.then(function(user) {
@@ -395,7 +452,7 @@ angular.module('myQuiz')
 
 		function StatusController($location, Auth) {
 
-			var vm = this
+			var vm = this;
 
 			vm.logout = function() {
 				Auth.logout();

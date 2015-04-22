@@ -2,13 +2,14 @@
 	angular
 		.module('myQuiz')
 		.controller('QuizController', 
-			['$http', '$animate', 'Data', '$location', 'QuestionService', 'User', QuizController]);
+			['$http', '$animate', 'Data', '$location', 'QuestionService', 'User', '$firebaseObject', 'CONSTANTS', QuizController]);
 
-	function QuizController ($http, $animate, Data, $location, QuestionService, User) {
+	function QuizController ($http, $animate, Data, $location, QuestionService, User, $firebaseObject, CONSTANTS) {
 
 		var vm = this;
 		var totalQuestions;
 		var currentQuestion = 9;
+		var quizIsRunning = false;
 
 		// This function is used to call the questionService everytime the user clicks on the 'add' button
 		function getTheCurrentQuestion() {
@@ -21,6 +22,7 @@
 
 		// Initial call of the data => first question
 		QuestionService.getQuestion(currentQuestion).then(function(data) {
+			quizIsRunning = true;
 			totalQuestions = data.totalQuestions;
 			getTheCurrentQuestion();
 		});
@@ -34,6 +36,7 @@
 				getTheCurrentQuestion();	
 			} else {
 				getUserAnswer();
+				addTopscore();
 				$location.path('/endofquiz');
 			}		
 		}
@@ -51,7 +54,6 @@
 		// If the answer is correct it updates the totalcorrect answers and the questions
 		// gets pushed in a new array for future purpose; vice versa for the wrong answers
 		function validateAnswer(userAnswer) {
-			console.log("the current question is " + currentQuestion);
 			if(vm.correctAnswer === userAnswer) {
 				User.totalCorrect += 1;
 				User.correctQuestions.push(vm.question);
@@ -59,6 +61,38 @@
 				User.totalIncorrect += 1;
 				User.incorrectQuestions.push(userAnswer);
 			}
+		}
+
+		function addTopscore() {
+			console.log(User.user.$id);
+			var ref = new Firebase(CONSTANTS.FIREBASE_URL + 'users/' + User.user.$id);
+
+			var userObject = $firebaseObject(ref);
+
+			userObject.$loaded().then(function() {
+				angular.forEach(userObject, function(key, value) {
+					if(key === 'topscore') {
+						console.log(User.topscore);
+					} else {
+						saveTopscore();
+					}
+				});
+			}).
+			catch(function(error) {
+				console.log("error: " + error);
+			});
+		}
+
+		function saveTopscore() {
+			var ref = new Firebase(CONSTANTS.FIREBASE_URL + 'users/' + User.user.$id + '/');
+			var userObject = $firebaseObject(ref);
+
+			userObject.topscore = User.totalCorrect;
+			userObject.$save().then(function(ref) {
+				console.log("worked");
+			}, function(error) {
+				console.log(error);
+			});
 		}
 
 		// function addScores(totalCorrectAnswers) {

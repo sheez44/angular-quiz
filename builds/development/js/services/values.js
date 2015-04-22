@@ -8,7 +8,8 @@
 			totalCorrect: 0,
 			totalIncorrect: 0,
 			correctQuestions: [],
-			incorrectQuestions: []
+			incorrectQuestions: [],
+			quizStatus: true
 		});
 
 })(); 

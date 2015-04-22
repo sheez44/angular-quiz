@@ -5,7 +5,7 @@
 
 		function StatusController($location, Auth) {
 
-			var vm = this
+			var vm = this;
 
 			vm.logout = function() {
 				Auth.logout();

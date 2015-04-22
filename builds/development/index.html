@@ -29,7 +29,7 @@
 	      </ul>
 	      <div class="navbar-right" ng-controller="StatusController" ng-show="main.user.user.username">
 	      		<h3 class="lead text-center"> Hello <span class="username">{{ main.user.user.username }}</span></h3>
-	      		<a class="btn btn-default logout" ng-href="#/logout" ng-click="logout()">logout</a>
+	      		<a class="btn btn-default logout" ng-href="#/logout" ng-click="main.logout()">logout</a>
 	      </div>
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
@@ -37,7 +37,9 @@
 
 	
 	
-
+	<div class="container" ng-show="main.errorMessage">
+		<p>{{main.errorMessage}}</p>
+	</div>
 
 	<div class="ng-view"></div>	
 

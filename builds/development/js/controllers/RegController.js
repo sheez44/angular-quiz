@@ -10,6 +10,8 @@
 
 		vm.user = User;
 
+		console.log(vm.user);
+
 		vm.login = function () {
 			Auth.login(vm.user) // user object contains user.email and user.password
 			.then(function(user) {
