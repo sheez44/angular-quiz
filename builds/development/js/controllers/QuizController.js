@@ -8,8 +8,7 @@
 
 		var vm = this;
 		var totalQuestions;
-		var currentQuestion = 9;
-		var quizIsRunning = false;
+		var currentQuestion = 0;
 
 		// This function is used to call the questionService everytime the user clicks on the 'add' button
 		function getTheCurrentQuestion() {
@@ -22,7 +21,6 @@
 
 		// Initial call of the data => first question
 		QuestionService.getQuestion(currentQuestion).then(function(data) {
-			quizIsRunning = true;
 			totalQuestions = data.totalQuestions;
 			getTheCurrentQuestion();
 		});
@@ -33,10 +31,12 @@
 			if(currentQuestion + 1 < totalQuestions ) {
 				vm.selected = false; // prevents highlight same question
 				getUserAnswer();
+				currentQuestion += 1;
 				getTheCurrentQuestion();	
 			} else {
 				getUserAnswer();
 				addTopscore();
+				User.quizStatus = false;
 				$location.path('/endofquiz');
 			}		
 		}
@@ -84,15 +84,8 @@
 		}
 
 		function saveTopscore() {
-			var ref = new Firebase(CONSTANTS.FIREBASE_URL + 'users/' + User.user.$id + '/');
-			var userObject = $firebaseObject(ref);
-
-			userObject.topscore = User.totalCorrect;
-			userObject.$save().then(function(ref) {
-				console.log("worked");
-			}, function(error) {
-				console.log(error);
-			});
+			var ref = new Firebase(CONSTANTS.FIREBASE_URL + 'users/' + User.user.$id);
+			ref.update({ topscore: User.totalCorrect });
 		}
 
 		// function addScores(totalCorrectAnswers) {

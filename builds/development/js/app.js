@@ -188,17 +188,17 @@ angular.module('myQuiz')
 				templateUrl: 'partials/endofquiz.html',
 				controller: 'EoquizController',
 				controllerAs: 'eo',
-				resolve: {
-					app: function(User, $q) {
-						var defer = $q.defer();
-						if(User.quizStatus === true) {
-							defer.reject();
-						} else {
-							return defer.resolve();
-						}
-						return defer.promise; 
-					}
-				}
+				// resolve: {
+				// 	app: function(User, $q) {
+				// 		var defer = $q.defer();
+				// 		if(User.quizStatus === true) {
+				// 			defer.reject();
+				// 		} else {
+				// 			return defer.resolve();
+				// 		}
+				// 		return defer.promise; 
+				// 	}
+				// }
 			}).
 			when('/', {
 				templateUrl: 'partials/home.html',
@@ -247,12 +247,11 @@ angular.module('myQuiz')
 		
 		var vm = this;
 
+		vm.errorMessage = undefined;
 
-		vm.errorMessage;
-
-		$rootScope.$on('$routeChangeError', function() {
-			vm.errorMessage = "You are not allowed to view this part of the website!";
-		});
+		// $rootScope.$on('$routeChangeError', function() {
+		// 	vm.errorMessage = "You are not allowed to view this part of the website!";
+		// });
 
 		
 		vm.title = CONSTANTS.TITLE;
@@ -275,8 +274,7 @@ angular.module('myQuiz')
 
 		var vm = this;
 		var totalQuestions;
-		var currentQuestion = 9;
-		var quizIsRunning = false;
+		var currentQuestion = 0;
 
 		// This function is used to call the questionService everytime the user clicks on the 'add' button
 		function getTheCurrentQuestion() {
@@ -289,7 +287,6 @@ angular.module('myQuiz')
 
 		// Initial call of the data => first question
 		QuestionService.getQuestion(currentQuestion).then(function(data) {
-			quizIsRunning = true;
 			totalQuestions = data.totalQuestions;
 			getTheCurrentQuestion();
 		});
@@ -300,10 +297,12 @@ angular.module('myQuiz')
 			if(currentQuestion + 1 < totalQuestions ) {
 				vm.selected = false; // prevents highlight same question
 				getUserAnswer();
+				currentQuestion += 1;
 				getTheCurrentQuestion();	
 			} else {
 				getUserAnswer();
 				addTopscore();
+				User.quizStatus = false;
 				$location.path('/endofquiz');
 			}		
 		}
@@ -351,15 +350,8 @@ angular.module('myQuiz')
 		}
 
 		function saveTopscore() {
-			var ref = new Firebase(CONSTANTS.FIREBASE_URL + 'users/' + User.user.$id + '/');
-			var userObject = $firebaseObject(ref);
-
-			userObject.topscore = User.totalCorrect;
-			userObject.$save().then(function(ref) {
-				console.log("worked");
-			}, function(error) {
-				console.log(error);
-			});
+			var ref = new Firebase(CONSTANTS.FIREBASE_URL + 'users/' + User.user.$id);
+			ref.update({ topscore: User.totalCorrect });
 		}
 
 		// function addScores(totalCorrectAnswers) {
@@ -414,8 +406,6 @@ angular.module('myQuiz')
 		var vm = this;
 
 		vm.user = User;
-
-		console.log(vm.user);
 
 		vm.login = function () {
 			Auth.login(vm.user) // user object contains user.email and user.password

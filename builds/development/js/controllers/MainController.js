@@ -8,12 +8,11 @@
 		
 		var vm = this;
 
+		vm.errorMessage = undefined;
 
-		vm.errorMessage;
-
-		$rootScope.$on('$routeChangeError', function() {
-			vm.errorMessage = "You are not allowed to view this part of the website!";
-		});
+		// $rootScope.$on('$routeChangeError', function() {
+		// 	vm.errorMessage = "You are not allowed to view this part of the website!";
+		// });
 
 		
 		vm.title = CONSTANTS.TITLE;
