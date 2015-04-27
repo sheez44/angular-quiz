@@ -423,8 +423,8 @@
 						"selection":
 						[
 							[
-								866,
-								866
+								1033,
+								1033
 							]
 						],
 						"settings":
@@ -657,7 +657,7 @@
 		[
 			[
 				"",
-				"C:\\wamp\\www\\wordpress\\wp-content\\themes\\Blog\\psyblog.sublime-project"
+				"C:\\wamp\\www\\wordpress\\wp-content\\themes\\wp-attc\\attc-wp.sublime-project"
 			]
 		],
 		"width": 380.0

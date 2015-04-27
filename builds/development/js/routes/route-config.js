@@ -28,17 +28,18 @@
 				templateUrl: 'partials/endofquiz.html',
 				controller: 'EoquizController',
 				controllerAs: 'eo',
-				// resolve: {
-				// 	app: function(User, $q) {
-				// 		var defer = $q.defer();
-				// 		if(User.quizStatus === true) {
-				// 			defer.reject();
-				// 		} else {
-				// 			return defer.resolve();
-				// 		}
-				// 		return defer.promise; 
-				// 	}
-				// }
+				resolve: {
+					app: function(User, $q, $location, $rootScope) {
+						var defer = $q.defer();
+						if(User.quizStatus === true) {
+							defer.reject();
+							$location.path('/');
+						} else {
+							return defer.resolve();
+						}
+						return defer.promise; 
+					}
+				}
 			}).
 			when('/', {
 				templateUrl: 'partials/home.html',

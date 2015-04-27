@@ -2,19 +2,12 @@
 
 	angular
 		.module('myQuiz')
-		.controller('MainController', ["CONSTANTS", 'User', 'Auth', '$rootScope', MainController]);
+		.controller('MainController', ["CONSTANTS", 'User', 'Auth', MainController]);
 
-	function MainController(CONSTANTS, User, Auth, $rootScope) {	
+	function MainController(CONSTANTS, User, Auth) {	
 		
 		var vm = this;
 
-		vm.errorMessage = undefined;
-
-		// $rootScope.$on('$routeChangeError', function() {
-		// 	vm.errorMessage = "You are not allowed to view this part of the website!";
-		// });
-
-		
 		vm.title = CONSTANTS.TITLE;
 
 		vm.user = User;	 

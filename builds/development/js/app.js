@@ -188,17 +188,18 @@ angular.module('myQuiz')
 				templateUrl: 'partials/endofquiz.html',
 				controller: 'EoquizController',
 				controllerAs: 'eo',
-				// resolve: {
-				// 	app: function(User, $q) {
-				// 		var defer = $q.defer();
-				// 		if(User.quizStatus === true) {
-				// 			defer.reject();
-				// 		} else {
-				// 			return defer.resolve();
-				// 		}
-				// 		return defer.promise; 
-				// 	}
-				// }
+				resolve: {
+					app: function(User, $q, $location, $rootScope) {
+						var defer = $q.defer();
+						if(User.quizStatus === true) {
+							defer.reject();
+							$location.path('/');
+						} else {
+							return defer.resolve();
+						}
+						return defer.promise; 
+					}
+				}
 			}).
 			when('/', {
 				templateUrl: 'partials/home.html',
@@ -241,19 +242,12 @@ angular.module('myQuiz')
 
 	angular
 		.module('myQuiz')
-		.controller('MainController', ["CONSTANTS", 'User', 'Auth', '$rootScope', MainController]);
+		.controller('MainController', ["CONSTANTS", 'User', 'Auth', MainController]);
 
-	function MainController(CONSTANTS, User, Auth, $rootScope) {	
+	function MainController(CONSTANTS, User, Auth) {	
 		
 		var vm = this;
 
-		vm.errorMessage = undefined;
-
-		// $rootScope.$on('$routeChangeError', function() {
-		// 	vm.errorMessage = "You are not allowed to view this part of the website!";
-		// });
-
-		
 		vm.title = CONSTANTS.TITLE;
 
 		vm.user = User;	 
