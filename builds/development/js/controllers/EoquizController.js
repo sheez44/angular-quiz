@@ -2,18 +2,34 @@
 	
 	angular
 		.module('myQuiz')
-		.controller('EoquizController', ['User', EoquizController]);
+		.controller('EoquizController', ['User', 'QuestionService', EoquizController]);
 
-	function EoquizController(User) {
+	function EoquizController(User, QuestionService) {
 
 		var vm = this;
 
 		// numbers
 		vm.totalIncorrect = User.totalIncorrect;
 		vm.totalCorrect = User.totalCorrect;
-		// arrays
-		vm.correctScores = User.correctQuestions;
-		vm.incorrectScores = User.incorrectQuestions;
+
+		vm.correctObj = { answers: [], questions: [] };
+
+		vm.incorrectObj = { answers: [], questions: [], userAnswers: [] };
+
+		User.correctQuestions.forEach(function(xdata) {
+			vm.correctObj.questions.push(xdata.theQuestion);
+			vm.correctObj.answers.push(xdata.theAnswer);
+		});
+
+		User.incorrectQuestions.forEach(function(xdata) {
+			vm.incorrectObj.answers.push(xdata.theAnswer);
+			vm.incorrectObj.questions.push(xdata.theAnswer);
+			vm.incorrectObj.userAnswers.push(xdata.good);
+		});
+
+		console.log(vm.incorrectObj);
+		console.log(vm.correctObj);
+
 
 	}
 

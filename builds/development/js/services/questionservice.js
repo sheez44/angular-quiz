@@ -24,6 +24,22 @@
 							def.reject("failed to retrieve questions");
 						});
 					return def.promise;	
+				},
+
+				getAllQuestions: function() {
+					var def = $q.defer();
+
+					$http.get("quizdb.json")
+						.success(function(data) {
+							// resolve the data by returning the question, choices and correctanswer in an object
+							def.resolve(
+								data
+								);
+						})
+						.error(function() {
+							def.reject("failed to retrieve questions");
+						});
+					return def.promise;	
 				}
 			};
 	}]);

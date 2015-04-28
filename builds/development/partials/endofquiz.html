@@ -5,7 +5,7 @@
 		<h3>You answered these {{ eo.totalCorrect }} correctly: </h3>
 
 		<ul>
-			<li class="scores is-correct" ng-repeat="score in eo.correctScores">
+			<li class="scores is-correct" ng-repeat="score in eo.correctObj.answers">
 				{{score}}
 			</li>
 		</ul>
@@ -13,7 +13,7 @@
 		<h3>You answered these {{ eo.totalIncorrect }} incorrectly: </h3>
 
 		<ul>
-			<li class="scores is-incorrect" ng-repeat="score in eo.incorrectScores">
+			<li class="scores is-incorrect" ng-repeat="score in eo.incorrectObj.answers">
 				{{score}}
 			</li>
 		</ul>

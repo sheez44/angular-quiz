@@ -44,7 +44,7 @@
 			when('/', {
 				templateUrl: 'partials/home.html',
 				controller: 'RegistrationController',
-				controllerAs: 'reg'
+				controllerAs: 'reg',
 			}).
 			when('/register', {
 				templateUrl: 'partials/register.html',

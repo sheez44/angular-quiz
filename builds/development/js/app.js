@@ -138,6 +138,22 @@ angular.module('myQuiz')
 							def.reject("failed to retrieve questions");
 						});
 					return def.promise;	
+				},
+
+				getAllQuestions: function() {
+					var def = $q.defer();
+
+					$http.get("quizdb.json")
+						.success(function(data) {
+							// resolve the data by returning the question, choices and correctanswer in an object
+							def.resolve(
+								data
+								);
+						})
+						.error(function() {
+							def.reject("failed to retrieve questions");
+						});
+					return def.promise;	
 				}
 			};
 	}]);
@@ -204,7 +220,7 @@ angular.module('myQuiz')
 			when('/', {
 				templateUrl: 'partials/home.html',
 				controller: 'RegistrationController',
-				controllerAs: 'reg'
+				controllerAs: 'reg',
 			}).
 			when('/register', {
 				templateUrl: 'partials/register.html',
@@ -222,18 +238,34 @@ angular.module('myQuiz')
 	
 	angular
 		.module('myQuiz')
-		.controller('EoquizController', ['User', EoquizController]);
+		.controller('EoquizController', ['User', 'QuestionService', EoquizController]);
 
-	function EoquizController(User) {
+	function EoquizController(User, QuestionService) {
 
 		var vm = this;
 
 		// numbers
 		vm.totalIncorrect = User.totalIncorrect;
 		vm.totalCorrect = User.totalCorrect;
-		// arrays
-		vm.correctScores = User.correctQuestions;
-		vm.incorrectScores = User.incorrectQuestions;
+
+		vm.correctObj = { answers: [], questions: [] };
+
+		vm.incorrectObj = { answers: [], questions: [], userAnswers: [] };
+
+		User.correctQuestions.forEach(function(xdata) {
+			vm.correctObj.questions.push(xdata.theQuestion);
+			vm.correctObj.answers.push(xdata.theAnswer);
+		});
+
+		User.incorrectQuestions.forEach(function(xdata) {
+			vm.incorrectObj.answers.push(xdata.theAnswer);
+			vm.incorrectObj.questions.push(xdata.theAnswer);
+			vm.incorrectObj.userAnswers.push(xdata.good);
+		});
+
+		console.log(vm.incorrectObj);
+		console.log(vm.correctObj);
+
 
 	}
 
@@ -242,9 +274,9 @@ angular.module('myQuiz')
 
 	angular
 		.module('myQuiz')
-		.controller('MainController', ["CONSTANTS", 'User', 'Auth', MainController]);
+		.controller('MainController', ["CONSTANTS", 'User', 'Auth', 'QuestionService', MainController]);
 
-	function MainController(CONSTANTS, User, Auth) {	
+	function MainController(CONSTANTS, User, Auth, QuestionService) {	
 		
 		var vm = this;
 
@@ -268,7 +300,7 @@ angular.module('myQuiz')
 
 		var vm = this;
 		var totalQuestions;
-		var currentQuestion = 0;
+		var currentQuestion = 8;
 
 		// This function is used to call the questionService everytime the user clicks on the 'add' button
 		function getTheCurrentQuestion() {
@@ -314,12 +346,20 @@ angular.module('myQuiz')
 		// If the answer is correct it updates the totalcorrect answers and the questions
 		// gets pushed in a new array for future purpose; vice versa for the wrong answers
 		function validateAnswer(userAnswer) {
+
 			if(vm.correctAnswer === userAnswer) {
 				User.totalCorrect += 1;
-				User.correctQuestions.push(vm.question);
+				User.correctQuestions.push({
+					theAnswer: userAnswer,
+					theQuestion: vm.question,
+				});
 			} else {
 				User.totalIncorrect += 1;
-				User.incorrectQuestions.push(userAnswer);
+				User.incorrectQuestions.push({
+					theAnswer: userAnswer,
+					theQuestion: vm.question,
+					good: vm.correctAnswer
+				});
 			}
 		}
 

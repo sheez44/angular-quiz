@@ -2,9 +2,9 @@
 
 	angular
 		.module('myQuiz')
-		.controller('MainController', ["CONSTANTS", 'User', 'Auth', MainController]);
+		.controller('MainController', ["CONSTANTS", 'User', 'Auth', 'QuestionService', MainController]);
 
-	function MainController(CONSTANTS, User, Auth) {	
+	function MainController(CONSTANTS, User, Auth, QuestionService) {	
 		
 		var vm = this;
 

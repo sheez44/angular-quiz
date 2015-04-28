@@ -8,7 +8,7 @@
 
 		var vm = this;
 		var totalQuestions;
-		var currentQuestion = 0;
+		var currentQuestion = 8;
 
 		// This function is used to call the questionService everytime the user clicks on the 'add' button
 		function getTheCurrentQuestion() {
@@ -54,12 +54,20 @@
 		// If the answer is correct it updates the totalcorrect answers and the questions
 		// gets pushed in a new array for future purpose; vice versa for the wrong answers
 		function validateAnswer(userAnswer) {
+
 			if(vm.correctAnswer === userAnswer) {
 				User.totalCorrect += 1;
-				User.correctQuestions.push(vm.question);
+				User.correctQuestions.push({
+					theAnswer: userAnswer,
+					theQuestion: vm.question,
+				});
 			} else {
 				User.totalIncorrect += 1;
-				User.incorrectQuestions.push(userAnswer);
+				User.incorrectQuestions.push({
+					theAnswer: userAnswer,
+					theQuestion: vm.question,
+					good: vm.correctAnswer
+				});
 			}
 		}
 
