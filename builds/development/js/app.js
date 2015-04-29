@@ -258,8 +258,9 @@ angular.module('myQuiz')
 		});
 
 		User.incorrectQuestions.forEach(function(xdata) {
+			console.log(xdata);
 			vm.incorrectObj.answers.push(xdata.theAnswer);
-			vm.incorrectObj.questions.push(xdata.theAnswer);
+			vm.incorrectObj.questions.push(xdata.theQuestion);
 			vm.incorrectObj.userAnswers.push(xdata.good);
 		});
 
@@ -300,7 +301,7 @@ angular.module('myQuiz')
 
 		var vm = this;
 		var totalQuestions;
-		var currentQuestion = 8;
+		var currentQuestion = 0;
 
 		// This function is used to call the questionService everytime the user clicks on the 'add' button
 		function getTheCurrentQuestion() {

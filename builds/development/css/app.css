@@ -40,6 +40,11 @@ header {
   .main h2 {
     text-align: center; }
 
+/* line 43, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+hr {
+  margin-top: 15px;
+  margin-bottom: 15px; }
+
 /* line 1, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_animations.scss */
 .choices.ng-enter, .choices.ng-move {
   transition: 1.5s linear all;
@@ -125,15 +130,30 @@ button[disabled] {
   background: gray;
   color: black; }
 
-/* line 3, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_state.scss */
-.is-correct {
+/* line 1, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_state.scss */
+.a-is-correct, .a-is-incorrect {
+  color: white;
+  padding: 6px;
+  margin-left: 2%;
+  border: 1px solid black; }
+
+/* line 11, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_state.scss */
+.q-is-correct {
   color: green; }
 
-/* line 7, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_state.scss */
-.is-incorrect {
+/* line 15, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_state.scss */
+.q-is-incorrect {
   color: red; }
 
-/* line 12, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_state.scss */
+/* line 20, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_state.scss */
+.a-is-correct {
+  background: green; }
+
+/* line 25, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_state.scss */
+.a-is-incorrect {
+  background: #c2b100; }
+
+/* line 31, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_state.scss */
 .active {
   background: green;
   color: #eee;
@@ -179,23 +199,36 @@ h3.lead {
 
 /* line 24, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_quiz.scss */
 .scores {
-  list-style-type: disc;
-  margin-bottom: 10px;
+  margin-bottom: 1%;
   font-family: 'Lora', serif;
   font-style: italic;
-  font-size: 20px; }
+  font-size: 20px;
+  padding-top: 15px;
+  background: #eee; }
 
-/* line 32, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_quiz.scss */
+/* line 33, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_quiz.scss */
+.scores.q-is-correct {
+  padding-bottom: 15px; }
+
+/* line 37, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_quiz.scss */
 .eoquiz {
   background: #f8f8f8;
   font-family: 'Lora', serif; }
-  /* line 35, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_quiz.scss */
+  /* line 40, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_quiz.scss */
   .eoquiz h1 {
     font-family: 'Istok Web', sans-serif; }
 
-/* line 40, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_quiz.scss */
+/* line 45, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_quiz.scss */
 .choices {
   padding: 15px 0 15px 15px; }
+
+/* line 49, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_quiz.scss */
+.black-text {
+  color: black; }
+
+/* line 53, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_quiz.scss */
+.eoq-answer-container {
+  margin-top: 1%; }
 
 /* line 1, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_users.scss */
 .username {

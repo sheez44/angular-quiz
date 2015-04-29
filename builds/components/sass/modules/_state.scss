@@ -1,12 +1,31 @@
+%eoq-answer-block {
+  color: white;
+  padding: 6px;
+  margin-left: 2%;
+  border: 1px solid black;
+}
+
+
 // End of the quiz, displays the wrong answers in red and vice versa
 
-.is-correct {
+.q-is-correct {
 	color: green;
 }
 
-.is-incorrect {
+.q-is-incorrect {
 	color: red;
 }
+
+// displays the correct answer given by the user
+.a-is-correct {
+	@extend %eoq-answer-block;	
+  	background: green;
+ }
+
+ .a-is-incorrect {
+	@extend %eoq-answer-block;	
+  	background: rgb(194, 177, 0);
+ }
 
 // When the user clicks an answer, .active is set on that listitem
 .active {

@@ -22,11 +22,16 @@ h3.lead {
 }
 
 .scores {
-	list-style-type: disc;
-	margin-bottom: 10px;
+	margin-bottom: 1%;
 	font-family: $font-sec;
 	font-style: italic;
 	font-size: 20px;
+	padding-top: 15px;
+	background: #eee;
+}
+
+.scores.q-is-correct {
+	padding-bottom: 15px;
 }
 
 .eoquiz {
@@ -39,4 +44,12 @@ h3.lead {
 
 .choices {
 	padding: 15px 0 15px 15px;
+}
+
+.black-text {
+	color: black;
+}
+
+.eoq-answer-container {
+	margin-top: 1%;
 }
