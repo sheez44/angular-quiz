@@ -9,7 +9,7 @@
 			totalIncorrect: 0,
 			correctQuestions: [],
 			incorrectQuestions: [],
-			quizStatus: true
+			hasStarted: false
 		});
 
 })(); 

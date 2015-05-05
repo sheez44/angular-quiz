@@ -21,6 +21,7 @@
 
 		// Initial call of the data => first question
 		QuestionService.getQuestion(currentQuestion).then(function(data) {
+			User.hasStarted = true;
 			totalQuestions = data.totalQuestions;
 			getTheCurrentQuestion();
 		});
@@ -36,7 +37,7 @@
 			} else {
 				getUserAnswer();
 				addTopscore();
-				User.quizStatus = false;
+				User.hasStarted = false;
 				$location.path('/endofquiz');
 			}		
 		}

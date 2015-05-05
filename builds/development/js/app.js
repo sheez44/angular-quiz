@@ -170,7 +170,7 @@ angular.module('myQuiz')
 			totalIncorrect: 0,
 			correctQuestions: [],
 			incorrectQuestions: [],
-			quizStatus: true
+			hasStarted: false
 		});
 
 })(); 
@@ -314,6 +314,7 @@ angular.module('myQuiz')
 
 		// Initial call of the data => first question
 		QuestionService.getQuestion(currentQuestion).then(function(data) {
+			User.hasStarted = true;
 			totalQuestions = data.totalQuestions;
 			getTheCurrentQuestion();
 		});
@@ -329,7 +330,7 @@ angular.module('myQuiz')
 			} else {
 				getUserAnswer();
 				addTopscore();
-				User.quizStatus = false;
+				User.hasStarted = false;
 				$location.path('/endofquiz');
 			}		
 		}
@@ -445,7 +446,7 @@ angular.module('myQuiz')
 		vm.login = function () {
 			Auth.login(vm.user) // user object contains user.email and user.password
 			.then(function(user) {
-				$location.path('/quiz');
+				$location.path('/');
 			}).catch(function(error) {
 				vm.message = error.message;
 			});
@@ -455,7 +456,7 @@ angular.module('myQuiz')
 			Auth.register(vm.user)
 			.then(function(user) {
 				Auth.login(vm.user);
-				$location.path('/quiz');
+				$location.path('/');
 			}).catch(function(error) {
 				vm.message = error.message;
 			});

@@ -26,7 +26,8 @@
 
 			</div>
 
-			<button ng-click="reg.resumeQuiz()">Resume quiz</button>
+			<button ng-hide"reg.user.hasStarted" ng-click="reg.resumeQuiz()">Start quiz</button>
+			<button ng-show"reg.user.hasStarted" ng-click="reg.resumeQuiz()">Resume quiz</button>
 
 	</div>
 
