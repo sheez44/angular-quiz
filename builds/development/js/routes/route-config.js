@@ -41,7 +41,7 @@
 					}
 				}
 			}).
-			when('/', {
+			when('/login', {
 				templateUrl: 'partials/home.html',
 				controller: 'RegistrationController',
 				controllerAs: 'reg',
@@ -51,8 +51,13 @@
 				controller: 'RegistrationController',
 				controllerAs: 'reg'
 			}).
+			when('/user-page', {
+				templateUrl: 'partials/user-page.html',
+				controller: 'UserPageController',
+				controllerAs: 'user'
+			}).
 			otherwise({
-				redirectTo: '/'
+				redirectTo: '/login'
 			});
 	}
 

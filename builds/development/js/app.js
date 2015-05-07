@@ -217,7 +217,7 @@ angular.module('myQuiz')
 					}
 				}
 			}).
-			when('/', {
+			when('/login', {
 				templateUrl: 'partials/home.html',
 				controller: 'RegistrationController',
 				controllerAs: 'reg',
@@ -227,8 +227,13 @@ angular.module('myQuiz')
 				controller: 'RegistrationController',
 				controllerAs: 'reg'
 			}).
+			when('/user-page', {
+				templateUrl: 'partials/user-page.html',
+				controller: 'UserPageController',
+				controllerAs: 'user'
+			}).
 			otherwise({
-				redirectTo: '/'
+				redirectTo: '/login'
 			});
 	}
 
@@ -443,12 +448,10 @@ angular.module('myQuiz')
 
 		vm.user = User;
 
-		vm.started = false;
-
 		vm.login = function () {
 			Auth.login(vm.user) // user object contains user.email and user.password
 			.then(function(user) {
-				$location.path('/');
+				$location.path('/user-page');
 			}).catch(function(error) {
 				vm.message = error.message;
 			});
@@ -458,15 +461,11 @@ angular.module('myQuiz')
 			Auth.register(vm.user)
 			.then(function(user) {
 				Auth.login(vm.user);
-				$location.path('/');
+				$location.path('/user-page');
 			}).catch(function(error) {
 				vm.message = error.message;
 			});
 		} // register
-
-		vm.resumeQuiz = function () {
-			$location.path('/quiz');
-		}
 
 	}
 
@@ -489,4 +488,26 @@ angular.module('myQuiz')
 
 		} // StatusController
 
+})(); 
+(function () {
+	angular
+		.module('myQuiz')
+		.controller('UserPageController', 
+			['User', UserPageController]);
+
+		function UserPageController(User) {
+
+			var vm = this;
+
+			vm.user = User;
+
+			vm.started = function() {
+				return User.hasStarted();
+			}
+
+			vm.resumeQuiz = function () {
+				$location.path('/quiz');
+			}
+
+		}
 })(); 

@@ -10,12 +10,10 @@
 
 		vm.user = User;
 
-		vm.started = false;
-
 		vm.login = function () {
 			Auth.login(vm.user) // user object contains user.email and user.password
 			.then(function(user) {
-				$location.path('/');
+				$location.path('/user-page');
 			}).catch(function(error) {
 				vm.message = error.message;
 			});
@@ -25,15 +23,11 @@
 			Auth.register(vm.user)
 			.then(function(user) {
 				Auth.login(vm.user);
-				$location.path('/');
+				$location.path('/user-page');
 			}).catch(function(error) {
 				vm.message = error.message;
 			});
 		} // register
-
-		vm.resumeQuiz = function () {
-			$location.path('/quiz');
-		}
 
 	}
 

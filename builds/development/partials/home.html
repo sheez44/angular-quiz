@@ -1,6 +1,6 @@
 
 <div class="container main clearfix">
-	<div class="quiz__login" ng-hide="reg.user.user.username">
+	<div class="quiz__login">
 		
 		<form class="login-form" ng-submit="reg.login()" name="myForm" novalidate>
 
@@ -14,21 +14,7 @@
 			
 		</form>
 		<img class="quiz__image img-responsive" src="http://www.gretchenrubin.com/wp-content/uploads/2014/03/quiz-.jpg.jpg" alt="quiz image">
-	</div>
-	
-	<div class="home__loggedin" ng-show="reg.user.user.username">
-			<h2>Personal Page <span>{{user.user.username}}</span></h2>
-
-			<div class="well">
-				<p>Name: {{reg.user.user.name}}</p>
-				<p>Email: {{reg.user.user.email}}</p>
-				<p>Top score: {{ "Not set" || user.user.topscore}}</p>
-
-			</div>
-
-			<button ng-hide="reg.started" ng-click="reg.resumeQuiz()">Start quiz</button>
-			<button ng-show="reg.started" ng-click="reg.resumeQuiz()">Resume quiz</button>
-	</div>
+	</div>	
 
 
 </div>

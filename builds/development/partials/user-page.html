@@ -1,0 +1,16 @@
+<div class="container main clearfix">
+
+	<div class="home__loggedin" ng-show="user.user.user.username">
+			<h2>Personal Page <span>{{user.user.username}}</span></h2>
+
+			<div class="well">
+				<p>Name: {{user.user.user.name}}</p>
+				<p>Email: {{user.user.user.email}}</p>
+				<p>Top score: {{ "Not set" || user.user.topscore}}</p>
+
+			</div>
+
+			<button ng-hide="user.hasstarted()" ng-click="user.resumeQuiz()">Start quiz</button>
+			<button ng-show="user.hasstarted()" ng-click="user.resumeQuiz()">Resume quiz</button>
+	</div>
+</div>	
