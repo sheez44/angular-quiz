@@ -9,7 +9,8 @@
 			totalIncorrect: 0,
 			correctQuestions: [],
 			incorrectQuestions: [],
-			hasStarted: false
+			hasStarted: false,
+			currentQuestion: 4
 		});
 
 })(); 

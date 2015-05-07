@@ -24,6 +24,7 @@
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav navigation" ng-init="logged-in">
+	        <li ng-hide="main.user.user.username"><a href="\#login">Login</a></li>
 	       	<li ng-hide="main.user.user.username"><a href="\#register">Register</a></li>
 	        <li ng-show="main.user.user.username"><a href="\#scoreboard">Scoreboard</a></li>
 	      </ul>

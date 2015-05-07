@@ -2,9 +2,9 @@
 
 	angular
 		.module('myQuiz')
-		.controller('MainController', ["CONSTANTS", 'User', 'Auth', 'QuestionService', MainController]);
+		.controller('MainController', ["$location", "CONSTANTS", 'User', 'Auth', 'QuestionService', MainController]);
 
-	function MainController(CONSTANTS, User, Auth, QuestionService) {	
+	function MainController($location, CONSTANTS, User, Auth, QuestionService) {	
 		
 		var vm = this;
 
@@ -12,7 +12,11 @@
 
 		vm.user = User;	 
 
-		vm.logout = Auth.logout;
+		vm.logout = function() {
+
+			Auth.logout();
+			$location.path('/login')
+		}
 	};
 
 })();

@@ -2,9 +2,9 @@
 	angular
 		.module('myQuiz')
 		.controller('UserPageController', 
-			['User', UserPageController]);
+			['User', '$location', UserPageController]);
 
-		function UserPageController(User) {
+		function UserPageController(User, $location) {
 
 			var vm = this;
 

@@ -97,10 +97,6 @@
 			ref.update({ topscore: User.totalCorrect });
 		}
 
-		// function addScores(totalCorrectAnswers) {
-
-		// }
-
 		var choiceSelection = {
 			userAnswers: [],
 			setSelection: function(choice) {

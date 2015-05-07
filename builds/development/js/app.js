@@ -170,7 +170,8 @@ angular.module('myQuiz')
 			totalIncorrect: 0,
 			correctQuestions: [],
 			incorrectQuestions: [],
-			hasStarted: false
+			hasStarted: false,
+			currentQuestion: 4
 		});
 
 })(); 
@@ -280,9 +281,9 @@ angular.module('myQuiz')
 
 	angular
 		.module('myQuiz')
-		.controller('MainController', ["CONSTANTS", 'User', 'Auth', 'QuestionService', MainController]);
+		.controller('MainController', ["$location", "CONSTANTS", 'User', 'Auth', 'QuestionService', MainController]);
 
-	function MainController(CONSTANTS, User, Auth, QuestionService) {	
+	function MainController($location, CONSTANTS, User, Auth, QuestionService) {	
 		
 		var vm = this;
 
@@ -290,7 +291,11 @@ angular.module('myQuiz')
 
 		vm.user = User;	 
 
-		vm.logout = Auth.logout;
+		vm.logout = function() {
+
+			Auth.logout();
+			$location.path('/login')
+		}
 	};
 
 })();
@@ -395,10 +400,6 @@ angular.module('myQuiz')
 			ref.update({ topscore: User.totalCorrect });
 		}
 
-		// function addScores(totalCorrectAnswers) {
-
-		// }
-
 		var choiceSelection = {
 			userAnswers: [],
 			setSelection: function(choice) {
@@ -493,9 +494,9 @@ angular.module('myQuiz')
 	angular
 		.module('myQuiz')
 		.controller('UserPageController', 
-			['User', UserPageController]);
+			['User', '$location', UserPageController]);
 
-		function UserPageController(User) {
+		function UserPageController(User, $location) {
 
 			var vm = this;
 
