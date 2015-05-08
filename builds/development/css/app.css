@@ -118,14 +118,17 @@ hr {
   margin-top: 3%; }
 
 /* line 1, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_buttons.scss */
-.button__next {
+.btn {
   margin-top: 1em;
-  background: blue;
-  padding: 15px;
-  width: 75px;
-  color: white; }
+  width: 100px;
+  text-align: center; }
 
-/* line 9, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_buttons.scss */
+/* line 7, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_buttons.scss */
+.btn.btn-success {
+  color: #000;
+  float: right; }
+
+/* line 12, C:/Users/johan/Desktop/Angularquiz/builds/components/sass/modules/_buttons.scss */
 button[disabled] {
   background: gray;
   color: black; }

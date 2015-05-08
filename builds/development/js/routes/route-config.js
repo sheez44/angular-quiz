@@ -21,6 +21,9 @@
 				resolve: {
 					currentAuth: function(Auth) { // checks whether the user is authenticated (has acces) to view this page
 						return Auth.requireAuth();
+					},
+					currentQuestion: function(quizFactory) {
+						return quizFactory.getCurrentQuestion();
 					}
 				}
 			}).

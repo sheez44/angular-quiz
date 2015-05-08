@@ -2,13 +2,17 @@
 	angular
 		.module('myQuiz')
 		.controller('QuizController', 
-			['$http', '$animate', 'Data', '$location', 'QuestionService', 'User', '$firebaseObject', 'CONSTANTS', QuizController]);
+			['currentQuestion', '$http', '$animate', 'Data', '$location', 'QuestionService', 'User', '$firebaseObject', 'CONSTANTS', 'quizFactory', QuizController]);
 
-	function QuizController ($http, $animate, Data, $location, QuestionService, User, $firebaseObject, CONSTANTS) {
+	function QuizController (currentQuestion, $http, $animate, Data, $location, QuestionService, User, $firebaseObject, CONSTANTS, quizFactory) {
 
 		var vm = this;
 		var totalQuestions;
-		var currentQuestion = 0;
+		var currentQuestion = currentQuestion;
+
+		function getCurrentQuestion() {
+			currentQuestion = quizFactory.getCurrentQuestion();
+		}
 
 		// This function is used to call the questionService everytime the user clicks on the 'add' button
 		function getTheCurrentQuestion() {
@@ -32,8 +36,9 @@
 			if(currentQuestion + 1 < totalQuestions ) {
 				vm.selected = false; // prevents highlight same question
 				getUserAnswer();
-				currentQuestion += 1;
-				getTheCurrentQuestion();	
+				quizFactory.nextQuestion();
+				getCurrentQuestion();
+				getTheCurrentQuestion();
 			} else {
 				getUserAnswer();
 				addTopscore();

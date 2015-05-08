@@ -10,8 +10,8 @@
 
 			vm.user = User;
 
-			vm.started = function() {
-				return User.hasStarted();
+			vm.hasStarted = function() {
+				return User.hasStarted;
 			}
 
 			vm.resumeQuiz = function () {

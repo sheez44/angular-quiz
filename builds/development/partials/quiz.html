@@ -5,6 +5,8 @@
 	<li ng-repeat="choice in quiz.choices" class="choices" ng-click="quiz.setSelection(choice)" ng-class="{active: quiz.isActive(choice)}">{{choice}}</li>
 </ul>
 
-<button class="button__next" ng-disabled="quiz.hasMadeAChoice()" ng-click="quiz.addQuestion()">add</button>
+<button class="btn btn-success" ng-disabled="quiz.hasMadeAChoice()" ng-click="quiz.addQuestion()">Next</button>
+<button class="btn btn-default" ng-disabled="quiz.hasMadeAChoice()" ng-click="quiz.prevQuestion()">Back</button>
+
 
 </div>

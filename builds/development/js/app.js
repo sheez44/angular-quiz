@@ -163,6 +163,37 @@ angular.module('myQuiz')
 	
 	angular
 		.module('myQuiz')
+		.factory('quizFactory', [ function() {
+
+			var currentQuestion = 0;
+
+			return {
+
+				nextQuestion: function() {
+					currentQuestion += 1
+					return currentQuestion;
+				},
+				previousQuestion: function() {
+					if(currentQuestion >= 0) {
+						currentQuestion -= 1;
+					} else {
+						currentQuestion = 0;
+					}
+				},
+				getCurrentQuestion: function() {
+					return currentQuestion;
+				},
+				resetQuestion: function() {
+					currentQuestion = 0;
+				}
+			};
+	}]);
+
+})(); 
+(function () {
+	
+	angular
+		.module('myQuiz')
 		// Ask for username which will displayed during quiz
 		.value("User", {
 			user: {},
@@ -198,6 +229,9 @@ angular.module('myQuiz')
 				resolve: {
 					currentAuth: function(Auth) { // checks whether the user is authenticated (has acces) to view this page
 						return Auth.requireAuth();
+					},
+					currentQuestion: function(quizFactory) {
+						return quizFactory.getCurrentQuestion();
 					}
 				}
 			}).
@@ -305,13 +339,17 @@ angular.module('myQuiz')
 	angular
 		.module('myQuiz')
 		.controller('QuizController', 
-			['$http', '$animate', 'Data', '$location', 'QuestionService', 'User', '$firebaseObject', 'CONSTANTS', QuizController]);
+			['currentQuestion', '$http', '$animate', 'Data', '$location', 'QuestionService', 'User', '$firebaseObject', 'CONSTANTS', 'quizFactory', QuizController]);
 
-	function QuizController ($http, $animate, Data, $location, QuestionService, User, $firebaseObject, CONSTANTS) {
+	function QuizController (currentQuestion, $http, $animate, Data, $location, QuestionService, User, $firebaseObject, CONSTANTS, quizFactory) {
 
 		var vm = this;
 		var totalQuestions;
-		var currentQuestion = 0;
+		var currentQuestion = currentQuestion;
+
+		function getCurrentQuestion() {
+			currentQuestion = quizFactory.getCurrentQuestion();
+		}
 
 		// This function is used to call the questionService everytime the user clicks on the 'add' button
 		function getTheCurrentQuestion() {
@@ -335,8 +373,9 @@ angular.module('myQuiz')
 			if(currentQuestion + 1 < totalQuestions ) {
 				vm.selected = false; // prevents highlight same question
 				getUserAnswer();
-				currentQuestion += 1;
-				getTheCurrentQuestion();	
+				quizFactory.nextQuestion();
+				getCurrentQuestion();
+				getTheCurrentQuestion();
 			} else {
 				getUserAnswer();
 				addTopscore();
@@ -502,8 +541,8 @@ angular.module('myQuiz')
 
 			vm.user = User;
 
-			vm.started = function() {
-				return User.hasStarted();
+			vm.hasStarted = function() {
+				return User.hasStarted;
 			}
 
 			vm.resumeQuiz = function () {
