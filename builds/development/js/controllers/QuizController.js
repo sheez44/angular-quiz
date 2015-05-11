@@ -47,6 +47,19 @@
 			}		
 		}
 
+		function prevQuestion() {
+			quizFactory.previousQuestion();
+			getCurrentQuestion();
+			getTheCurrentQuestion();
+			for(var i = 0; i < User.incorrectQuestions.length; i++) {
+				if (User.incorrectQuestions[i].currentQuestion == currentQuestion) {
+					alert("was incorrect");
+				} else if (User.correctQuestions[i].currentQuestion == currentQuestion) {
+					alert("was correct");
+				}
+			}
+		}
+
 		// This function passes the last given answer by the user to a new array
 		// Then that answers is passed on to get validated
 		// Additionally it will clear the array entirely to save memory 
@@ -60,19 +73,20 @@
 		// If the answer is correct it updates the totalcorrect answers and the questions
 		// gets pushed in a new array for future purpose; vice versa for the wrong answers
 		function validateAnswer(userAnswer) {
-
 			if(vm.correctAnswer === userAnswer) {
 				User.totalCorrect += 1;
 				User.correctQuestions.push({
 					theAnswer: userAnswer,
 					theQuestion: vm.question,
+					currentQuestion: currentQuestion
 				});
 			} else {
 				User.totalIncorrect += 1;
 				User.incorrectQuestions.push({
 					theAnswer: userAnswer,
 					theQuestion: vm.question,
-					good: vm.correctAnswer
+					good: vm.correctAnswer,
+					currentQuestion: currentQuestion
 				});
 			}
 		}
@@ -120,17 +134,11 @@
 				if(currentQuestion !== 0) {
 					return true;
 				}
-			},
-			nextQuestion: function() {
-				(currentQuestion >= 0) ? currentQuestion += 1 : false; 
-				return currentQuestion;
-			}, 
-			prevQuestion: function() {
-				(currentQuestion < 0) ? false : currentQuestion -= 1; 
 			}
 		};
 
 		vm.addQuestion = addQuestion;
+		vm.prevQuestion = prevQuestion;
 		vm.setSelection = choiceSelection.setSelection;
 		vm.hasMadeAChoice = choiceSelection.hasMadeAChoice;
 		vm.isActive = choiceSelection.isActive;

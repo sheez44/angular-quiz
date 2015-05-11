@@ -10,7 +10,8 @@ var gulp = require('gulp'),
 var jsSources = ['./builds/development/js/modules/*.js',
 				 './builds/development/js/services/*.js',
 				 './builds/development/js/routes/*.js',
-				 './builds/development/js/controllers/*.js'			 
+				 './builds/development/js/controllers/*.js',
+				 './builds/development/js/directives/*.js'					 
 				 ];
 
 gulp.task('sass', function() {
