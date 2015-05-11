@@ -6,6 +6,6 @@
 	</ul>
 
 	<button class="btn btn-success" ng-disabled="quiz.hasMadeAChoice()" ng-click="quiz.addQuestion()">Next</button>
-	<button class="btn btn-default" ng-disabled="quiz.hasMadeAChoice()" ng-click="quiz.prevQuestion()">Back</button>
+	<button class="btn btn-default" ng-show="quiz.currentQuestion()" ng-click="quiz.prevQuestion()">Back</button>
 
 </div>

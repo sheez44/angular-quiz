@@ -116,6 +116,10 @@
 			ref.update({ topscore: User.totalCorrect });
 		}
 
+		function getTheCurrent() {
+			return currentQuestion > 0 ? true : false;
+		}
+
 		var choiceSelection = {
 			userAnswers: [],
 			setSelection: function(choice) {
@@ -139,6 +143,7 @@
 
 		vm.addQuestion = addQuestion;
 		vm.prevQuestion = prevQuestion;
+		vm.currentQuestion = getTheCurrent;
 		vm.setSelection = choiceSelection.setSelection;
 		vm.hasMadeAChoice = choiceSelection.hasMadeAChoice;
 		vm.isActive = choiceSelection.isActive;

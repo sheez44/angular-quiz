@@ -1,4 +1,10 @@
 @import url(http://fonts.googleapis.com/css?family=Lora|Istok+Web:400,400italic);
+/* line 2, c:/Users/johan/desktop/angularquiz/builds/components/sass/_helpers.scss */
+.main:after {
+  content: "";
+  display: table;
+  clear: both; }
+
 /* line 1, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
 body {
   background: #63DFB9;
@@ -36,11 +42,11 @@ header {
   padding: 15px;
   border-radius: 15px;
   box-shadow: 5px 5px 0 gray; }
-  /* line 37, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+  /* line 38, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
   .main h2 {
     text-align: center; }
 
-/* line 43, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
+/* line 44, c:/Users/johan/desktop/angularquiz/builds/components/sass/_main.scss */
 hr {
   margin-top: 15px;
   margin-bottom: 15px; }

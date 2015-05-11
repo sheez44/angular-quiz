@@ -34,6 +34,7 @@ header {
 	padding: 15px;
 	border-radius: 15px;
 	box-shadow: 5px 5px 0 gray;
+	@extend %clearfix;
 	h2 {
 		text-align: center;
 	}
