@@ -22,15 +22,10 @@
 		});
 
 		User.incorrectQuestions.forEach(function(xdata) {
-			console.log(xdata);
 			vm.incorrectObj.answers.push(xdata.theAnswer);
 			vm.incorrectObj.questions.push(xdata.theQuestion);
 			vm.incorrectObj.userAnswers.push(xdata.good);
 		});
-
-		console.log(vm.incorrectObj);
-		console.log(vm.correctObj);
-
 
 	}
 

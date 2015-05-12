@@ -10,6 +10,7 @@
 			correctQuestions: [],
 			incorrectQuestions: [],
 			hasStarted: false,
+			isActive: false,
 			currentQuestion: 4
 		});
 

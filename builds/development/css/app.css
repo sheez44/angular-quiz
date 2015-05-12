@@ -239,6 +239,10 @@ h3.lead {
 .eoq-answer-container {
   margin-top: 1%; }
 
+/* line 57, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_quiz.scss */
+.prev {
+  background: blue; }
+
 /* line 1, c:/Users/johan/desktop/angularquiz/builds/components/sass/modules/_users.scss */
 .username {
   color: black; }

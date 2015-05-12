@@ -165,7 +165,7 @@ angular.module('myQuiz')
 		.module('myQuiz')
 		.factory('quizFactory', [ function() {
 
-			var currentQuestion = 0;
+			var currentQuestion = 9;
 
 			return {
 
@@ -202,6 +202,7 @@ angular.module('myQuiz')
 			correctQuestions: [],
 			incorrectQuestions: [],
 			hasStarted: false,
+			isActive: false,
 			currentQuestion: 4
 		});
 
@@ -298,15 +299,10 @@ angular.module('myQuiz')
 		});
 
 		User.incorrectQuestions.forEach(function(xdata) {
-			console.log(xdata);
 			vm.incorrectObj.answers.push(xdata.theAnswer);
 			vm.incorrectObj.questions.push(xdata.theQuestion);
 			vm.incorrectObj.userAnswers.push(xdata.good);
 		});
-
-		console.log(vm.incorrectObj);
-		console.log(vm.correctObj);
-
 
 	}
 
@@ -346,6 +342,7 @@ angular.module('myQuiz')
 		var vm = this;
 		var totalQuestions;
 		var currentQuestion = currentQuestion;
+		vm.answered = undefined;
 
 		function getCurrentQuestion() {
 			currentQuestion = quizFactory.getCurrentQuestion();
@@ -388,13 +385,8 @@ angular.module('myQuiz')
 			quizFactory.previousQuestion();
 			getCurrentQuestion();
 			getTheCurrentQuestion();
-			for(var i = 0; i < User.incorrectQuestions.length; i++) {
-				if (User.incorrectQuestions[i].currentQuestion == currentQuestion) {
-					alert("was incorrect");
-				} else if (User.correctQuestions[i].currentQuestion == currentQuestion) {
-					alert("was correct");
-				}
-			}
+			console.log((User.incorrectQuestions[currentQuestion].theAnswer));
+		
 		}
 
 		// This function passes the last given answer by the user to a new array
@@ -429,9 +421,7 @@ angular.module('myQuiz')
 		}
 
 		function addTopscore() {
-			console.log(User.user.$id);
 			var ref = new Firebase(CONSTANTS.FIREBASE_URL + 'users/' + User.user.$id);
-
 			var userObject = $firebaseObject(ref);
 
 			userObject.$loaded().then(function() {
@@ -451,10 +441,6 @@ angular.module('myQuiz')
 		function saveTopscore() {
 			var ref = new Firebase(CONSTANTS.FIREBASE_URL + 'users/' + User.user.$id);
 			ref.update({ topscore: User.totalCorrect });
-		}
-
-		function getTheCurrent() {
-			return currentQuestion > 0 ? true : false;
 		}
 
 		var choiceSelection = {
@@ -478,14 +464,22 @@ angular.module('myQuiz')
 			}
 		};
 
+		function isChosen(index) {
+			vm.answered = index;
+		}
+
+		function showBackbutton() {
+			return currentQuestion > 0 ? true : false;
+		}
+
+		vm.isChosen = isChosen;
 		vm.addQuestion = addQuestion;
 		vm.prevQuestion = prevQuestion;
-		vm.currentQuestion = getTheCurrent;
+		vm.showBackbutton = showBackbutton;
 		vm.setSelection = choiceSelection.setSelection;
 		vm.hasMadeAChoice = choiceSelection.hasMadeAChoice;
 		vm.isActive = choiceSelection.isActive;
 		vm.hasAnsweredOnce = choiceSelection.hasAnsweredOnce;
-
 	};
 	
 })(); 
