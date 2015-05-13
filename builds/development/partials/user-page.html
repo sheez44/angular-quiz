@@ -6,7 +6,7 @@
 			<div class="well">
 				<p>Name: {{user.user.user.name}}</p>
 				<p>Email: {{user.user.user.email}}</p>
-				<p>Top score: {{ "Not set" || user.user.topscore}}</p>
+				<p>Top score: {{user.topscore || "Not set"}}</p>
 
 			</div>
 

@@ -113,6 +113,35 @@ angular.module('myQuiz')
 
 })();	
 (function () {
+	angular
+		.module('myQuiz')
+		.factory('Topscore' , ['$firebaseObject', 'CONSTANTS', 'User', function($firebaseObject, CONSTANTS, User) {
+			var ref = new Firebase(CONSTANTS.FIREBASE_URL);
+			var userObject = $firebaseObject(ref);
+
+			return {
+				getTopscore: function(userid) {
+					var ref = new Firebase(CONSTANTS.FIREBASE_URL + 'users/' + userid);
+					var userObject = $firebaseObject(ref);
+
+					return userObject.$loaded().then(function() {
+						return angular.forEach(userObject, function(key, value) {
+							if(value == 'topscore') {
+								return value[key];
+							} 
+						});
+					}).
+					catch(function(error) {
+						console.log("error: " + error);
+					});
+				}, // getTopscore
+				saveTopscore: function() {
+					ref.update({ topscore: User.totalCorrect });
+				}
+			};
+		}]);
+})(); 
+(function () {
 	
 	angular
 		.module('myQuiz')
@@ -335,14 +364,15 @@ angular.module('myQuiz')
 	angular
 		.module('myQuiz')
 		.controller('QuizController', 
-			['currentQuestion', '$http', '$animate', 'Data', '$location', 'QuestionService', 'User', '$firebaseObject', 'CONSTANTS', 'quizFactory', QuizController]);
+			['currentQuestion', '$http', '$animate', 'Data', '$location', 'QuestionService', 'User', 'quizFactory', QuizController]);
 
-	function QuizController (currentQuestion, $http, $animate, Data, $location, QuestionService, User, $firebaseObject, CONSTANTS, quizFactory) {
+	function QuizController (currentQuestion, $http, $animate, Data, $location, QuestionService, User, quizFactory) {
 
 		var vm = this;
 		var totalQuestions;
 		var currentQuestion = currentQuestion;
 		vm.answered = undefined;
+		var userid = User.user.$id
 
 		function getCurrentQuestion() {
 			currentQuestion = quizFactory.getCurrentQuestion();
@@ -418,29 +448,6 @@ angular.module('myQuiz')
 					currentQuestion: currentQuestion
 				});
 			}
-		}
-
-		function addTopscore() {
-			var ref = new Firebase(CONSTANTS.FIREBASE_URL + 'users/' + User.user.$id);
-			var userObject = $firebaseObject(ref);
-
-			userObject.$loaded().then(function() {
-				angular.forEach(userObject, function(key, value) {
-					if(key === 'topscore') {
-						console.log(User.topscore);
-					} else {
-						saveTopscore();
-					}
-				});
-			}).
-			catch(function(error) {
-				console.log("error: " + error);
-			});
-		}
-
-		function saveTopscore() {
-			var ref = new Firebase(CONSTANTS.FIREBASE_URL + 'users/' + User.user.$id);
-			ref.update({ topscore: User.totalCorrect });
 		}
 
 		var choiceSelection = {
@@ -540,13 +547,20 @@ angular.module('myQuiz')
 	angular
 		.module('myQuiz')
 		.controller('UserPageController', 
-			['User', '$location', UserPageController]);
+			['User', '$location', 'Topscore', UserPageController]);
 
-		function UserPageController(User, $location) {
+		function UserPageController(User, $location, Topscore) {
 
 			var vm = this;
 
 			vm.user = User;
+
+			var userid = User.user.$id;
+
+			var test = Topscore.getTopscore(userid).then(function(data) {
+				vm.topscore = data.topscore;
+				console.log(vm.topscore);
+			});
 
 			vm.hasStarted = function() {
 				return User.hasStarted;
