@@ -4,7 +4,7 @@
 		.module('myQuiz')
 		.factory('quizFactory', [ function() {
 
-			var currentQuestion = 9;
+			var currentQuestion = 7;
 
 			return {
 

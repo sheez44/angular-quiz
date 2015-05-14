@@ -11,18 +11,19 @@
 					var userObject = $firebaseObject(ref);
 
 					return userObject.$loaded().then(function() {
-						return angular.forEach(userObject, function(key, value) {
-							if(value == 'topscore') {
-								return value[key];
-							} 
-						});
+						return userObject.topscore;
 					}).
 					catch(function(error) {
 						console.log("error: " + error);
 					});
 				}, // getTopscore
-				saveTopscore: function() {
-					ref.update({ topscore: User.totalCorrect });
+				saveTopscore: function(correct, userid) {
+					var ref = new Firebase(CONSTANTS.FIREBASE_URL + 'users/' + userid);
+					var userObject = $firebaseObject(ref);
+
+					ref.update({topscore: correct})
+
+					console.log("topscore successfully updated!")
 				}
 			};
 		}]);

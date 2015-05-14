@@ -12,8 +12,8 @@
 
 			var userid = User.user.$id;
 
-			var test = Topscore.getTopscore(userid).then(function(data) {
-				vm.topscore = data.topscore;
+			var test = Topscore.getTopscore(userid).then(function(topscore) {
+				vm.topscore = topscore;
 				console.log(vm.topscore);
 			});
 

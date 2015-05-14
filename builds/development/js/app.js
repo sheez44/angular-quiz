@@ -125,18 +125,19 @@ angular.module('myQuiz')
 					var userObject = $firebaseObject(ref);
 
 					return userObject.$loaded().then(function() {
-						return angular.forEach(userObject, function(key, value) {
-							if(value == 'topscore') {
-								return value[key];
-							} 
-						});
+						return userObject.topscore;
 					}).
 					catch(function(error) {
 						console.log("error: " + error);
 					});
 				}, // getTopscore
-				saveTopscore: function() {
-					ref.update({ topscore: User.totalCorrect });
+				saveTopscore: function(correct, userid) {
+					var ref = new Firebase(CONSTANTS.FIREBASE_URL + 'users/' + userid);
+					var userObject = $firebaseObject(ref);
+
+					ref.update({topscore: correct})
+
+					console.log("topscore successfully updated!")
 				}
 			};
 		}]);
@@ -194,7 +195,7 @@ angular.module('myQuiz')
 		.module('myQuiz')
 		.factory('quizFactory', [ function() {
 
-			var currentQuestion = 9;
+			var currentQuestion = 7;
 
 			return {
 
@@ -232,7 +233,8 @@ angular.module('myQuiz')
 			incorrectQuestions: [],
 			hasStarted: false,
 			isActive: false,
-			currentQuestion: 4
+			currentQuestion: 4,
+			newTopscore: false
 		});
 
 })(); 
@@ -314,6 +316,8 @@ angular.module('myQuiz')
 
 		var vm = this;
 
+		vm.newTopscore = User.newTopscore;
+
 		// numbers
 		vm.totalIncorrect = User.totalIncorrect;
 		vm.totalCorrect = User.totalCorrect;
@@ -364,15 +368,15 @@ angular.module('myQuiz')
 	angular
 		.module('myQuiz')
 		.controller('QuizController', 
-			['currentQuestion', '$http', '$animate', 'Data', '$location', 'QuestionService', 'User', 'quizFactory', QuizController]);
+			['Topscore', 'currentQuestion', '$http', '$animate', 'Data', '$location', 'QuestionService', 'User', 'quizFactory', QuizController]);
 
-	function QuizController (currentQuestion, $http, $animate, Data, $location, QuestionService, User, quizFactory) {
+	function QuizController (Topscore, currentQuestion, $http, $animate, Data, $location, QuestionService, User, quizFactory) {
 
 		var vm = this;
 		var totalQuestions;
 		var currentQuestion = currentQuestion;
 		vm.answered = undefined;
-		var userid = User.user.$id
+		var userid = User.user.$id;
 
 		function getCurrentQuestion() {
 			currentQuestion = quizFactory.getCurrentQuestion();
@@ -405,7 +409,12 @@ angular.module('myQuiz')
 				getTheCurrentQuestion();
 			} else {
 				getUserAnswer();
-				addTopscore();
+				Topscore.getTopscore(userid).then(function(topscore) {
+					if(topscore < User.totalCorrect) {
+						Topscore.saveTopscore(User.totalCorrect, userid);
+						User.newTopscore = true;
+					}
+				});
 				User.hasStarted = false;
 				$location.path('/endofquiz');
 			}		
@@ -487,6 +496,7 @@ angular.module('myQuiz')
 		vm.hasMadeAChoice = choiceSelection.hasMadeAChoice;
 		vm.isActive = choiceSelection.isActive;
 		vm.hasAnsweredOnce = choiceSelection.hasAnsweredOnce;
+		vm.newTopscore;
 	};
 	
 })(); 
@@ -557,8 +567,8 @@ angular.module('myQuiz')
 
 			var userid = User.user.$id;
 
-			var test = Topscore.getTopscore(userid).then(function(data) {
-				vm.topscore = data.topscore;
+			var test = Topscore.getTopscore(userid).then(function(topscore) {
+				vm.topscore = topscore;
 				console.log(vm.topscore);
 			});
 

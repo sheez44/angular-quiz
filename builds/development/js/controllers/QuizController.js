@@ -2,15 +2,15 @@
 	angular
 		.module('myQuiz')
 		.controller('QuizController', 
-			['currentQuestion', '$http', '$animate', 'Data', '$location', 'QuestionService', 'User', 'quizFactory', QuizController]);
+			['Topscore', 'currentQuestion', '$http', '$animate', 'Data', '$location', 'QuestionService', 'User', 'quizFactory', QuizController]);
 
-	function QuizController (currentQuestion, $http, $animate, Data, $location, QuestionService, User, quizFactory) {
+	function QuizController (Topscore, currentQuestion, $http, $animate, Data, $location, QuestionService, User, quizFactory) {
 
 		var vm = this;
 		var totalQuestions;
 		var currentQuestion = currentQuestion;
 		vm.answered = undefined;
-		var userid = User.user.$id
+		var userid = User.user.$id;
 
 		function getCurrentQuestion() {
 			currentQuestion = quizFactory.getCurrentQuestion();
@@ -43,7 +43,12 @@
 				getTheCurrentQuestion();
 			} else {
 				getUserAnswer();
-				addTopscore();
+				Topscore.getTopscore(userid).then(function(topscore) {
+					if(topscore < User.totalCorrect) {
+						Topscore.saveTopscore(User.totalCorrect, userid);
+						User.newTopscore = true;
+					}
+				});
 				User.hasStarted = false;
 				$location.path('/endofquiz');
 			}		
@@ -125,6 +130,7 @@
 		vm.hasMadeAChoice = choiceSelection.hasMadeAChoice;
 		vm.isActive = choiceSelection.isActive;
 		vm.hasAnsweredOnce = choiceSelection.hasAnsweredOnce;
+		vm.newTopscore;
 	};
 	
 })(); 

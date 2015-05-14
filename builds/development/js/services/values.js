@@ -11,7 +11,8 @@
 			incorrectQuestions: [],
 			hasStarted: false,
 			isActive: false,
-			currentQuestion: 4
+			currentQuestion: 4,
+			newTopscore: false
 		});
 
 })(); 

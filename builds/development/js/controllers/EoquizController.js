@@ -8,6 +8,8 @@
 
 		var vm = this;
 
+		vm.newTopscore = User.newTopscore;
+
 		// numbers
 		vm.totalIncorrect = User.totalIncorrect;
 		vm.totalCorrect = User.totalCorrect;
