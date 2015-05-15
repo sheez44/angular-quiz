@@ -2,7 +2,7 @@
 
 	<h2>{{quiz.question}}</h2>
 	<ul>
-		<li ng-repeat="choice in quiz.choices" class="choices" ng-click="quiz.setSelection(choice, $index)" ng-class="{active: quiz.isActive(choice), prev: $index == quiz.answered}">{{choice}}</li>
+		<li ng-repeat="choice in quiz.choices" class="choices" ng-click="quiz.setSelection(choice, $index)" ng-class="{active: quiz.isActive(choice), prev: $index == quiz.index}">{{choice}}</li>
 	</ul>
 
 	<button class="btn btn-success" ng-disabled="quiz.hasMadeAChoice()" ng-click="quiz.addQuestion()">Next</button>

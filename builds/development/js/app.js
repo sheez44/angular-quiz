@@ -161,7 +161,8 @@ angular.module('myQuiz')
 								totalQuestions: data.allQuestions.length,
 								question: data.allQuestions[number].question,
 								choices: data.allQuestions[number].choices,
-								correctAnswer: data.allQuestions[number].correctAnswer
+								correctAnswer: data.allQuestions[number].correctAnswer,
+								index: number
 								});
 						})
 						.error(function() {
@@ -170,20 +171,30 @@ angular.module('myQuiz')
 					return def.promise;	
 				},
 
-				getAllQuestions: function() {
-					var def = $q.defer();
+			// 	getAllQuestions: function() {
+			// 		var def = $q.defer();
 
-					$http.get("quizdb.json")
-						.success(function(data) {
-							// resolve the data by returning the question, choices and correctanswer in an object
-							def.resolve(
-								data
-								);
-						})
-						.error(function() {
-							def.reject("failed to retrieve questions");
-						});
-					return def.promise;	
+			// 		$http.get("quizdb.json")
+			// 			.success(function(data) {
+			// 				// resolve the data by returning the question, choices and correctanswer in an object
+			// 				def.resolve(
+			// 					data
+			// 					);
+			// 			})
+			// 			.error(function() {
+			// 				def.reject("failed to retrieve questions");
+			// 			});
+			// 		return def.promise;	
+			// 	}
+			// };
+			getIndexQuestion: function(qNumber, answer) {
+				return $http.get("quizdb.json")
+					.then(function(response) {
+						return response.data.allQuestions[qNumber].choices.indexOf(answer);
+					}, function(response) {
+						return $q.reject(response.data);
+					});
+					
 				}
 			};
 	}]);
@@ -195,7 +206,7 @@ angular.module('myQuiz')
 		.module('myQuiz')
 		.factory('quizFactory', [ function() {
 
-			var currentQuestion = 7;
+			var currentQuestion = 0;
 
 			return {
 
@@ -227,6 +238,7 @@ angular.module('myQuiz')
 		// Ask for username which will displayed during quiz
 		.value("User", {
 			user: {},
+			indexAnswers: [],
 			totalCorrect: 0,
 			totalIncorrect: 0,
 			correctQuestions: [],
@@ -388,8 +400,12 @@ angular.module('myQuiz')
 				vm.question = data.question;
 				vm.choices = data.choices;
 				vm.correctAnswer = data.correctAnswer;
+				vm.index = data.index;
+				console.log(vm.index);
 			});
 		}
+
+		console.log(User.indexAnswers);
 
 		// Initial call of the data => first question
 		QuestionService.getQuestion(currentQuestion).then(function(data) {
@@ -424,7 +440,9 @@ angular.module('myQuiz')
 			quizFactory.previousQuestion();
 			getCurrentQuestion();
 			getTheCurrentQuestion();
-			console.log((User.incorrectQuestions[currentQuestion].theAnswer));
+			QuestionService.getIndexQuestion(currentQuestion, answer).then(function(data) {
+			  vm.index = data;
+			});
 		
 		}
 
@@ -443,6 +461,10 @@ angular.module('myQuiz')
 		function validateAnswer(userAnswer) {
 			if(vm.correctAnswer === userAnswer) {
 				User.totalCorrect += 1;
+				User.indexAnswers.push({
+					theAnswer: userAnswer,
+					index: vm.index
+				});
 				User.correctQuestions.push({
 					theAnswer: userAnswer,
 					theQuestion: vm.question,
@@ -450,6 +472,10 @@ angular.module('myQuiz')
 				});
 			} else {
 				User.totalIncorrect += 1;
+				User.indexAnswers.push({
+					theAnswer: userAnswer,
+					index: vm.index
+				});
 				User.incorrectQuestions.push({
 					theAnswer: userAnswer,
 					theQuestion: vm.question,

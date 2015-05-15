@@ -22,8 +22,12 @@
 				vm.question = data.question;
 				vm.choices = data.choices;
 				vm.correctAnswer = data.correctAnswer;
+				vm.index = data.index;
+				console.log(vm.index);
 			});
 		}
+
+		console.log(User.indexAnswers);
 
 		// Initial call of the data => first question
 		QuestionService.getQuestion(currentQuestion).then(function(data) {
@@ -58,7 +62,9 @@
 			quizFactory.previousQuestion();
 			getCurrentQuestion();
 			getTheCurrentQuestion();
-			console.log((User.incorrectQuestions[currentQuestion].theAnswer));
+			QuestionService.getIndexQuestion(currentQuestion, answer).then(function(data) {
+			  vm.index = data;
+			});
 		
 		}
 
@@ -77,6 +83,10 @@
 		function validateAnswer(userAnswer) {
 			if(vm.correctAnswer === userAnswer) {
 				User.totalCorrect += 1;
+				User.indexAnswers.push({
+					theAnswer: userAnswer,
+					index: vm.index
+				});
 				User.correctQuestions.push({
 					theAnswer: userAnswer,
 					theQuestion: vm.question,
@@ -84,6 +94,10 @@
 				});
 			} else {
 				User.totalIncorrect += 1;
+				User.indexAnswers.push({
+					theAnswer: userAnswer,
+					index: vm.index
+				});
 				User.incorrectQuestions.push({
 					theAnswer: userAnswer,
 					theQuestion: vm.question,
