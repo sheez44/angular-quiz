@@ -23,7 +23,6 @@
 				vm.choices = data.choices;
 				vm.correctAnswer = data.correctAnswer;
 				vm.index = data.index;
-				console.log(vm.index);
 			});
 		}
 
@@ -39,6 +38,9 @@
 		// Every time a user clicks on the "add" button this function is called
 		// Will update the question and choices
 		function addQuestion() {
+			if(currentQuestion === User.indexAnswers.length ) {
+				vm.q_index = undefined;
+			}
 			if(currentQuestion + 1 < totalQuestions ) {
 				vm.selected = false; // prevents highlight same question
 				getUserAnswer();
@@ -55,15 +57,18 @@
 				});
 				User.hasStarted = false;
 				$location.path('/endofquiz');
-			}		
+			}	
 		}
 
 		function prevQuestion() {
+			User.quizFlow = 'backwards';
 			quizFactory.previousQuestion();
 			getCurrentQuestion();
 			getTheCurrentQuestion();
-			QuestionService.getIndexQuestion(currentQuestion, answer).then(function(data) {
-			  vm.index = data;
+			QuestionService.getIndexQuestion(currentQuestion, User.indexAnswers[currentQuestion].theAnswer).then(function(data) {
+			  if(User.quizFlow === 'backwards') {
+			  	vm.q_index = data;
+			  }		  
 			});
 		
 		}
@@ -83,28 +88,54 @@
 		function validateAnswer(userAnswer) {
 			if(vm.correctAnswer === userAnswer) {
 				User.totalCorrect += 1;
-				User.indexAnswers.push({
-					theAnswer: userAnswer,
-					index: vm.index
-				});
-				User.correctQuestions.push({
-					theAnswer: userAnswer,
-					theQuestion: vm.question,
-					currentQuestion: currentQuestion
-				});
+				if(User.quizFlow === 'forwards') {
+					User.indexAnswers.push({
+						theAnswer: userAnswer,
+						index: vm.index
+					});
+					User.correctQuestions.push({
+						theAnswer: userAnswer,
+						theQuestion: vm.question,
+						currentQuestion: currentQuestion
+					});
+				} else if (User.quizFlow === 'backwards') {
+					User.indexAnswers.splice(currentQuestion, 1, {
+						theAnswer: userAnswer,
+						index: vm.index
+					});
+					User.correctQuestions.splice(currentQuestion, 1, {
+						theAnswer: userAnswer,
+						theQuestion: vm.question,
+						currentQuestion: currentQuestion
+					});
+				}
+				
 			} else {
 				User.totalIncorrect += 1;
-				User.indexAnswers.push({
-					theAnswer: userAnswer,
-					index: vm.index
-				});
-				User.incorrectQuestions.push({
-					theAnswer: userAnswer,
-					theQuestion: vm.question,
-					good: vm.correctAnswer,
-					currentQuestion: currentQuestion
-				});
-			}
+				if(User.quizFlow === 'forwards') {
+					User.indexAnswers.push({
+						theAnswer: userAnswer,
+						index: vm.index
+					});
+					User.incorrectQuestions.push({
+						theAnswer: userAnswer,
+						theQuestion: vm.question,
+						good: vm.correctAnswer,
+						currentQuestion: currentQuestion
+					});
+				} else if (User.quizFlow === 'backwards') {
+					User.indexAnswers.splice(currentQuestion, 1, {
+						theAnswer: userAnswer,
+						index: vm.index
+					});
+					User.incorrectQuestions.splice(currentQuestion, 1, {
+						theAnswer: userAnswer,
+						theQuestion: vm.question,
+						good: vm.correctAnswer,
+						currentQuestion: currentQuestion
+					});
+				}				
+			} 
 		}
 
 		var choiceSelection = {

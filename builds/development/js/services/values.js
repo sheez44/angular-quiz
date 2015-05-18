@@ -12,8 +12,9 @@
 			incorrectQuestions: [],
 			hasStarted: false,
 			isActive: false,
-			currentQuestion: 4,
-			newTopscore: false
+			currentQuestion: 0,
+			newTopscore: false,
+			quizFlow: 'forwards'
 		});
 
 })(); 
