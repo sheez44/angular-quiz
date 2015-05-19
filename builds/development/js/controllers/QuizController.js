@@ -11,6 +11,12 @@
 		var currentQuestion = currentQuestion;
 		vm.answered = undefined;
 		var userid = User.user.$id;
+		var allQuestions;
+
+
+		QuestionService.getAllQuestions().then(function(data) {
+			allQuestions = data;	
+		});
 
 		function getCurrentQuestion() {
 			currentQuestion = quizFactory.getCurrentQuestion();
@@ -24,9 +30,7 @@
 				vm.correctAnswer = data.correctAnswer;
 				vm.index = data.index;
 			});
-		}
-
-		console.log(User.indexAnswers);
+		}		
 
 		// Initial call of the data => first question
 		QuestionService.getQuestion(currentQuestion).then(function(data) {
@@ -62,6 +66,7 @@
 
 		function prevQuestion() {
 			User.quizFlow = 'backwards';
+			choiceSelection.hasMadeAChoice();
 			quizFactory.previousQuestion();
 			getCurrentQuestion();
 			getTheCurrentQuestion();
@@ -82,6 +87,28 @@
 			choiceSelection.userAnswers = [];
 		}
 
+		function addPoints(status) {
+			while(quizFlow === 'forwards') {
+				if(status === 'correct') {
+					User.totalCorrect += 1;
+				} else if (status === 'incorrect') {
+					User.totalIncorrect += 1;
+				}	
+			}
+
+			if (status === 'correct') {
+				for (var i = 0; i < User.correctQuestions; i += 1) {
+					if (userAnswer != User.correctQuestions[i].theAnswer) {
+						User.totalCorrect -=1
+					}
+				}
+			} else {
+				if(vm.correctAnswer === userAnswer) {
+					User.totalCorrect += 1;
+				}
+			}
+			
+		}
 		// This function checks the correct answer with the answers provided by the user
 		// If the answer is correct it updates the totalcorrect answers and the questions
 		// gets pushed in a new array for future purpose; vice versa for the wrong answers
@@ -142,12 +169,16 @@
 			userAnswers: [],
 			setSelection: function(choice) {
 				choiceSelection.userAnswers.push(choice);
+				vm.q_index = undefined;
 				vm.selected = choice;
 			},
 			hasMadeAChoice: function() {
-				if(choiceSelection.userAnswers.length === 0) {
+				// doesnt work somehow
+				if(currentQuestion < User.indexAnswers.length) {
 					return true;
-				}
+				} else {
+					return (choiceSelection.userAnswers.length === 0);
+				} 
 			},
 			isActive: function (choice) {
 				return vm.selected === choice;

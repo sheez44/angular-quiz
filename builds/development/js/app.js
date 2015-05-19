@@ -142,64 +142,75 @@ angular.module('myQuiz')
 			};
 		}]);
 })(); 
-(function () {
-	
-	angular
-		.module('myQuiz')
-		.factory('QuestionService', ['$http', '$q', function($http, $q) {
+(function() {
 
-			return {
+  angular
+    .module('myQuiz')
+    .factory('QuestionService', ['$http', '$q',
+      function($http, $q) {
 
-				getQuestion: function(number) {	
+        return {
 
-					var def = $q.defer();
+          getQuestion: function(number) {
 
-					$http.get("quizdb.json")
-						.success(function(data) {
-							// resolve the data by returning the question, choices and correctanswer in an object
-							def.resolve({
-								totalQuestions: data.allQuestions.length,
-								question: data.allQuestions[number].question,
-								choices: data.allQuestions[number].choices,
-								correctAnswer: data.allQuestions[number].correctAnswer,
-								index: number
-								});
-						})
-						.error(function() {
-							def.reject("failed to retrieve questions");
-						});
-					return def.promise;	
-				},
+            var def = $q.defer();
 
-			// 	getAllQuestions: function() {
-			// 		var def = $q.defer();
+            $http.get("quizdb.json")
+              .success(function(data) {
+                // resolve the data by returning the question, choices and correctanswer in an object
+                def.resolve({
+                  totalQuestions: data.allQuestions.length,
+                  question: data.allQuestions[number].question,
+                  choices: data.allQuestions[number].choices,
+                  correctAnswer: data.allQuestions[number].correctAnswer,
+                  index: number
+                });
+              })
+              .error(function() {
+                def.reject("failed to retrieve questions");
+              });
+            return def.promise;
+          },
 
-			// 		$http.get("quizdb.json")
-			// 			.success(function(data) {
-			// 				// resolve the data by returning the question, choices and correctanswer in an object
-			// 				def.resolve(
-			// 					data
-			// 					);
-			// 			})
-			// 			.error(function() {
-			// 				def.reject("failed to retrieve questions");
-			// 			});
-			// 		return def.promise;	
-			// 	}
-			// };
-			getIndexQuestion: function(qNumber, answer) {
-				return $http.get("quizdb.json")
-					.then(function(response) {
-						return response.data.allQuestions[qNumber].choices.indexOf(answer);
-					}, function(response) {
-						return $q.reject(response.data);
-					});
-					
-				}
-			};
-	}]);
+          getAllQuestions: function() {
+            var def = $q.defer();
 
-})(); 
+            $http.get("quizdb.json")
+              .success(function(data) {
+                // resolve the data by returning the question, choices and correctanswer in an object
+                def.resolve(
+                  data.allQuestions
+                );
+              })
+              .error(function() {
+                def.reject("failed to retrieve questions");
+              });
+            return def.promise;
+          },
+
+          getIndexQuestion: function(qNumber, answer) {
+            return $http.get("quizdb.json")
+              .then(function(response) {
+                return response.data.allQuestions[qNumber].choices.indexOf(answer);
+              }, function(response) {
+                return $q.reject(response.data);
+              });
+          },
+          getCorrectAnswer: function(index) {
+            return $http.get('quizdb.json')
+              .then(function(response) {
+                  return response.data.allQuestions[index].correctAnswer;
+                },
+                function(response) {
+                  return $q.reject(response.data);
+                });
+          }
+        };
+
+      }
+    ]);
+
+})();
 (function () {
 	
 	angular
@@ -390,6 +401,12 @@ angular.module('myQuiz')
 		var currentQuestion = currentQuestion;
 		vm.answered = undefined;
 		var userid = User.user.$id;
+		var allQuestions;
+
+
+		QuestionService.getAllQuestions().then(function(data) {
+			allQuestions = data;	
+		});
 
 		function getCurrentQuestion() {
 			currentQuestion = quizFactory.getCurrentQuestion();
@@ -403,9 +420,7 @@ angular.module('myQuiz')
 				vm.correctAnswer = data.correctAnswer;
 				vm.index = data.index;
 			});
-		}
-
-		console.log(User.indexAnswers);
+		}		
 
 		// Initial call of the data => first question
 		QuestionService.getQuestion(currentQuestion).then(function(data) {
@@ -441,6 +456,7 @@ angular.module('myQuiz')
 
 		function prevQuestion() {
 			User.quizFlow = 'backwards';
+			choiceSelection.hasMadeAChoice();
 			quizFactory.previousQuestion();
 			getCurrentQuestion();
 			getTheCurrentQuestion();
@@ -461,6 +477,28 @@ angular.module('myQuiz')
 			choiceSelection.userAnswers = [];
 		}
 
+		function addPoints(status) {
+			while(quizFlow === 'forwards') {
+				if(status === 'correct') {
+					User.totalCorrect += 1;
+				} else if (status === 'incorrect') {
+					User.totalIncorrect += 1;
+				}	
+			}
+
+			if (status === 'correct') {
+				for (var i = 0; i < User.correctQuestions; i += 1) {
+					if (userAnswer != User.correctQuestions[i].theAnswer) {
+						User.totalCorrect -=1
+					}
+				}
+			} else {
+				if(vm.correctAnswer === userAnswer) {
+					User.totalCorrect += 1;
+				}
+			}
+			
+		}
 		// This function checks the correct answer with the answers provided by the user
 		// If the answer is correct it updates the totalcorrect answers and the questions
 		// gets pushed in a new array for future purpose; vice versa for the wrong answers
@@ -521,12 +559,16 @@ angular.module('myQuiz')
 			userAnswers: [],
 			setSelection: function(choice) {
 				choiceSelection.userAnswers.push(choice);
+				vm.q_index = undefined;
 				vm.selected = choice;
 			},
 			hasMadeAChoice: function() {
-				if(choiceSelection.userAnswers.length === 0) {
+				// doesnt work somehow
+				if(currentQuestion < User.indexAnswers.length) {
 					return true;
-				}
+				} else {
+					return (choiceSelection.userAnswers.length === 0);
+				} 
 			},
 			isActive: function (choice) {
 				return vm.selected === choice;

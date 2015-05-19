@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"index",
+				"indexAnswers"
+			],
+			[
 				"new",
 				"newTopscore"
 			],
@@ -151,15 +155,7 @@
 			"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/js/controllers/QuizController.js",
 			"settings":
 			{
-				"buffer_size": 4341,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/johan/Desktop/Angularquiz/todo",
-			"settings":
-			{
-				"buffer_size": 95,
+				"buffer_size": 6037,
 				"line_ending": "Windows"
 			}
 		},
@@ -175,7 +171,7 @@
 			"file": "questionservice.js",
 			"settings":
 			{
-				"buffer_size": 1493,
+				"buffer_size": 2150,
 				"line_ending": "Windows"
 			}
 		},
@@ -183,7 +179,7 @@
 			"file": "values.js",
 			"settings":
 			{
-				"buffer_size": 348,
+				"buffer_size": 373,
 				"line_ending": "Windows"
 			}
 		},
@@ -237,7 +233,12 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/johan/Desktop/Angularquiz"
+		"/C/Users/johan/Desktop/Angularquiz",
+		"/C/Users/johan/Desktop/Angularquiz/builds",
+		"/C/Users/johan/Desktop/Angularquiz/builds/development",
+		"/C/Users/johan/Desktop/Angularquiz/builds/development/js",
+		"/C/Users/johan/Desktop/Angularquiz/builds/development/js/directives",
+		"/C/Users/johan/Desktop/Angularquiz/builds/development/js/services"
 	],
 	"file_history":
 	[
@@ -330,7 +331,7 @@
 	],
 	"find":
 	{
-		"height": 49.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
@@ -344,6 +345,7 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"push",
 			"index",
 			"answer",
 			"userAnswers",
@@ -411,7 +413,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -420,15 +422,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4341,
+						"buffer_size": 6037,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2058,
-								2058
+								3264,
+								3264
 							]
 						],
 						"settings":
@@ -437,42 +439,14 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1026.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/C/Users/johan/Desktop/Angularquiz/todo",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 95,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								95,
-								95
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1511.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 1,
 					"file": "/C/Users/johan/Desktop/Angularquiz/builds/development/js/directives/thequiz.html",
 					"semi_transient": false,
 					"settings":
@@ -496,7 +470,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -506,49 +480,20 @@
 			"sheets":
 			[
 				{
-					"buffer": 3,
+					"buffer": 2,
 					"file": "questionservice.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1493,
+						"buffer_size": 2150,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								611,
-								611
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 157.0,
-						"translation.y": 216.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "values.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 348,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								153,
-								153
+								1027,
+								1027
 							]
 						],
 						"settings":
@@ -564,7 +509,36 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 3,
+					"file": "values.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 373,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								335,
+								335
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
 					"file": "quizFactory.js",
 					"semi_transient": false,
 					"settings":
@@ -589,7 +563,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -623,7 +597,7 @@
 		"cols":
 		[
 			0.0,
-			0.5,
+			0.528132992328,
 			1.0
 		],
 		"rows":
@@ -633,6 +607,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.doc":
+	{
+		"height": 0.0
+	},
 	"output.find_results":
 	{
 		"height": 0.0
